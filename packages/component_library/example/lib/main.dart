@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Storybook(
-      initialStory: 'Widgets/QuizDetail',
+      initialStory: 'Widgets/DetailQuizPage',
       stories: [
         Story(
           name: 'Widgets/QuizItem',
@@ -35,7 +35,12 @@ class MyApp extends StatelessWidget {
         Story(
           name: 'Widgets/QuizDetail',
           description: 'Grande tuile de detail d\'un quiz',
-          builder: (context) => const QuizDetail(),
+          builder: (context) => const DetailQuizItem(),
+        ),
+        Story(
+          name: 'Widgets/DetailQuizPage',
+          description: 'Grande tuile de detail d\'un quiz',
+          builder: (context) => const DetailQuizPage(),
         ),
       ],
       wrapperBuilder: (context, child) => MaterialApp(
