@@ -1,0 +1,24 @@
+name: quiz_list
+publish_to: none
+
+environment:
+  sdk: ^3.6.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.1.2
+
+  quiz_repository:
+    path: ../../quiz_repository
+
+  domain_entities:
+    path: ../../domain_entities
+  equatable: ^2.0.7
+
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
