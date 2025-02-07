@@ -1,10 +1,16 @@
 {
     "configurations": [
         {
-            "name": "Flutter (lib\\main.dart)",
+            "name": "StoryBook${fileDirname}",
             "type": "dart",
             "request": "launch",
             "cwd": "packages\\component_library\\example",
+            "program": "lib\\main.dart"
+        },
+        {
+            "name": "Quizzy",
+            "type": "dart",
+            "request": "launch",
             "program": "lib\\main.dart"
         }
     ]

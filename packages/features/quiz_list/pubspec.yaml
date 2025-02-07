@@ -16,6 +16,8 @@ dependencies:
     path: ../../domain_entities
   equatable: ^2.0.7
 
+  component_library:
+    path: ../../component_library
 
 dev_dependencies:
   flutter_lints: ^5.0.0

@@ -4,13 +4,12 @@ import 'package:quiz_list/quiz_list.dart';
 import 'package:quiz_repository/quiz_repository.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Quizzy());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Quizzy extends StatelessWidget {
+  const Quizzy({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -36,7 +35,10 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        routes: {},
+        home: const HomePageScreen(),
+        // routes: {
+        //   '/': (context) => const HomePageScreen(),
+        // },
       ),
     );
   }
