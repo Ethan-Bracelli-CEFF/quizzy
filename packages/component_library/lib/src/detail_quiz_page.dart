@@ -19,21 +19,7 @@ class DetailQuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          color: Colors.grey,
-          child: const Text('Quizzy', textAlign: TextAlign.center),
-        ),
-        Container(
-          color: Colors.black,
-          child: Column(
-            children: [
-              DetailQuizItem(quiz: quiz),
-            ],
-          ),
-        ),
-      ],
-    );
+    // TODO
+    return Placeholder();
   }
 }

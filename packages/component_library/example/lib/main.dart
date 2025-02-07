@@ -42,6 +42,11 @@ class MyApp extends StatelessWidget {
           description: 'Bouton pour commencer un quiz',
           builder: (context) => StartButton(),
         ),
+        Story(
+          name: 'Widgets/DetailQuizPage',
+          description: 'Page de detail sur un quiz',
+          builder: (context) => DetailQuizPage(),
+        ),
       ],
       wrapperBuilder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
