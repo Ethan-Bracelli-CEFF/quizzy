@@ -1,3 +1,5 @@
+import 'package:domain_entities/domain_entities.dart';
+
 class Quiz {
     const Quiz({
         required this.title,
@@ -9,13 +11,13 @@ class Quiz {
     final String title;
     final String description;
     final List<String> tags;
-    final String questions; 
+    final List<Question> questions; 
 
     Quiz copyWith({
         final String? title,
         final String? description,
         final List<String>? tags,
-        final String? questions,
+        final List<Question>? questions,
     }) {
         return Quiz(
             title: title ?? this.title,
