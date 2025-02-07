@@ -1,130 +1,151 @@
 {
     "questionnaires": [
         {
-            "createur": "Fabrioche",
+            "creator": "Fabrioche",
             "title": "Étudiants de la classe ICH-2DEV",
             "description": "Connaissez vous les étudiants de la classe ICH-2DEV?",
             "tags": [
                 "#Etudiant",
-                "#Class"
+                "#Ecole"
             ],
             "questions": [
                 {
-                    "titre": "Quel est le nom de famille de Fabian?",
-                    "reponses": [
+                    "title": "Quel est le nom de famille de Fabian?",
+                    "responses": [
                         "Martin",
                         "Marti",
                         "Martim",
                         "Marteau"
                     ],
-                    "bonne_reponse": 2
+                    "correct_answer": 2
                 },
                 {
-                    "titre": "Quel est le surnom de Ethan Hoftetter?",
-                    "reponses": [
+                    "title": "Quel est le surnom de Ethan Hoftetter?",
+                    "responses": [
                         "Bratch",
                         "Mini",
                         "Greg",
                         "Niry"
                     ],
-                    "bonne_reponse": 4
+                    "correct_answer": 4
                 },
                 {
-                    "titre": "Quelle spécialisation ne va pas prendre Simon Golay?",
-                    "reponses": [
+                    "title": "Quelle spécialisation ne va pas prendre Simon Golay?",
+                    "responses": [
                         "Web",
                         "C#",
                         "Mobile"
                     ],
-                    "bonne_reponse": 3
+                    "correct_answer": 3
                 },
                 {
-                    "titre": "Quel est le sport favori de Ethan Bracelli?",
-                    "reponses": [
+                    "title": "Quel est le sport favori de Ethan Bracelli?",
+                    "responses": [
                         "L'escalade",
                         "Le foot",
                         "Le Rugby",
                         "Le Hockey"
                     ],
-                    "bonne_reponse": 4
+                    "correct_answer": 4
                 },
                 {
-                    "titre": "Qui a eu la meilleure note au cie 295?",
-                    "reponses": [
+                    "title": "Qui a eu la meilleure note au cie 295?",
+                    "responses": [
                         "Ewan",
                         "Ylan",
                         "Ryan",
                         "Fabian"
                     ],
-                    "bonne_reponse": 2
+                    "correct_answer": 2
                 },
                 {
-                    "titre": "Laquelle de ces personnes préfère le cours de mobile?",
-                    "reponses": [
+                    "title": "Laquelle de ces personnes préfère le cours de mobile?",
+                    "responses": [
                         "Simon",
                         "Quentin",
                         "Martim",
                         "Fabian"
                     ],
-                    "bonne_reponse": 2
+                    "correct_answer": 2
                 },
                 {
-                    "titre": "D'une manière très objective quel est le meilleurs cours du jeudi?",
-                    "reponses": [
+                    "title": "D'une manière très objective quel est le meilleurs cours du jeudi?",
+                    "responses": [
                         "Agilité",
                         "NoSQL",
                         "Docker",
                         "Mandats-2.0"
                     ],
-                    "bonne_reponse": 3
+                    "correct_answer": 3
                 },
                 {
-                    "titre": "Qui est le maître de classe des ICH-2DEV ce semestre?",
-                    "reponses": [
+                    "title": "Qui est le maître de classe des ICH-2DEV ce semestre?",
+                    "responses": [
                         "Guerdat",
                         "Mathez",
                         "Vogel",
                         "Gagnebin"
                     ],
-                    "bonne_reponse": 1
+                    "correct_answer": 1
                 },
                 {
-                    "titre": "A partir de quelle note Fabian Marti va venir râler auprès du prof?",
-                    "reponses": [
+                    "title": "A partir de quelle note Fabian Marti va venir râler auprès du prof?",
+                    "responses": [
                         "4",
                         "5",
                         "5.2",
                         "5.5"
                     ],
-                    "bonne_reponse": 3
+                    "correct_answer": 3
                 },
                 {
-                    "titre": "Combien d'élèves sont dans la classe ICH-2DEV? (plein-temps)",
-                    "reponses": [
+                    "title": "Combien d'élèves sont dans la classe ICH-2DEV? (plein-temps)",
+                    "responses": [
                         "14",
                         "15",
                         "12",
                         "17"
                     ],
-                    "bonne_reponse": 1
+                    "correct_answer": 1
                 },
                 {
-                    "titre": "Quel jeu a réussi a terminer l'ensemble de la classe?",
-                    "reponses": [
+                    "title": "Quel jeu a réussi a terminer l'ensemble de la classe?",
+                    "responses": [
                         "Aucun",
                         "Minecraft",
                         "Make more paperclips",
                         "Cookie clicker"
                     ],
-                    "bonne_reponse": 2
+                    "correct_answer": 2
                 },
                 {
-                    "titre": "M Guerdat est-il le meilleur prof?",
-                    "reponses": [
+                    "title": "M Guerdat est-il le meilleur prof?",
+                    "responses": [
                         "Oui",
                         "Non"
                     ],
-                    "bonne_reponse": 1
+                    "correct_answer": 1
+                }
+            ]
+        },
+        {
+            "creator": "Fabrioche",
+            "title": "Culture générale",
+            "description": "Savez vous des choses innutiles?",
+            "tags": [
+                "#Culture",
+                "#General"
+            ],
+            "questions": [
+                {
+                    "title": "Quelle est la capitale de la suisse?",
+                    "responses": [
+                        "Berne",
+                        "Genève",
+                        "Zurich",
+                        "Lausanne"
+                    ],
+                    "correct_answer": 1
                 }
             ]
         }
