@@ -14,6 +14,15 @@ class _HomePageScreenState extends State<HomePageScreen> {
   @override
   void initState() {
     super.initState();
+    _fetchQuizes;
+  }
+
+  _fetchQuizes() {
+    if (context.read<QuizListProvider>().state.quizes.isEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<QuizListProvider>().fetchAndSetQuizes();
+      });
+    }
   }
 
   Widget _showQuiz() {
@@ -53,7 +62,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     ],
                   )
                 : ListView.separated(
-                    itemBuilder: (context, index) => QuizItem(),
+                    itemBuilder: (context, index) => QuizItem(
+                          quiz: state.quizes[index],
+                        ),
                     separatorBuilder: (context, index) => SizedBox(
                           height: 30,
                         ),
