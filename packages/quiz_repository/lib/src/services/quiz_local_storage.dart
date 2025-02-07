@@ -11,10 +11,10 @@ class QuizLocalStorage implements QuizStorage {
     try {
       final quizzes = <Quiz>[];
       final dataString = await rootBundle.loadString(
-          'packages/quiz_repository/lib/src/assets/data/exemple.json');
+          'packages/quiz_repository/lib/src/assets/data/questionnaires.json');
       final Map<String, dynamic> json = jsonDecode(dataString);
-      if (json['quizzes'] != null) {
-        json['quizzes'].foEach((quizData) {
+      if (json['questionnaires'] != null) {
+        json['questionnaires'].foEach((quizData) {
           final questions = <Question>[];
           quizData['questions'].foEach((questionData) {
             questions.add(

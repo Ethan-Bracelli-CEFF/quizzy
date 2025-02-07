@@ -8,8 +8,8 @@ class QuestionLocalModel {
   factory QuestionLocalModel.fromJson(Map<String, dynamic> json) {
     return QuestionLocalModel(
       title: json['title'],
-      answers: json['answers'],
-      rightAnswer: json['right_answer'],
+      answers: json['responses'],
+      rightAnswer: json['correct_answer'],
     );
   }
 

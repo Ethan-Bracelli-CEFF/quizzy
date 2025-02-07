@@ -14,4 +14,4 @@ dev_dependencies:
 
 flutter:
   assets:
-    - lib\src\assets\data\exemple.json
+    - lib\src\assets\data\questionnaires.json
