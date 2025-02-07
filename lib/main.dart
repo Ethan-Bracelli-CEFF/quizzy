@@ -22,7 +22,7 @@ class Quizzy extends StatelessWidget {
             storage: context.read<QuizLocalStorage>(),
           ),
         ),
-        Provider<QuizListProvider>(
+        ChangeNotifierProvider<QuizListProvider>(
           create: (context) => QuizListProvider(
             repository: context.read<QuizRepository>(),
           ),
@@ -32,7 +32,7 @@ class Quizzy extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Quizzy',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
           useMaterial3: true,
         ),
         home: const HomePageScreen(),
