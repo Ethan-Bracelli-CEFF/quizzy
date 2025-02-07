@@ -1,0 +1,263 @@
+{
+    "questionnaires": [
+        {
+            "creator": "Fabrioche",
+            "title": "Étudiants de la classe ICH-2DEV",
+            "description": "Connaissez vous les étudiants de la classe ICH-2DEV?",
+            "tags": [
+                "#Etudiant",
+                "#Ecole"
+            ],
+            "questions": [
+                {
+                    "title": "Quel est le nom de famille de Fabian?",
+                    "responses": [
+                        "Martin",
+                        "Marti",
+                        "Martim",
+                        "Marteau"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Quel est le surnom de Ethan Hoftetter?",
+                    "responses": [
+                        "Bratch",
+                        "Mini",
+                        "Greg",
+                        "Niry"
+                    ],
+                    "correct_answer": 4
+                },
+                {
+                    "title": "Quelle spécialisation ne va pas prendre Simon Golay?",
+                    "responses": [
+                        "Web",
+                        "C#",
+                        "Mobile"
+                    ],
+                    "correct_answer": 3
+                },
+                {
+                    "title": "Quel est le sport favori de Ethan Bracelli?",
+                    "responses": [
+                        "L'escalade",
+                        "Le foot",
+                        "Le Rugby",
+                        "Le Hockey"
+                    ],
+                    "correct_answer": 4
+                },
+                {
+                    "title": "Qui a eu la meilleure note au cie 295?",
+                    "responses": [
+                        "Ewan",
+                        "Ylan",
+                        "Ryan",
+                        "Fabian"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Laquelle de ces personnes préfère le cours de mobile?",
+                    "responses": [
+                        "Simon",
+                        "Quentin",
+                        "Martim",
+                        "Fabian"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "D'une manière très objective quel est le meilleurs cours du jeudi?",
+                    "responses": [
+                        "Agilité",
+                        "NoSQL",
+                        "Docker",
+                        "Mandats-2.0"
+                    ],
+                    "correct_answer": 3
+                },
+                {
+                    "title": "Qui est le maître de classe des ICH-2DEV ce semestre?",
+                    "responses": [
+                        "Guerdat",
+                        "Mathez",
+                        "Vogel",
+                        "Gagnebin"
+                    ],
+                    "correct_answer": 1
+                },
+                {
+                    "title": "A partir de quelle note Fabian Marti va venir râler auprès du prof?",
+                    "responses": [
+                        "4",
+                        "5",
+                        "5.2",
+                        "5.5"
+                    ],
+                    "correct_answer": 3
+                },
+                {
+                    "title": "Combien d'élèves sont dans la classe ICH-2DEV? (plein-temps)",
+                    "responses": [
+                        "14",
+                        "15",
+                        "12",
+                        "17"
+                    ],
+                    "correct_answer": 1
+                },
+                {
+                    "title": "Quel jeu a réussi a terminer l'ensemble de la classe?",
+                    "responses": [
+                        "Aucun",
+                        "Minecraft",
+                        "Make more paperclips",
+                        "Cookie clicker"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "M Guerdat est-il le meilleur prof?",
+                    "responses": [
+                        "Oui",
+                        "Non"
+                    ],
+                    "correct_answer": 1
+                }
+            ]
+        },
+        {
+            "creator": "Fabrioche",
+            "title": "Culture générale",
+            "description": "Savez vous des choses innutiles?",
+            "tags": [
+                "#Culture",
+                "#General"
+            ],
+            "questions": [
+                {
+                    "title": "Quelle est la capitale de la suisse?",
+                    "responses": [
+                        "Berne",
+                        "Genève",
+                        "Zurich",
+                        "Lausanne"
+                    ],
+                    "correct_answer": 1
+                },
+                {
+                    "title": "Qui a écrit \"Les Misérables\"?",
+                    "responses": [
+                        "Emile Zola",
+                        "Victor Hugo",
+                        "Marcel Proust",
+                        "Albert Camus"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Quel est le plus grand pays du monde par superficie?",
+                    "responses": [
+                        "Canada",
+                        "Russie",
+                        "États-Unis",
+                        "Chine"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "En quelle année a eu lieu la Révolution française?",
+                    "responses": [
+                        "1789",
+                        "1799",
+                        "1804",
+                        "1766"
+                    ],
+                    "correct_answer": 1
+                },
+                {
+                    "title": "Quel est l'élément chimique dont le symbole est \"O\"?",
+                    "responses": [
+                        "Osmium",
+                        "Or",
+                        "Oxygène",
+                        "Ozone"
+                    ],
+                    "correct_answer": 3
+                },
+                {
+                    "title": "Quel est le plus grand océan de la planète?",
+                    "responses": [
+                        "Océan Pacifique",
+                        "Océan Atlantique",
+                        "Océan Arctique",
+                        "Océan Indien"
+                    ],
+                    "correct_answer": 1
+                },
+                {
+                    "title": "Combien de pays composent l'Union européenne (2025)",
+                    "responses": [
+                        "24",
+                        "28",
+                        "30",
+                        "27"
+                    ],
+                    "correct_answer": 4
+                },
+                {
+                    "title": "Quel est le nom du premier homme à avoir marché sur la Lune?",
+                    "responses": [
+                        "Yousel al-Mahmoud",
+                        "Buzz Aldrin",
+                        "Michael Collins",
+                        "Neil Armstrong"
+                    ],
+                    "correct_answer": 4
+                },
+                {
+                    "title": "Dans quel pays se trouve la ville de Marrakech?",
+                    "responses": [
+                        "Algérie",
+                        "Maroc",
+                        "Tunisie",
+                        "Égipte"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Quel est le dieu grec de la guerre",
+                    "responses": [
+                        "Apollon",
+                        "Poséidon",
+                        "Arès",
+                        "Hermès"
+                    ],
+                    "correct_answer": 3
+                },
+                {
+                    "title": "Quel est le nom de la plus grande île du monde?",
+                    "responses": [
+                        "Nouvelle-Guinée",
+                        "Groenland",
+                        "Madagascar",
+                        "Bornéo"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Quel est l'auteur de \"1984\" et \"La ferme des animaux\"?",
+                    "responses": [
+                        "Aldous Huxley",
+                        "Georges Orwell",
+                        "Ray Bradbury",
+                        "Phillip K. Dick"
+                    ],
+                    "correct_answer": 2
+                }
+            ]
+        }
+    ]
+}
