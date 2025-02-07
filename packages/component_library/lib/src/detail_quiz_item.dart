@@ -9,7 +9,7 @@ class QuizDetail extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 50),
       child: Container(
-        height: 200,
+        height: 225,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: const Color.fromARGB(255, 255, 255, 255),
@@ -32,15 +32,17 @@ class QuizDetail extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Tag(),
+                      Tag(
+                        name: '#TAG',
+                      ),
                       SizedBox(
                         width: 10,
                       ),
-                      Tag(),
+                      Tag(name: '#Example'),
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 50,
                   ),
                   Row(
                     children: [
