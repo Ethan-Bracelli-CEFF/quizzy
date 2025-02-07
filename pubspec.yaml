@@ -34,8 +34,6 @@ dependencies:
   component_library:
     path: packages/component_library
   # TODO garder ça à jour
-  quiz_list:
-    path: packages/features/quiz_list
   # quiz_repository:
   #   path: packages/quiz_repository
 

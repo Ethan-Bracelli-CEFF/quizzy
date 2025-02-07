@@ -10,13 +10,16 @@ class QuizLocalStorage implements QuizStorage {
   Future<List<Quiz>> getAllQuizzes() async {
     try {
       final quizzes = <Quiz>[];
+
       final dataString = await rootBundle.loadString(
           'packages/quiz_repository/lib/src/assets/data/questionnaires.json');
+
       final Map<String, dynamic> json = jsonDecode(dataString);
+
       if (json['questionnaires'] != null) {
-        json['questionnaires'].foEach((quizData) {
+        json['questionnaires'].forEach((quizData) {
           final questions = <Question>[];
-          quizData['questions'].foEach((questionData) {
+          quizData['questions'].forEach((questionData) {
             questions.add(
                 QuestionLocalModel.fromJson(questionData).toDomainEntity());
           });

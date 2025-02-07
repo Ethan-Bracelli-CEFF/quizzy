@@ -14,7 +14,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   @override
   void initState() {
     super.initState();
-    _fetchQuizes;
+    _fetchQuizes();
   }
 
   _fetchQuizes() {
@@ -31,12 +31,18 @@ class _HomePageScreenState extends State<HomePageScreen> {
     if (state.status == QuizListStatus.initial) {
       return const Center(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Getting started...'),
+            Text(
+              'Getting started...',
+              style: TextStyle(color: Colors.white),
+            ),
             SizedBox(
               width: 10,
             ),
-            CircularProgressIndicator(),
+            CircularProgressIndicator(
+              color: Colors.white,
+            ),
           ],
         ),
       );
@@ -53,12 +59,18 @@ class _HomePageScreenState extends State<HomePageScreen> {
           Expanded(
             child: state.status == QuizListStatus.loading
                 ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Fetching Data...'),
+                      Text(
+                        'Fetching Data...',
+                        style: TextStyle(color: Colors.white),
+                      ),
                       SizedBox(
                         width: 10,
                       ),
-                      CircularProgressIndicator(),
+                      CircularProgressIndicator(
+                        color: Colors.white,
+                      ),
                     ],
                   )
                 : ListView.separated(
