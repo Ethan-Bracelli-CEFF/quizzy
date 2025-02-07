@@ -1,4 +1,5 @@
 import 'package:component_library/component_library.dart';
+import 'package:domain_entities/domain_entities.dart';
 // import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 import 'package:storybook_flutter/storybook_flutter.dart';
@@ -10,15 +11,27 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  final quiz = const Quiz(
+      creator: 'Fabrioche',
+      title: 'Culture générale',
+      description: 'Connaissez vous des choses inutiles?',
+      questions: [],
+      tags: [
+        "#general",
+        "#culture",
+        "#inutile",
+        "#aigri",
+      ]);
+
   @override
   Widget build(BuildContext context) {
     return Storybook(
-      initialStory: 'Screens/HomePage',
+      initialStory: 'Widgets/QuizItem',
       stories: [
         Story(
           name: 'Widgets/QuizItem',
           description: 'La tuile d\'un quiz',
-          builder: (context) => const QuizItem(),
+          builder: (context) => QuizItem(quiz: quiz),
         ),
         Story(
           name: 'Screens/HomePage',

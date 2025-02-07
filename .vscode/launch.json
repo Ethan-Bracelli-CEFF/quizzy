@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "Flutter (lib\\main.dart)",
+            "name": "Component library",
             "type": "dart",
             "request": "launch",
             "cwd": "packages\\component_library\\example",
