@@ -2,8 +2,8 @@ import 'package:component_library/component_library.dart';
 import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 
-class QuizDetail extends StatelessWidget {
-  const QuizDetail({required this.quiz, super.key});
+class DetailQuizItem extends StatelessWidget {
+  const DetailQuizItem({required this.quiz, super.key});
 
   final Quiz quiz;
 
