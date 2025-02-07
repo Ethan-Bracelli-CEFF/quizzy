@@ -1,68 +1,55 @@
 import 'package:component_library/component_library.dart';
+import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 
 class QuizItem extends StatelessWidget {
-  const QuizItem({super.key});
+  const QuizItem({required this.quiz, super.key});
+
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 50),
-      child: Container(
-        height: 160,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: const Color.fromARGB(255, 255, 255, 255),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(3.0),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: const Color.fromARGB(255, 80, 80, 80),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 25.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: const Color.fromARGB(255, 80, 80, 80),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Wrap(
+            spacing: 10,
+            runSpacing: 5,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            alignment: WrapAlignment.spaceBetween,
+            runAlignment: WrapAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                quiz.title,
+                style: const TextStyle(color: Colors.white, fontSize: 25),
+              ),
+              Wrap(
+                spacing: 7,
+                runSpacing: 5,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Titre',
-                        style: TextStyle(color: Colors.white, fontSize: 50),
-                      ),
-                      // ListView.separated(
-                      //     itemBuilder: (context, index) => Tag(),
-                      //     separatorBuilder: (context, index) =>
-                      //         SizedBox(width: 10),
-                      //     itemCount: 1),
-                      Row(
-                        children: [
-                          Tag(),
-                          SizedBox(
-                            width: 10,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'Description...',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  )
+                  for (int i = 0; i < quiz.tags.length; i++)
+                    Tag(name: quiz.tags[i].toLowerCase()),
                 ],
               ),
-            ),
+            ],
           ),
-        ),
+          const SizedBox(height: 30),
+          Text(
+            quiz.description,
+            style: const TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.normal),
+          ),
+        ],
       ),
     );
   }

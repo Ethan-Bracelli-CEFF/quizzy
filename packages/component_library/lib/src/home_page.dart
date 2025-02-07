@@ -1,8 +1,16 @@
 import 'package:component_library/component_library.dart';
+import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
+  final quiz = const Quiz(
+      creator: 'Fabrioche',
+      title: 'Culture générale',
+      description: 'Connaissez vous des choses inutiles?',
+      questions: [],
+      tags: ["General", "Culture"]);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +34,7 @@ class HomePage extends StatelessWidget {
             ),
             Expanded(
               child: ListView.separated(
-                  itemBuilder: (context, index) => QuizItem(),
+                  itemBuilder: (context, index) => QuizItem(quiz: quiz),
                   separatorBuilder: (context, index) => SizedBox(
                         height: 30,
                       ),
