@@ -1,0 +1,13 @@
+name: quiz_repository
+publish_to: none
+
+environment:
+    sdk: ^3.6.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  domain_entities:
+    path: ../domain_entities
+dev_dependencies:
+  flutter_lints: ^5.0.0
