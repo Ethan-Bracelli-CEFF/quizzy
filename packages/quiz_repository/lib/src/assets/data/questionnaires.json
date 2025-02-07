@@ -146,6 +146,116 @@
                         "Lausanne"
                     ],
                     "correct_answer": 1
+                },
+                {
+                    "title": "Qui a écrit \"Les Misérables\"?",
+                    "responses": [
+                        "Emile Zola",
+                        "Victor Hugo",
+                        "Marcel Proust",
+                        "Albert Camus"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Quel est le plus grand pays du monde par superficie?",
+                    "responses": [
+                        "Canada",
+                        "Russie",
+                        "États-Unis",
+                        "Chine"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "En quelle année a eu lieu la Révolution française?",
+                    "responses": [
+                        "1789",
+                        "1799",
+                        "1804",
+                        "1766"
+                    ],
+                    "correct_answer": 1
+                },
+                {
+                    "title": "Quel est l'élément chimique dont le symbole est \"O\"?",
+                    "responses": [
+                        "Osmium",
+                        "Or",
+                        "Oxygène",
+                        "Ozone"
+                    ],
+                    "correct_answer": 3
+                },
+                {
+                    "title": "Quel est le plus grand océan de la planète?",
+                    "responses": [
+                        "Océan Pacifique",
+                        "Océan Atlantique",
+                        "Océan Arctique",
+                        "Océan Indien"
+                    ],
+                    "correct_answer": 1
+                },
+                {
+                    "title": "Combien de pays composent l'Union européenne (2025)",
+                    "responses": [
+                        "24",
+                        "28",
+                        "30",
+                        "27"
+                    ],
+                    "correct_answer": 4
+                },
+                {
+                    "title": "Quel est le nom du premier homme à avoir marché sur la Lune?",
+                    "responses": [
+                        "Yousel al-Mahmoud",
+                        "Buzz Aldrin",
+                        "Michael Collins",
+                        "Neil Armstrong"
+                    ],
+                    "correct_answer": 4
+                },
+                {
+                    "title": "Dans quel pays se trouve la ville de Marrakech?",
+                    "responses": [
+                        "Algérie",
+                        "Maroc",
+                        "Tunisie",
+                        "Égipte"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Quel est le dieu grec de la guerre",
+                    "responses": [
+                        "Apollon",
+                        "Poséidon",
+                        "Arès",
+                        "Hermès"
+                    ],
+                    "correct_answer": 3
+                },
+                {
+                    "title": "Quel est le nom de la plus grande île du monde?",
+                    "responses": [
+                        "Nouvelle-Guinée",
+                        "Groenland",
+                        "Madagascar",
+                        "Bornéo"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Quel est l'auteur de \"1984\" et \"La ferme des animaux\"?",
+                    "responses": [
+                        "Aldous Huxley",
+                        "Georges Orwell",
+                        "Ray Bradbury",
+                        "Phillip K. Dick"
+                    ],
+                    "correct_answer": 2
                 }
             ]
         }
