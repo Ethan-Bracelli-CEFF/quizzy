@@ -19,9 +19,9 @@ class QuizListProvider with ChangeNotifier {
 
     await Future.delayed(Duration(seconds: 1));
 
-    // final datas = await repository.getAllQuizes();
+    final datas = await repository.getAllQuizzes();
 
-    // _state.copyWith(state: QuizListStatus.loaded, quizes: datas);
+    _state.copyWith(state: QuizListStatus.loaded, quizes: datas);
     notifyListeners();
   }
 }
