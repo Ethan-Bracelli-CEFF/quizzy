@@ -1,67 +1,54 @@
 import 'package:component_library/component_library.dart';
+import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 
 class QuizItem extends StatelessWidget {
-  const QuizItem({super.key});
+  const QuizItem({required this.quiz, super.key});
+
+  final Quiz quiz;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 50),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Container(
-        height: 160,
+        padding: const EdgeInsets.all(18.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: const Color.fromARGB(255, 255, 255, 255),
+          color: const Color.fromARGB(255, 80, 80, 80),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(3.0),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: const Color.fromARGB(255, 80, 80, 80),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 20,
+          children: [
+            Wrap(
+              spacing: 15,
+              runSpacing: 5,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              alignment: WrapAlignment.spaceBetween,
+              runAlignment: WrapAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  quiz.title,
+                  style: const TextStyle(color: Colors.white, fontSize: 25),
+                ),
+                Wrap(
+                  spacing: 7,
+                  runSpacing: 5,
+                  children: [
+                    for (int i = 0; i < quiz.tags.length; i++)
+                      Tag(name: quiz.tags[i].toLowerCase()),
+                  ],
+                ),
+              ],
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Titre',
-                        style: TextStyle(color: Colors.white, fontSize: 50),
-                      ),
-                      // ListView.separated(
-                      //     itemBuilder: (context, index) => Tag(),
-                      //     separatorBuilder: (context, index) =>
-                      //         SizedBox(width: 10),
-                      //     itemCount: 1),
-                      Row(
-                        children: [
-                          Tag(),
-                          SizedBox(
-                            width: 10,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'Description...',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  )
-                ],
-              ),
+            Text(
+              quiz.description,
+              style: const TextStyle(color: Colors.white, fontSize: 14),
             ),
-          ),
+          ],
         ),
       ),
     );
