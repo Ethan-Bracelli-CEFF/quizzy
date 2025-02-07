@@ -16,6 +16,7 @@ class QuizLocalStorage implements QuizStorage {
 
       final Map<String, dynamic> json = jsonDecode(dataString);
 
+      // TODO : corriger le fromJson en dessous et dans services/quiz_local_storage.dart
       if (json['questionnaires'] != null) {
         json['questionnaires'].forEach((quizData) {
           final questions = <Question>[];
