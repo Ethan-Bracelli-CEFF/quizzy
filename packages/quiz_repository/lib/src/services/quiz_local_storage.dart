@@ -2,10 +2,13 @@ import 'dart:convert';
 
 import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/services.dart';
+import 'package:logger/logger.dart';
 import 'package:quiz_repository/quiz_repository.dart';
 import 'package:quiz_repository/src/mappers/question_local_model_to_domain.dart';
 
 class QuizLocalStorage implements QuizStorage {
+  final logger = Logger();
+
   @override
   Future<List<Quiz>> getAllQuizzes() async {
     try {
@@ -16,7 +19,6 @@ class QuizLocalStorage implements QuizStorage {
 
       final Map<String, dynamic> json = jsonDecode(dataString);
 
-      // TODO : corriger le fromJson en dessous et dans services/quiz_local_storage.dart
       if (json['questionnaires'] != null) {
         json['questionnaires'].forEach((quizData) {
           final questions = <Question>[];
@@ -28,8 +30,10 @@ class QuizLocalStorage implements QuizStorage {
               .add(QuizLocalModel.fromJson(quizData).toDomainEntity(questions));
         });
       }
+      logger.w('Quizzes number: ${quizzes.length}');
       return quizzes;
     } catch (e) {
+      logger.w(e);
       rethrow;
     }
   }

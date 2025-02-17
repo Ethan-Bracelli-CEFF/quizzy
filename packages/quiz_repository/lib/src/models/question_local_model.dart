@@ -6,9 +6,13 @@ class QuestionLocalModel {
   });
 
   factory QuestionLocalModel.fromJson(Map<String, dynamic> json) {
+    final answers = <String>[];
+    json['responses'].forEach((answer) {
+      answers.add(answer.toString());
+    });
     return QuestionLocalModel(
       title: json['title'],
-      answers: json['responses'],
+      answers: answers,
       rightAnswer: json['correct_answer'],
     );
   }

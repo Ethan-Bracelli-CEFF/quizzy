@@ -46,6 +46,7 @@ dependencies:
     path: packages/features/quiz_list
   quiz_repository:
     path: packages/quiz_repository
+  logger: ^2.5.0
 
 dev_dependencies:
   flutter_test:

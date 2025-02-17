@@ -7,11 +7,15 @@ class QuizLocalModel {
   });
 
   factory QuizLocalModel.fromJson(Map<String, dynamic> json) {
+    final tags = <String>[];
+    json['tags'].forEach((tag) {
+      tags.add(tag.toString());
+    });
     return QuizLocalModel(
       creator: json['creator'],
       title: json['title'],
       description: json['description'],
-      tags: json['tags'],
+      tags: tags,
     );
   }
 
