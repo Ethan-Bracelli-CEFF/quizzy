@@ -4,7 +4,6 @@ import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 import 'package:quiz_repository/quiz_repository.dart';
-import 'package:quiz_repository/src/mappers/question_local_model_to_domain.dart';
 
 class QuizLocalStorage implements QuizStorage {
   final logger = Logger();
@@ -30,7 +29,11 @@ class QuizLocalStorage implements QuizStorage {
               .add(QuizLocalModel.fromJson(quizData).toDomainEntity(questions));
         });
       }
+      // TODO: Delete Logger
       logger.w('Quizzes number: ${quizzes.length}');
+      if (quizzes.isNotEmpty) {
+        logger.w(quizzes[0].toString());
+      }
       return quizzes;
     } catch (e) {
       logger.w(e);

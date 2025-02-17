@@ -19,7 +19,6 @@ class DetailQuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

@@ -1,6 +1,7 @@
 import 'package:domain_entities/domain_entities.dart';
+import 'package:equatable/equatable.dart';
 
-class Quiz {
+class Quiz extends Equatable {
   const Quiz({
     required this.creator,
     required this.title,
@@ -30,4 +31,16 @@ class Quiz {
       questions: questions ?? this.questions,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        creator,
+        title,
+        description,
+        tags,
+        questions,
+      ];
+
+  @override
+  bool? get stringify => true;
 }
