@@ -14,14 +14,14 @@ class QuizListProvider with ChangeNotifier {
   QuizListState get state => _state;
 
   Future<void> fetchAndSetQuizes() async {
-    _state = _state.copyWith(state: QuizListStatus.loading);
+    _state = _state.copyWith(status: QuizListStatus.loading);
     notifyListeners();
 
     await Future.delayed(Duration(seconds: 1));
 
-    final datas = await repository.getAllQuizzes();
+    final repositoryQuizzes = await repository.getAllQuizzes();
 
-    _state.copyWith(state: QuizListStatus.loaded, quizes: datas);
+    _state.copyWith(status: QuizListStatus.loaded, quizzes: repositoryQuizzes);
     notifyListeners();
   }
 }

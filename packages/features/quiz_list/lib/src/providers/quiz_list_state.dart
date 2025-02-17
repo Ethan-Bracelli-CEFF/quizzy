@@ -8,28 +8,28 @@ enum QuizListStatus {
 
 class QuizListState extends Equatable {
   const QuizListState({
-    required this.quizes,
+    required this.quizzes,
     required this.status,
   });
 
   final QuizListStatus status;
-  final List<Quiz> quizes;
+  final List<Quiz> quizzes;
 
   factory QuizListState.initial() {
     return QuizListState(
-        quizes: List<Quiz>.empty(), status: QuizListStatus.initial);
+        quizzes: List<Quiz>.empty(), status: QuizListStatus.initial);
   }
 
   @override
-  List<Object?> get props => [status, quizes];
+  List<Object?> get props => [status, quizzes];
 
   QuizListState copyWith({
-    QuizListStatus? state,
-    List<Quiz>? quizes,
+    QuizListStatus? status,
+    List<Quiz>? quizzes,
   }) {
     return QuizListState(
-      quizes: quizes ?? this.quizes,
-      status: state ?? status,
+      quizzes: quizzes ?? this.quizzes,
+      status: status ?? this.status,
     );
   }
 }
