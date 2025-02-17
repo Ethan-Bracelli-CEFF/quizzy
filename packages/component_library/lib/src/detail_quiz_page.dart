@@ -20,6 +20,13 @@ class DetailQuizPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO
-    return Placeholder();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        DetailQuizItem(quiz: quiz),
+        const SizedBox(height: 100),
+        const StartButton(),
+      ],
+    );
   }
 }
