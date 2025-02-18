@@ -45,13 +45,14 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
             style: TextStyle(color: Colors.white, fontSize: 60),
           ),
         ),
-        body: Center(
+        body: Padding(
+          padding: const EdgeInsets.all(17.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              QuestionTitleItem(question: question),
-              const SizedBox(height: 100),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 100.0),
+                child: QuestionTitleItem(question: question),
+              ),
               Expanded(
                 child: ListView.separated(
                   itemBuilder: (context, index) => AnswerItem(
@@ -63,7 +64,7 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
                     index: index + 1,
                   ),
                   separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10.0),
+                      const SizedBox(height: 20.0),
                   itemCount: question.answers.length,
                 ),
               )

@@ -6,8 +6,8 @@
             "description": "Connaissez vous les étudiants de la classe ICH-2DEV?",
             "id": "Coucou",
             "tags": [
-                "#Etudiant",
-                "#Ecole"
+                "etudiant",
+                "ecole"
             ],
             "questions": [
                 {
@@ -135,8 +135,8 @@
             "description": "Savez vous des choses innutiles?",
             "id": "Salut",
             "tags": [
-                "#Culture",
-                "#General"
+                "culture",
+                "general"
             ],
             "questions": [
                 {
@@ -225,7 +225,7 @@
                         "Algérie",
                         "Maroc",
                         "Tunisie",
-                        "Égipte"
+                        "Égypte"
                     ],
                     "correct_answer": 2
                 },

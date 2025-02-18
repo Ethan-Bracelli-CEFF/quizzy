@@ -25,7 +25,7 @@ class AnswerItem extends StatelessWidget {
             ? WidgetStatePropertyAll(Colors.grey.shade800)
             : isCorrectAnswer
                 ? const WidgetStatePropertyAll(Colors.green)
-                : const WidgetStatePropertyAll(Colors.red),
+                : WidgetStatePropertyAll(Colors.red.shade900),
         shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
@@ -33,7 +33,7 @@ class AnswerItem extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 40.0),
+        padding: const EdgeInsets.symmetric(vertical: 17.0),
         child: Text(
           text,
           style: const TextStyle(fontSize: 25.0, color: Colors.white),

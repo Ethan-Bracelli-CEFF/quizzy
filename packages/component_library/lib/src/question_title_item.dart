@@ -9,7 +9,7 @@ class QuestionTitleItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(35.0),
+      padding: const EdgeInsets.all(30.0),
       decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(25.0))),
