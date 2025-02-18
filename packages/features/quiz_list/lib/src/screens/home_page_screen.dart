@@ -76,9 +76,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
               padding: const EdgeInsets.all(17.0),
               child: Column(
                 children: [
-                  SearchsBar(click: (String value) {
-                    context.read<QuizListProvider>().filterQuizzes(value);
-                  }),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    child: SearchsBar(click: (String value) {
+                      context.read<QuizListProvider>().filterQuizzes(value);
+                    }),
+                  ),
                   SizedBox(height: 30.0),
                   Expanded(
                     child: ListView.separated(
