@@ -30,10 +30,10 @@ class QuizLocalStorage implements QuizStorage {
         });
       }
       // TODO: Delete Logger
-      logger.w('Quizzes number: ${quizzes.length}');
-      if (quizzes.isNotEmpty) {
-        logger.w(quizzes[0].toString());
-      }
+      // logger.w('Quizzes number: ${quizzes.length}');
+      // if (quizzes.isNotEmpty) {
+      //   logger.w(quizzes[0].toString());
+      // }
       return quizzes;
     } catch (e) {
       logger.w(e);

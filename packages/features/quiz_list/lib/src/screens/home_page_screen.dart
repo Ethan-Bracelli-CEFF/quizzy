@@ -76,6 +76,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 : ListView.separated(
                     itemBuilder: (context, index) => QuizItem(
                           quiz: state.quizzes[index],
+                          showDetail: (id) => _showDetailQuizScreen(id),
                         ),
                     separatorBuilder: (context, index) => SizedBox(
                           height: 30,
@@ -102,5 +103,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
       body: _showQuiz(),
       backgroundColor: Color.fromARGB(255, 18, 18, 18),
     );
+  }
+
+  void _showDetailQuizScreen(String id) {
+    Navigator.of(context).pushNamed(DetailPageScreen.routeName, arguments: id);
   }
 }
