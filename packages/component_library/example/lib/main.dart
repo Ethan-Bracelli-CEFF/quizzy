@@ -72,7 +72,11 @@ class MyApp extends StatelessWidget {
         Story(
           name: 'Widgets/Answer',
           description: 'Bouton re réponse à une question',
-          builder: (context) => AnswerItem(text: 'Martin'),
+          builder: (context) => AnswerItem(
+            text: 'Martin',
+            isCorrectAnswer: false,
+            click: () {},
+          ),
         ),
         Story(
           name: 'Widgets/DetailQuizPage',
@@ -83,6 +87,11 @@ class MyApp extends StatelessWidget {
           name: 'Widgets/QuestionTitleItem',
           description: 'Forme la question',
           builder: (context) => QuestionTitleItem(question: quiz.questions[0]),
+        ),
+        Story(
+          name: 'Widgets/QuestionPage',
+          description: 'Page contanant la question',
+          builder: (context) => QuestionPage(question: quiz.questions[0]),
         ),
       ],
       wrapperBuilder: (context, child) => MaterialApp(
