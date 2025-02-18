@@ -24,9 +24,10 @@ class QuizListProvider with ChangeNotifier {
     final repositoryQuizzes = await repository.getAllQuizzes();
 
     _state = _state.copyWith(
-        status: QuizListStatus.loaded, quizzes: repositoryQuizzes);
-    // notifyListeners();
-    filterQuizzes('');
+        status: QuizListStatus.loaded,
+        quizzes: repositoryQuizzes,
+        filtered: repositoryQuizzes);
+    notifyListeners();
   }
 
   Quiz findQuizById(String id) {
@@ -34,22 +35,28 @@ class QuizListProvider with ChangeNotifier {
   }
 
   void filterQuizzes(String value) {
-    _filterState = _filterState.copyWith(status: QuizListStatus.loading);
     List<Quiz> quizzes = <Quiz>[];
+
     if (value.isNotEmpty) {
       for (Quiz quiz in _state.quizzes) {
-        for (String tag in quiz.tags) {
-          if (tag.contains(value)) {
+        if (value[0] == "#") {
+          for (String tag in quiz.tags) {
+            if (tag.toLowerCase().contains(value.substring(1).toLowerCase())) {
+              quizzes.add(quiz);
+              break;
+            }
+          }
+        } else {
+          if (quiz.title.toLowerCase().contains(value.toLowerCase())) {
             quizzes.add(quiz);
-            break;
           }
         }
       }
     } else {
       quizzes = _state.quizzes;
     }
-    _filterState =
-        _filterState.copyWith(status: QuizListStatus.loaded, quizzes: quizzes);
+
+    _state = _state.copyWith(filtered: quizzes);
     notifyListeners();
   }
 }

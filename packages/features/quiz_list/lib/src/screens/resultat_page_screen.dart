@@ -60,8 +60,9 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
                 Icons.home,
                 size: 40.0,
               ),
-              onPressed: () => Navigator.of(context)
-                  .pushReplacementNamed(HomePageScreen.routeName),
+              onPressed: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              },
             ),
             IconButton(
               color: Colors.white,
