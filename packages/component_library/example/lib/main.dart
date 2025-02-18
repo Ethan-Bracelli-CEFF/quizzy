@@ -14,7 +14,24 @@ class MyApp extends StatelessWidget {
       creator: 'Fabrioche',
       title: 'Culture générale',
       description: 'Connaissez vous des choses inutiles?',
-      questions: [],
+      questions: [
+        Question(
+          title:
+              'D\'une manière très objective quel est le meilleurs cours du jeudi?',
+          answers: ['Simon', 'Quentin', 'Martim', 'Fabian'],
+          rightAnswer: 2,
+        ),
+        Question(
+          title: 'Laquelle de ces personnes préfère le cours de mobile?',
+          answers: ['Ewan', 'Quentin', 'Martim', 'Le Hockey'],
+          rightAnswer: 2,
+        ),
+        Question(
+          title: 'Qui a eu la meilleure note au cie 295?',
+          answers: ['Le Hockey', 'Quentin', 'Ewan', 'Fabian'],
+          rightAnswer: 2,
+        ),
+      ],
       tags: [
         "#general",
         "#culture",
@@ -25,7 +42,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Storybook(
-      initialStory: 'Widgets/Answer',
+      initialStory: 'Widgets/QuestionTitleItem',
       stories: [
         Story(
           name: 'Widgets/QuizItem',
@@ -58,6 +75,11 @@ class MyApp extends StatelessWidget {
           description: 'Page de detail sur un quiz',
           builder: (context) => DetailQuizPage(),
         ),
+        Story(
+          name: 'Widgets/QuestionTitleItem',
+          description: 'Forme la question',
+          builder: (context) => QuestionTitleItem(question: quiz.questions[0]),
+        ),
       ],
       wrapperBuilder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -67,7 +89,9 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: Scaffold(
-          body: Center(child: child),
+          body: Container(
+              color: Colors.black,
+              child: Expanded(child: Center(child: child))),
         ),
       ),
     );
