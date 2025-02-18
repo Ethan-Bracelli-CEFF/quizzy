@@ -13,7 +13,10 @@ class QuestionTitleItem extends StatelessWidget {
       decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(25.0))),
-      child: Text(question.title),
+      child: Text(
+        question.title,
+        style: const TextStyle(fontSize: 25),
+      ),
     );
   }
 }

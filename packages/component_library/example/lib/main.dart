@@ -80,6 +80,11 @@ class MyApp extends StatelessWidget {
           description: 'Forme la question',
           builder: (context) => QuestionTitleItem(question: quiz.questions[0]),
         ),
+        Story(
+          name: 'Widgets/QuestionPage',
+          description: 'Page contanant la question',
+          builder: (context) => QuestionPage(question: quiz.questions[0]),
+        ),
       ],
       wrapperBuilder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
