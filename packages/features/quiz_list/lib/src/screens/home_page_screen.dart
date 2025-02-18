@@ -55,9 +55,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
-            height: 70,
-          ),
           Expanded(
             child: state.status == QuizListStatus.loading
                 ? Row(
@@ -75,21 +72,26 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       ),
                     ],
                   )
-                : Column(
-                    children: [
-                      SearchsBar(click: (String value) {}),
-                      Expanded(
-                        child: ListView.separated(
-                            itemBuilder: (context, index) => QuizItem(
-                                  quiz: state.quizzes[index],
-                                  showDetail: (id) => _showDetailQuizScreen(id),
-                                ),
-                            separatorBuilder: (context, index) => SizedBox(
-                                  height: 30,
-                                ),
-                            itemCount: state.quizzes.length),
-                      ),
-                    ],
+                : Padding(
+                    padding: const EdgeInsets.all(17.0),
+                    child: Column(
+                      children: [
+                        SearchsBar(click: (String value) {}),
+                        SizedBox(height: 50.0),
+                        Expanded(
+                          child: ListView.separated(
+                              itemBuilder: (context, index) => QuizItem(
+                                    quiz: state.quizzes[index],
+                                    showDetail: (id) =>
+                                        _showDetailQuizScreen(id),
+                                  ),
+                              separatorBuilder: (context, index) => SizedBox(
+                                    height: 20,
+                                  ),
+                              itemCount: state.quizzes.length),
+                        ),
+                      ],
+                    ),
                   ),
           ),
         ],
