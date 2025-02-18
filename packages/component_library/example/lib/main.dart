@@ -65,11 +65,6 @@ class MyApp extends StatelessWidget {
           description: 'Grande tuile de detail d\'un quiz',
           builder: (context) => DetailQuizItem(quiz: quiz),
         ),
-        // Story(
-        //   name: 'Widgets/StartButton',
-        //   description: 'Bouton pour commencer un quiz',
-        //   builder: (context) => StartButton(),
-        // ),
         Story(
           name: 'Widgets/Question',
           description: 'Zone dédié à la question dans un quiz',
