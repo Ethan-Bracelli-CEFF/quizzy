@@ -45,29 +45,28 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
             style: TextStyle(color: Colors.white, fontSize: 60),
           ),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              QuestionTitleItem(question: question),
-              const SizedBox(height: 100),
-              Expanded(
-                child: ListView.separated(
-                  itemBuilder: (context, index) => AnswerItem(
-                    text: question.answers[index],
-                    isCorrectAnswer:
-                        index + 1 == question.rightAnswer ? true : false,
-                    showAnswer: showAnswers,
-                    click: revealAnswers,
-                  ),
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10.0),
-                  itemCount: question.answers.length,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            QuestionTitleItem(question: question),
+            const SizedBox(height: 100),
+            Expanded(
+              child: ListView.separated(
+                itemBuilder: (context, index) => AnswerItem(
+                  text: question.answers[index],
+                  isCorrectAnswer:
+                      index + 1 == question.rightAnswer ? true : false,
+                  showAnswer: showAnswers,
+                  click: revealAnswers,
                 ),
-              )
-            ],
-          ),
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 10.0),
+                itemCount: question.answers.length,
+              ),
+            )
+          ],
         ),
         backgroundColor: const Color.fromARGB(255, 18, 18, 18),
         bottomNavigationBar: showAnswers
@@ -96,15 +95,13 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
     final quiz = context.read<QuizListProvider>().findQuizById(id);
     final questions = quiz.questions;
 
-    // index += 1;
-
     if (index < questions.length) {
       setState(() {
         this.index += 1;
         showAnswers = false;
       });
     } else {
-      // TODO : aller à la page de résultat
+      Navigator.of(context).pushReplacementNamed(ResultatPageScreen.routeName);
     }
   }
 }
