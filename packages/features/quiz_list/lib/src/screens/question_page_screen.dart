@@ -1,6 +1,7 @@
 import 'package:component_library/component_library.dart';
 import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_list/quiz_list.dart';
 
@@ -34,6 +35,8 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
 
     final question = questions[index];
 
+    double percentage = index / questions.length;
+
     return Scaffold(
         appBar: AppBar(
           foregroundColor: Colors.white,
@@ -50,6 +53,17 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              LinearPercentIndicator(
+                width: MediaQuery.of(context).size.width,
+                animation: true,
+                animateFromLastPercent: true,
+                lineHeight: 20.0,
+                animationDuration: 1000,
+                percent: percentage,
+                center: Text("${(percentage * 100).roundToDouble()}%"),
+                progressColor: const Color.fromARGB(255, 122, 122, 122),
+              ),
+              const SizedBox(height: 200),
               QuestionTitleItem(question: question),
               const SizedBox(height: 100),
               Expanded(
@@ -101,13 +115,14 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
     final quiz = context.read<QuizListProvider>().findQuizById(id);
     final questions = quiz.questions;
 
-    if (index < questions.length) {
+    if (index + 1 < questions.length) {
       setState(() {
         this.index += 1;
         showAnswers = false;
       });
     } else {
-      Navigator.of(context).pushReplacementNamed(ResultatPageScreen.routeName);
+      Navigator.of(context).pushReplacementNamed(ResultatPageScreen.routeName,
+          arguments: questions);
     }
   }
 }
