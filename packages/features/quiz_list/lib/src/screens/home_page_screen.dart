@@ -77,7 +77,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   )
                 : Column(
                     children: [
-                      SearchsBar(click: (String value) {}),
+                      SearchsBar(click: (String value) {
+                        context.read<QuizListProvider>().filterQuizzes(value);
+                      }),
                       Expanded(
                         child: ListView.separated(
                             itemBuilder: (context, index) => QuizItem(

@@ -29,4 +29,18 @@ class QuizListProvider with ChangeNotifier {
   Quiz findQuizById(String id) {
     return _state.quizzes.firstWhere((quiz) => quiz.id == id);
   }
+
+  void filterQuizzes(String value) {
+    final quizzes = <Quiz>[];
+    for (Quiz quiz in _state.quizzes) {
+      for (String tag in quiz.tags) {
+        if (tag.contains(value)) {
+          quizzes.add(quiz);
+          break;
+        }
+      }
+    }
+    _state = _state.copyWith(quizzes: quizzes);
+    notifyListeners();
+  }
 }
