@@ -22,7 +22,9 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
         children: [
           DetailQuizItem(quiz: quiz),
           const SizedBox(height: 100),
-          const StartButton(),
+          StartButton(
+            click: () => _showQuestionPageScreen(),
+          ),
         ],
       ),
     );
@@ -46,5 +48,12 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
       body: body(quiz),
       backgroundColor: Color.fromARGB(255, 18, 18, 18),
     );
+  }
+
+  void _showQuestionPageScreen() {
+    final id = ModalRoute.of(context)?.settings.arguments as String;
+
+    Navigator.of(context)
+        .pushNamed(QuestionPageScreen.routeName, arguments: id);
   }
 }
