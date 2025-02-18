@@ -52,47 +52,48 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
     return Container(
       color: Color.fromARGB(255, 18, 18, 18),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Expanded(
-            child: state.status == QuizListStatus.loading
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Fetching Data...',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      CircularProgressIndicator(
-                        color: Colors.white,
-                      ),
-                    ],
-                  )
-                : Column(
-                    children: [
-                      SearchsBar(click: (String value) {
-                        context.read<QuizListProvider>().filterQuizzes(value);
-                      }),
-                      Expanded(
-                        child: ListView.separated(
-                            itemBuilder: (context, index) => QuizItem(
-                                  quiz: state.quizzes[index],
-                                  showDetail: (id) => _showDetailQuizScreen(id),
-                                ),
-                            separatorBuilder: (context, index) => SizedBox(
-                                  height: 30,
-                                ),
-                            itemCount: state.quizzes.length),
-                      ),
-                    ],
+      child: state.status == QuizListStatus.loading
+          ? Center(
+              child: Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Fetching Data...',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+              ),
+            )
+          : Padding(
+              padding: const EdgeInsets.all(17.0),
+              child: Column(
+                children: [
+                  SearchsBar(click: (String value) {
+                    context.read<QuizListProvider>().filterQuizzes(value);
+                  }),
+                  SizedBox(height: 30.0),
+                  Expanded(
+                    child: ListView.separated(
+                        itemBuilder: (context, index) => QuizItem(
+                              quiz: state.quizzes[index],
+                              showDetail: (id) => _showDetailQuizScreen(id),
+                            ),
+                        separatorBuilder: (context, index) => SizedBox(
+                              height: 20,
+                            ),
+                        itemCount: state.quizzes.length),
                   ),
-          ),
-        ],
-      ),
+                ],
+              ),
+            ),
     );
   }
 
