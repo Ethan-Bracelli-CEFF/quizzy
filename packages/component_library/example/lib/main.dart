@@ -102,11 +102,6 @@ class MyApp extends StatelessWidget {
             ],
           ),
         ),
-        Story(
-          name: 'Widgets/QuestionPage',
-          description: 'Page contanant la question',
-          builder: (context) => QuestionPage(question: quiz.questions[0]),
-        ),
       ],
       wrapperBuilder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
