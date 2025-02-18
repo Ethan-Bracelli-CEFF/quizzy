@@ -21,7 +21,8 @@ class QuizListProvider with ChangeNotifier {
 
     final repositoryQuizzes = await repository.getAllQuizzes();
 
-    _state.copyWith(status: QuizListStatus.loaded, quizzes: repositoryQuizzes);
+    _state = _state.copyWith(
+        status: QuizListStatus.loaded, quizzes: repositoryQuizzes);
     notifyListeners();
   }
 }
