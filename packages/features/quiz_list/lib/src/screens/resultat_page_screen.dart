@@ -16,8 +16,8 @@ class ResultatPageScreen extends StatefulWidget {
 class _ResultatPageScreenState extends State<ResultatPageScreen> {
   @override
   Widget build(BuildContext context) {
-    final questions =
-        ModalRoute.of(context)?.settings.arguments as List<Question>;
+    final quiz = ModalRoute.of(context)?.settings.arguments as Quiz;
+    final questions = quiz.questions;
     int score = context.read<QuizPoints>().points;
 
     double percentage = score / questions.length;
@@ -51,16 +51,35 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
       backgroundColor: const Color.fromARGB(255, 18, 18, 18),
       bottomNavigationBar: BottomAppBar(
         color: const Color.fromRGBO(70, 70, 70, 70),
-        child: IconButton(
-          color: Colors.white,
-          icon: const Icon(
-            Icons.home,
-            size: 24.0,
-          ),
-          onPressed: () => Navigator.of(context)
-              .pushReplacementNamed(HomePageScreen.routeName),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              color: Colors.white,
+              icon: const Icon(
+                Icons.home,
+                size: 40.0,
+              ),
+              onPressed: () => Navigator.of(context)
+                  .pushReplacementNamed(HomePageScreen.routeName),
+            ),
+            IconButton(
+              color: Colors.white,
+              icon: const Icon(
+                Icons.restart_alt,
+                size: 40.0,
+              ),
+              onPressed: () => _retry(context, quiz),
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  void _retry(BuildContext context, Quiz quiz) {
+    Navigator.of(context)
+        .pushReplacementNamed(QuestionPageScreen.routeName, arguments: quiz.id);
+    context.read<QuizPoints>().points = 0;
   }
 }

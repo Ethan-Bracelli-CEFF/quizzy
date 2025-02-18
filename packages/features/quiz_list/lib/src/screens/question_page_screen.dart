@@ -122,8 +122,8 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
         showAnswers = false;
       });
     } else {
-      Navigator.of(context).pushReplacementNamed(ResultatPageScreen.routeName,
-          arguments: questions);
+      Navigator.of(context)
+          .pushReplacementNamed(ResultatPageScreen.routeName, arguments: quiz);
     }
   }
 }
