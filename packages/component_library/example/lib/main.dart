@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Storybook(
-      initialStory: 'Widgets/QuestionTitleItem',
+      initialStory: 'Widgets/SearchBar',
       stories: [
         Story(
           name: 'Widgets/QuizItem',
@@ -93,12 +93,20 @@ class MyApp extends StatelessWidget {
           description: 'Page contanant la question',
           builder: (context) => QuestionPage(question: quiz.questions[0]),
         ),
+        Story(
+          name: 'Widgets/SearchBar',
+          description: 'Barre de recherche',
+          builder: (context) => SearchsBar(click: (String value) {}),
+        ),
       ],
       wrapperBuilder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Quizzy',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          textSelectionTheme: TextSelectionThemeData(
+            selectionColor: Colors.black.withAlpha(100),
+          ),
           useMaterial3: true,
         ),
         home: Scaffold(

@@ -29,14 +29,8 @@ class QuizLocalStorage implements QuizStorage {
               .add(QuizLocalModel.fromJson(quizData).toDomainEntity(questions));
         });
       }
-      // TODO: Delete Logger
-      // logger.w('Quizzes number: ${quizzes.length}');
-      // if (quizzes.isNotEmpty) {
-      //   logger.w(quizzes[0].toString());
-      // }
       return quizzes;
     } catch (e) {
-      logger.w(e);
       rethrow;
     }
   }
