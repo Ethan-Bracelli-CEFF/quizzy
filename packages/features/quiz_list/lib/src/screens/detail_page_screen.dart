@@ -15,17 +15,20 @@ class DetailPageScreen extends StatefulWidget {
 
 class _DetailPageScreenState extends State<DetailPageScreen> {
   Widget body(Quiz quiz) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          DetailQuizItem(quiz: quiz),
-          const SizedBox(height: 100),
-          StartButton(
-            click: () => _showQuestionPageScreen(),
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(17.0),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            DetailQuizItem(quiz: quiz),
+            const SizedBox(height: 80),
+            StartButton(
+              click: () => _showQuestionPageScreen(),
+            ),
+          ],
+        ),
       ),
     );
   }

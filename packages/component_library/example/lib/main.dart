@@ -65,11 +65,6 @@ class MyApp extends StatelessWidget {
           description: 'Grande tuile de detail d\'un quiz',
           builder: (context) => DetailQuizItem(quiz: quiz),
         ),
-        // Story(
-        //   name: 'Widgets/StartButton',
-        //   description: 'Bouton pour commencer un quiz',
-        //   builder: (context) => StartButton(),
-        // ),
         Story(
           name: 'Widgets/Question',
           description: 'Zone dédié à la question dans un quiz',
@@ -97,25 +92,20 @@ class MyApp extends StatelessWidget {
           description: 'Forme la question',
           builder: (context) => QuestionTitleItem(question: quiz.questions[0]),
         ),
-        // Story(
-        //   name: 'List/Answers',
-        //   description: 'Affichage d\'une liste de réponses',
-        //   builder: (context) => Column(
-        //     children: [
-        //       QuestionTitleItem(question: quiz.questions[0]),
-        //       SizedBox(height: 30.0),
-        //       Expanded(
-        //         child: AnswerList(question: quiz.questions[0]),
-        //       )
-        //     ],
-        //   ),
-        // ),
+        Story(
+          name: 'Widgets/SearchBar',
+          description: 'Barre de recherche',
+          builder: (context) => SearchsBar(click: (String value) {}),
+        ),
       ],
       wrapperBuilder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Quizzy',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          textSelectionTheme: TextSelectionThemeData(
+            selectionColor: Colors.black.withAlpha(100),
+          ),
           useMaterial3: true,
         ),
         home: Scaffold(
