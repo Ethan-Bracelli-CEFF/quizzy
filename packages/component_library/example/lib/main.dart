@@ -58,11 +58,11 @@ class MyApp extends StatelessWidget {
           description: 'Grande tuile de detail d\'un quiz',
           builder: (context) => DetailQuizItem(quiz: quiz),
         ),
-        Story(
-          name: 'Widgets/StartButton',
-          description: 'Bouton pour commencer un quiz',
-          builder: (context) => StartButton(),
-        ),
+        // Story(
+        //   name: 'Widgets/StartButton',
+        //   description: 'Bouton pour commencer un quiz',
+        //   builder: (context) => StartButton(),
+        // ),
         Story(
           name: 'Widgets/Question',
           description: 'Zone dédié à la question dans un quiz',
@@ -101,7 +101,12 @@ class MyApp extends StatelessWidget {
               )
             ],
           ),
-        )
+        ),
+        Story(
+          name: 'Widgets/QuestionPage',
+          description: 'Page contanant la question',
+          builder: (context) => QuestionPage(question: quiz.questions[0]),
+        ),
       ],
       wrapperBuilder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
