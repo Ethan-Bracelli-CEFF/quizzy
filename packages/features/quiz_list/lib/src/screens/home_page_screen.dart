@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:quiz_list/quiz_list.dart';
 
 class HomePageScreen extends StatefulWidget {
+  static const routeName = 'home_screen';
+
   const HomePageScreen({super.key});
 
   @override

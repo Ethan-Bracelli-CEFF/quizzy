@@ -43,8 +43,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Storybook(
-      initialStory: 'List/Answers',
+      initialStory: 'Pages/Résultat',
       stories: [
+        Story(
+          name: 'Pages/Résultat',
+          description: 'La page de résultat',
+          builder: (context) => ResultPage(
+            score: context.knobs.sliderInt(label: '% de bonne réponse'),
+          ),
+        ),
         Story(
           name: 'Widgets/QuizItem',
           description: 'La tuile d\'un quiz',
@@ -90,25 +97,20 @@ class MyApp extends StatelessWidget {
           description: 'Forme la question',
           builder: (context) => QuestionTitleItem(question: quiz.questions[0]),
         ),
-        // Story(
-        //   name: 'List/Answers',
-        //   description: 'Affichage d\'une liste de réponses',
-        //   builder: (context) => Column(
-        //     children: [
-        //       QuestionTitleItem(question: quiz.questions[0]),
-        //       SizedBox(height: 30.0),
-        //       Expanded(
-        //         child: AnswerList(question: quiz.questions[0]),
-        //       )
-        //     ],
-        //   ),
-        // ),
+        Story(
+          name: 'Widgets/SearchBar',
+          description: 'Barre de recherche',
+          builder: (context) => SearchsBar(click: (String value) {}),
+        ),
       ],
       wrapperBuilder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Quizzy',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          textSelectionTheme: TextSelectionThemeData(
+            selectionColor: Colors.black.withAlpha(100),
+          ),
           useMaterial3: true,
         ),
         home: Scaffold(

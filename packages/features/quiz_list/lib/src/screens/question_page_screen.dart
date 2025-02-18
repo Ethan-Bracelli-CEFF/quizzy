@@ -107,7 +107,7 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
         showAnswers = false;
       });
     } else {
-      // TODO : aller à la page de résultat
+      Navigator.of(context).pushReplacementNamed(ResultatPageScreen.routeName);
     }
   }
 }
