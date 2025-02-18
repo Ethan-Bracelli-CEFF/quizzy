@@ -48,10 +48,9 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
             style: TextStyle(color: Colors.white, fontSize: 60),
           ),
         ),
-        body: Center(
+        body: Padding(
+          padding: const EdgeInsets.all(17.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               LinearPercentIndicator(
                 width: MediaQuery.of(context).size.width,
@@ -63,8 +62,10 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
                 center: Text("${(percentage * 100).roundToDouble()}%"),
                 progressColor: const Color.fromARGB(255, 122, 122, 122),
               ),
-              const SizedBox(height: 200),
-              QuestionTitleItem(question: question),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 100.0),
+                child: QuestionTitleItem(question: question),
+              ),
               const SizedBox(height: 100),
               Expanded(
                 child: ListView.separated(
@@ -77,7 +78,7 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
                     index: index + 1,
                   ),
                   separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10.0),
+                      const SizedBox(height: 20.0),
                   itemCount: question.answers.length,
                 ),
               )
