@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
 
-class AnswerItem extends StatelessWidget {
-  const AnswerItem({required this.text, super.key});
+class AnswerItem extends StatefulWidget {
+  const AnswerItem(
+      {required this.text, required this.isCorrectAnswer, super.key});
 
   final String text;
+  final bool isCorrectAnswer;
 
-  // TODO: Finir le composant
+  @override
+  State<AnswerItem> createState() => _AnswerItemState();
+}
+
+class _AnswerItemState extends State<AnswerItem> {
+  bool showAnswer = false;
+
+  revealAnswer() {
+    setState(() {
+      showAnswer = true;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () => revealAnswer(),
       style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(Colors.grey.shade800),
+        backgroundColor: showAnswer == false
+            ? WidgetStatePropertyAll(Colors.grey.shade800)
+            : widget.isCorrectAnswer
+                ? const WidgetStatePropertyAll(Colors.green)
+                : const WidgetStatePropertyAll(Colors.red),
         shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
@@ -21,7 +39,7 @@ class AnswerItem extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 40.0),
         child: Text(
-          text,
+          widget.text,
           style: const TextStyle(fontSize: 25.0, color: Colors.white),
         ),
       ),

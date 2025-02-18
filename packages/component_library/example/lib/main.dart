@@ -51,7 +51,10 @@ class MyApp extends StatelessWidget {
         Story(
           name: 'Widgets/Answer',
           description: 'Bouton re réponse à une question',
-          builder: (context) => AnswerItem(text: 'Martin'),
+          builder: (context) => AnswerItem(
+            text: 'Martin',
+            isCorrectAnswer: false,
+          ),
         ),
         Story(
           name: 'Widgets/DetailQuizPage',
