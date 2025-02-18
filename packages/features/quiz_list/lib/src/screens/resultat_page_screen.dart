@@ -12,8 +12,8 @@ class ResultatPageScreen extends StatefulWidget {
 }
 
 class _ResultatPageScreenState extends State<ResultatPageScreen> {
-  int score = 
-  
+  int score =
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
