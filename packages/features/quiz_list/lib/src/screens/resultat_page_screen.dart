@@ -36,7 +36,7 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
       body: Center(
         child: CircularPercentIndicator(
           animation: true,
-          animationDuration: 2000,
+          animationDuration: 1000,
           radius: 200.0,
           lineWidth: 30.0,
           percent: percentage,
