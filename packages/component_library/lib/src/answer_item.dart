@@ -2,10 +2,15 @@ import 'package:flutter/material.dart';
 
 class AnswerItem extends StatefulWidget {
   const AnswerItem(
-      {required this.text, required this.isCorrectAnswer, super.key});
+      {required this.text,
+      required this.isCorrectAnswer,
+      required this.click,
+      super.key});
 
   final String text;
   final bool isCorrectAnswer;
+
+  final Function() click;
 
   @override
   State<AnswerItem> createState() => _AnswerItemState();

@@ -75,6 +75,7 @@ class MyApp extends StatelessWidget {
           builder: (context) => AnswerItem(
             text: 'Martin',
             isCorrectAnswer: false,
+            click: () {},
           ),
         ),
         Story(
