@@ -10,3 +10,4 @@ export 'src/answer_item.dart';
 export 'src/question_title_item.dart';
 export 'src/answer_list.dart';
 export 'src/searchs_bar.dart';
+export 'src/result_page.dart';

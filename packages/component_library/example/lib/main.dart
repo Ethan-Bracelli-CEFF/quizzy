@@ -43,8 +43,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Storybook(
-      initialStory: 'Widgets/SearchBar',
+      initialStory: 'Pages/Résultat',
       stories: [
+        Story(
+          name: 'Pages/Résultat',
+          description: 'La page de résultat',
+          builder: (context) => ResultPage(
+            score: context.knobs.sliderInt(label: '% de bonne réponse'),
+          ),
+        ),
         Story(
           name: 'Widgets/QuizItem',
           description: 'La tuile d\'un quiz',
