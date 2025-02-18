@@ -54,6 +54,8 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
   void _showQuestionPageScreen() {
     final id = ModalRoute.of(context)?.settings.arguments as String;
 
+    context.read<QuizPoints>().points == 0;
+
     Navigator.of(context)
         .pushNamed(QuestionPageScreen.routeName, arguments: id);
   }

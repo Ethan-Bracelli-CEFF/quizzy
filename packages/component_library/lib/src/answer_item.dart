@@ -6,18 +6,20 @@ class AnswerItem extends StatelessWidget {
       required this.isCorrectAnswer,
       required this.showAnswer,
       required this.click,
+      required this.index,
       super.key});
 
   final String text;
   final bool isCorrectAnswer;
   final bool showAnswer;
+  final int index;
 
-  final Function() click;
+  final void Function(int index) click;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: click,
+      onPressed: () => click(index),
       style: ButtonStyle(
         backgroundColor: showAnswer == false
             ? WidgetStatePropertyAll(Colors.grey.shade800)
