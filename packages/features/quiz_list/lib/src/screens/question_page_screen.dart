@@ -53,14 +53,14 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
           child: Column(
             children: [
               LinearPercentIndicator(
-                width: MediaQuery.of(context).size.width,
+                width: MediaQuery.of(context).size.width - 37,
                 animation: true,
                 animateFromLastPercent: true,
                 lineHeight: 20.0,
                 animationDuration: 1000,
                 percent: percentage,
                 center: Text("${(percentage * 100).roundToDouble()}%"),
-                progressColor: const Color.fromARGB(255, 122, 122, 122),
+                progressColor: Colors.blue.shade400,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 100.0),
@@ -122,8 +122,8 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
         showAnswers = false;
       });
     } else {
-      Navigator.of(context).pushReplacementNamed(ResultatPageScreen.routeName,
-          arguments: questions);
+      Navigator.of(context)
+          .pushReplacementNamed(ResultatPageScreen.routeName, arguments: quiz);
     }
   }
 }
