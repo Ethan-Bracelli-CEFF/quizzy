@@ -15,7 +15,7 @@ class Tag extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
         child: Text(
-          name,
+          name.toLowerCase(),
           style: const TextStyle(
             fontSize: 14,
           ),

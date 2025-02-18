@@ -18,7 +18,7 @@ class StartButton extends StatelessWidget {
         ),
       ),
       child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         child: Text(
           'Start',
           style: TextStyle(fontSize: 35.0, color: Colors.white),
