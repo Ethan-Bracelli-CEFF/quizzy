@@ -28,7 +28,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   }
 
   Widget _showQuiz() {
-    final state = context.watch<QuizListProvider>().state;
+    final state = context.watch<QuizListProvider>().filterState;
 
     if (state.status == QuizListStatus.initial) {
       return const Center(

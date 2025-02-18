@@ -6,11 +6,13 @@ import 'package:quiz_repository/quiz_repository.dart';
 part 'quiz_list_state.dart';
 
 class QuizListProvider with ChangeNotifier {
+  QuizListState _filterState = QuizListState.initial();
   QuizListState _state = QuizListState.initial();
 
   QuizListProvider({required this.repository});
   final QuizRepository repository;
 
+  QuizListState get filterState => _filterState;
   QuizListState get state => _state;
 
   Future<void> fetchAndSetQuizes() async {
@@ -23,7 +25,8 @@ class QuizListProvider with ChangeNotifier {
 
     _state = _state.copyWith(
         status: QuizListStatus.loaded, quizzes: repositoryQuizzes);
-    notifyListeners();
+    // notifyListeners();
+    filterQuizzes('');
   }
 
   Quiz findQuizById(String id) {
@@ -31,16 +34,22 @@ class QuizListProvider with ChangeNotifier {
   }
 
   void filterQuizzes(String value) {
-    final quizzes = <Quiz>[];
-    for (Quiz quiz in _state.quizzes) {
-      for (String tag in quiz.tags) {
-        if (tag.contains(value)) {
-          quizzes.add(quiz);
-          break;
+    _filterState = _filterState.copyWith(status: QuizListStatus.loading);
+    List<Quiz> quizzes = <Quiz>[];
+    if (value.isNotEmpty) {
+      for (Quiz quiz in _state.quizzes) {
+        for (String tag in quiz.tags) {
+          if (tag.contains(value)) {
+            quizzes.add(quiz);
+            break;
+          }
         }
       }
+    } else {
+      quizzes = _state.quizzes;
     }
-    _state = _state.copyWith(quizzes: quizzes);
+    _filterState =
+        _filterState.copyWith(status: QuizListStatus.loaded, quizzes: quizzes);
     notifyListeners();
   }
 }
