@@ -1,4 +1,6 @@
+import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:quiz_list/quiz_list.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -12,47 +14,72 @@ class ResultatPageScreen extends StatefulWidget {
 }
 
 class _ResultatPageScreenState extends State<ResultatPageScreen> {
-  int score =
-
   @override
   Widget build(BuildContext context) {
+    final quiz = ModalRoute.of(context)?.settings.arguments as Quiz;
+    final questions = quiz.questions;
+    int score = context.read<QuizPoints>().points;
+
+    double percentage = score / questions.length;
+
     return Scaffold(
-        appBar: AppBar(
-          foregroundColor: Colors.white,
-          toolbarHeight: 100,
-          backgroundColor: const Color.fromRGBO(70, 70, 70, 70),
-          centerTitle: true,
-          title: const Text(
-            'Quizzy',
-            style: TextStyle(color: Colors.white, fontSize: 60),
-          ),
+      appBar: AppBar(
+        foregroundColor: Colors.white,
+        toolbarHeight: 100,
+        backgroundColor: const Color.fromRGBO(70, 70, 70, 70),
+        centerTitle: true,
+        title: const Text(
+          'Quizzy',
+          style: TextStyle(color: Colors.white, fontSize: 60),
         ),
-        body: Center(
-          child: CircularPercentIndicator(
-            radius: 200.0,
-            lineWidth: 30.0,
-            percent: widget.score / 100,
-            center: Text(
-              '${widget.score}%',
-              style: TextStyle(color: Colors.white, fontSize: 50),
-            ),
-            progressColor: Colors.green,
-            backgroundColor: Colors.red,
+      ),
+      body: Center(
+        child: CircularPercentIndicator(
+          animation: true,
+          animationDuration: 1000,
+          radius: 200.0,
+          lineWidth: 30.0,
+          percent: percentage,
+          center: Text(
+            '${(percentage * 100).roundToDouble()}%',
+            style: TextStyle(color: Colors.white, fontSize: 50),
           ),
+          progressColor: Colors.green,
+          backgroundColor: Colors.red,
         ),
-        backgroundColor: const Color.fromARGB(255, 18, 18, 18),
-        bottomNavigationBar: BottomAppBar(
-          color: const Color.fromRGBO(70, 70, 70, 70),
-          child: IconButton(
-            color: Colors.white,
-            icon: const Icon(
-              Icons.arrow_forward,
-              size: 24.0,
+      ),
+      backgroundColor: const Color.fromARGB(255, 18, 18, 18),
+      bottomNavigationBar: BottomAppBar(
+        color: const Color.fromRGBO(70, 70, 70, 70),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              color: Colors.white,
+              icon: const Icon(
+                Icons.home,
+                size: 40.0,
+              ),
+              onPressed: () => Navigator.of(context)
+                  .pushReplacementNamed(HomePageScreen.routeName),
             ),
-          onPressed: () =>
-              Navigator.of(context).pushNamed(HomePageScreen.routeName),
+            IconButton(
+              color: Colors.white,
+              icon: const Icon(
+                Icons.restart_alt,
+                size: 40.0,
+              ),
+              onPressed: () => _retry(context, quiz),
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  void _retry(BuildContext context, Quiz quiz) {
+    Navigator.of(context)
+        .pushReplacementNamed(QuestionPageScreen.routeName, arguments: quiz.id);
+    context.read<QuizPoints>().points = 0;
   }
 }

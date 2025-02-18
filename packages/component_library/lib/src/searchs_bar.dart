@@ -24,8 +24,7 @@ class _SearchsBarState extends State<SearchsBar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
-      width: 500,
+      height: 75,
       child: TextFormField(
         controller: _searchsBar,
         decoration: InputDecoration(

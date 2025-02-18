@@ -1,6 +1,7 @@
 import 'package:component_library/component_library.dart';
 import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_list/quiz_list.dart';
 
@@ -34,6 +35,8 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
 
     final question = questions[index];
 
+    double percentage = index / questions.length;
+
     return Scaffold(
         appBar: AppBar(
           foregroundColor: Colors.white,
@@ -45,12 +48,24 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
             style: TextStyle(color: Colors.white, fontSize: 60),
           ),
         ),
-        body: Center(
+        body: Padding(
+          padding: const EdgeInsets.all(17.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              QuestionTitleItem(question: question),
+              LinearPercentIndicator(
+                width: MediaQuery.of(context).size.width - 37,
+                animation: true,
+                animateFromLastPercent: true,
+                lineHeight: 20.0,
+                animationDuration: 1000,
+                percent: percentage,
+                center: Text("${(percentage * 100).roundToDouble()}%"),
+                progressColor: Colors.blue.shade400,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 100.0),
+                child: QuestionTitleItem(question: question),
+              ),
               const SizedBox(height: 100),
               Expanded(
                 child: ListView.separated(
@@ -63,7 +78,7 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
                     index: index + 1,
                   ),
                   separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10.0),
+                      const SizedBox(height: 20.0),
                   itemCount: question.answers.length,
                 ),
               )
@@ -101,13 +116,14 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
     final quiz = context.read<QuizListProvider>().findQuizById(id);
     final questions = quiz.questions;
 
-    if (index < questions.length) {
+    if (index + 1 < questions.length) {
       setState(() {
         this.index += 1;
         showAnswers = false;
       });
     } else {
-      Navigator.of(context).pushReplacementNamed(ResultatPageScreen.routeName);
+      Navigator.of(context)
+          .pushReplacementNamed(ResultatPageScreen.routeName, arguments: quiz);
     }
   }
 }

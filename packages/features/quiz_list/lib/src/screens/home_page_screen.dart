@@ -55,9 +55,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
-            height: 70,
-          ),
           Expanded(
             child: state.status == QuizListStatus.loading
                 ? Row(
