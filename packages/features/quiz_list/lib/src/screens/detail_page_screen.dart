@@ -37,6 +37,7 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         toolbarHeight: 100,
         backgroundColor: const Color.fromRGBO(70, 70, 70, 70),
         centerTitle: true,
