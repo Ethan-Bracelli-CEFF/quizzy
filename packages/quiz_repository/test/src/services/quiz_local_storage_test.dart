@@ -115,6 +115,7 @@ void main() {
     expect(
         QuizLocalModel.fromJson(quizData).toDomainEntity([question]),
         Quiz(
+            id: 'quiz1',
             creator: 'Fabrioche',
             title: 'Étudiants de la classe ICH-2DEV',
             description: 'Connaissez vous les étudiants de la classe ICH-2DEV?',

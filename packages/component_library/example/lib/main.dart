@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       creator: 'Fabrioche',
       title: 'Culture générale',
       description: 'Connaissez vous des choses inutiles?',
+      id: 'Salam',
       questions: [
         Question(
           title:
@@ -47,7 +48,10 @@ class MyApp extends StatelessWidget {
         Story(
           name: 'Widgets/QuizItem',
           description: 'La tuile d\'un quiz',
-          builder: (context) => QuizItem(quiz: quiz),
+          builder: (context) => QuizItem(
+            quiz: quiz,
+            showDetail: (String id) {},
+          ),
         ),
         Story(
           name: 'Widgets/QuizDetail',
@@ -68,7 +72,11 @@ class MyApp extends StatelessWidget {
         Story(
           name: 'Widgets/Answer',
           description: 'Bouton re réponse à une question',
-          builder: (context) => AnswerItem(text: 'Martin'),
+          builder: (context) => AnswerItem(
+            text: 'Martin',
+            isCorrectAnswer: false,
+            click: () {},
+          ),
         ),
         Story(
           name: 'Widgets/DetailQuizPage',

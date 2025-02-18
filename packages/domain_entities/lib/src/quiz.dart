@@ -6,6 +6,7 @@ class Quiz extends Equatable {
     required this.creator,
     required this.title,
     required this.description,
+    required this.id,
     required this.tags,
     required this.questions,
   });
@@ -13,6 +14,7 @@ class Quiz extends Equatable {
   final String creator;
   final String title;
   final String description;
+  final String id;
   final List<String> tags;
   final List<Question> questions;
 
@@ -20,6 +22,7 @@ class Quiz extends Equatable {
     final String? creator,
     final String? title,
     final String? description,
+    final String? id,
     final List<String>? tags,
     final List<Question>? questions,
   }) {
@@ -27,6 +30,7 @@ class Quiz extends Equatable {
       creator: creator ?? this.creator,
       title: title ?? this.title,
       description: description ?? this.description,
+      id: id ?? this.id,
       tags: tags ?? this.tags,
       questions: questions ?? this.questions,
     );
@@ -37,6 +41,7 @@ class Quiz extends Equatable {
         creator,
         title,
         description,
+        id,
         tags,
         questions,
       ];

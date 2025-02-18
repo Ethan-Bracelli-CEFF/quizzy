@@ -25,4 +25,8 @@ class QuizListProvider with ChangeNotifier {
         status: QuizListStatus.loaded, quizzes: repositoryQuizzes);
     notifyListeners();
   }
+
+  Quiz findQuizById(String id) {
+    return _state.quizzes.firstWhere((quiz) => quiz.id == id);
+  }
 }
