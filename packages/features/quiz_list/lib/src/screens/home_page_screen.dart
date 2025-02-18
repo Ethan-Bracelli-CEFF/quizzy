@@ -53,9 +53,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(
-            height: 70,
-          ),
           Expanded(
             child: state.status == QuizListStatus.loading
                 ? Row(
@@ -73,15 +70,18 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       ),
                     ],
                   )
-                : ListView.separated(
-                    itemBuilder: (context, index) => QuizItem(
-                          quiz: state.quizzes[index],
-                          showDetail: (id) => _showDetailQuizScreen(id),
-                        ),
-                    separatorBuilder: (context, index) => SizedBox(
-                          height: 30,
-                        ),
-                    itemCount: state.quizzes.length),
+                : Padding(
+                    padding: const EdgeInsets.all(17.0),
+                    child: ListView.separated(
+                        itemBuilder: (context, index) => QuizItem(
+                              quiz: state.quizzes[index],
+                              showDetail: (id) => _showDetailQuizScreen(id),
+                            ),
+                        separatorBuilder: (context, index) => SizedBox(
+                              height: 20,
+                            ),
+                        itemCount: state.quizzes.length),
+                  ),
           ),
         ],
       ),
