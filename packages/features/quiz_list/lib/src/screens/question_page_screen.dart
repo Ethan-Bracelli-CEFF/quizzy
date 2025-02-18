@@ -96,8 +96,6 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
     final quiz = context.read<QuizListProvider>().findQuizById(id);
     final questions = quiz.questions;
 
-    // index += 1;
-
     if (index < questions.length) {
       setState(() {
         this.index += 1;
