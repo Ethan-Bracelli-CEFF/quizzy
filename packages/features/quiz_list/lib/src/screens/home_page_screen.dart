@@ -28,7 +28,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   }
 
   Widget _showQuiz() {
-    final state = context.watch<QuizListProvider>().filterState;
+    final state = context.watch<QuizListProvider>().state;
 
     if (state.status == QuizListStatus.initial) {
       return const Center(
@@ -82,14 +82,15 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   SizedBox(height: 30.0),
                   Expanded(
                     child: ListView.separated(
-                        itemBuilder: (context, index) => QuizItem(
-                              quiz: state.quizzes[index],
-                              showDetail: (id) => _showDetailQuizScreen(id),
-                            ),
-                        separatorBuilder: (context, index) => SizedBox(
-                              height: 20,
-                            ),
-                        itemCount: state.quizzes.length),
+                      itemBuilder: (context, index) => QuizItem(
+                        quiz: state.filtered[index],
+                        showDetail: (id) => _showDetailQuizScreen(id),
+                      ),
+                      separatorBuilder: (context, index) => SizedBox(
+                        height: 20,
+                      ),
+                      itemCount: state.filtered.length,
+                    ),
                   ),
                 ],
               ),
