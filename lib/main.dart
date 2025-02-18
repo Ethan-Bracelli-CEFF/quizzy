@@ -35,10 +35,11 @@ class Quizzy extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
           useMaterial3: true,
         ),
-        home: const HomePageScreen(),
-        // routes: {
-        //   '/': (context) => const HomePageScreen(),
-        // },
+        // home: const HomePageScreen(),
+        routes: {
+          '/': (context) => const HomePageScreen(),
+          DetailPageScreen.routeName: (context) => const DetailPageScreen(),
+        },
       ),
     );
   }

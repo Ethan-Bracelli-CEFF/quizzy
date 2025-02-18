@@ -3,6 +3,7 @@ class QuizLocalModel {
     required this.creator,
     required this.title,
     required this.description,
+    required this.id,
     required this.tags,
   });
 
@@ -15,6 +16,7 @@ class QuizLocalModel {
       creator: json['creator'],
       title: json['title'],
       description: json['description'],
+      id: json['id'],
       tags: tags,
     );
   }
@@ -22,5 +24,6 @@ class QuizLocalModel {
   final String creator;
   final String title;
   final String description;
+  final String id;
   final List<String> tags;
 }

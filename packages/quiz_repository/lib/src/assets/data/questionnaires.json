@@ -4,6 +4,7 @@
             "creator": "Fabrioche",
             "title": "Étudiants de la classe ICH-2DEV",
             "description": "Connaissez vous les étudiants de la classe ICH-2DEV?",
+            "id": "Coucou",
             "tags": [
                 "#Etudiant",
                 "#Ecole"
@@ -132,6 +133,7 @@
             "creator": "Fabrioche",
             "title": "Culture générale",
             "description": "Savez vous des choses innutiles?",
+            "id": "Salut",
             "tags": [
                 "#Culture",
                 "#General"

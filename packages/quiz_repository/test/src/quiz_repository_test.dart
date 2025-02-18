@@ -20,6 +20,7 @@ void main() {
         creator: 'Fabrioche',
         title: 'Étudiants de la classe ICH-2DEV',
         description: 'Connaissez vous les étudiants de la classe ICH-2DEV?',
+        id: 'Hello',
         tags: ['#Etudiant', '#Ecole'],
         questions: [
           Question(
@@ -33,6 +34,7 @@ void main() {
         creator: 'Fabrioche',
         title: 'Culture générale',
         description: 'Savez vous des choses innutiles?',
+        id: 'Hallo',
         tags: ['#Culture', '#General'],
         questions: [
           Question(
