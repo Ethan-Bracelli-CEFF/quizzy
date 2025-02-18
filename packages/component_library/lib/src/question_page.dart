@@ -26,13 +26,17 @@ class QuestionPage extends StatelessWidget {
           children: [
             QuestionTitleItem(question: question),
             const SizedBox(height: 100),
-            AnswerItem(text: question.answers[0]),
+            AnswerItem(
+                text: question.answers[0], isCorrectAnswer: true, click: () {}),
             const SizedBox(height: 30),
-            AnswerItem(text: question.answers[1]),
+            AnswerItem(
+                text: question.answers[1], isCorrectAnswer: true, click: () {}),
             const SizedBox(height: 30),
-            AnswerItem(text: question.answers[2]),
+            AnswerItem(
+                text: question.answers[2], isCorrectAnswer: true, click: () {}),
             const SizedBox(height: 30),
-            AnswerItem(text: question.answers[3]),
+            AnswerItem(
+                text: question.answers[3], isCorrectAnswer: true, click: () {}),
             // ListView.separated(
             //   itemBuilder: (context, index) =>
             //       AnswerItem(text: question.answers[index]),
