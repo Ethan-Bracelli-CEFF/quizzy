@@ -56,10 +56,13 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
                 width: MediaQuery.of(context).size.width - 37,
                 animation: true,
                 animateFromLastPercent: true,
-                lineHeight: 20.0,
+                lineHeight: 40.0,
                 animationDuration: 1000,
                 percent: percentage,
-                center: Text("${(percentage * 100).roundToDouble()}%"),
+                center: Text(
+                  "$index/${questions.length}",
+                  style: TextStyle(fontSize: 30),
+                ),
                 progressColor: Colors.blue.shade400,
               ),
               Padding(
