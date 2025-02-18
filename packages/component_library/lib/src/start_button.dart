@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class StartButton extends StatelessWidget {
-  const StartButton({super.key});
+  const StartButton({required this.click, super.key});
+
+  final Function() click;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () => click(),
       style: ButtonStyle(
         backgroundColor: WidgetStatePropertyAll(Colors.green.shade400),
         shape: WidgetStatePropertyAll<RoundedRectangleBorder>(

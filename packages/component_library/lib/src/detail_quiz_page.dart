@@ -26,7 +26,7 @@ class DetailQuizPage extends StatelessWidget {
       children: [
         DetailQuizItem(quiz: quiz),
         const SizedBox(height: 100),
-        const StartButton(),
+        // const StartButton(),
       ],
     );
   }

@@ -8,5 +8,5 @@ export 'src/detail_quiz_page.dart';
 export 'src/question_quiz.dart';
 export 'src/answer_item.dart';
 export 'src/question_title_item.dart';
-export 'src/question_page.dart';
+export 'src/answer_list.dart';
 export 'src/searchs_bar.dart';

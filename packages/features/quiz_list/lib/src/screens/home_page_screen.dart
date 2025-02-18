@@ -92,6 +92,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        foregroundColor: Colors.white,
         toolbarHeight: 100,
         backgroundColor: const Color.fromRGBO(70, 70, 70, 70),
         centerTitle: true,

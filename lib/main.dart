@@ -22,6 +22,9 @@ class Quizzy extends StatelessWidget {
             storage: context.read<QuizLocalStorage>(),
           ),
         ),
+        Provider<QuizPoints>(
+          create: (context) => QuizPoints(),
+        ),
         ChangeNotifierProvider<QuizListProvider>(
           create: (context) => QuizListProvider(
             repository: context.read<QuizRepository>(),
@@ -39,6 +42,7 @@ class Quizzy extends StatelessWidget {
         routes: {
           '/': (context) => const HomePageScreen(),
           DetailPageScreen.routeName: (context) => const DetailPageScreen(),
+          QuestionPageScreen.routeName: (context) => const QuestionPageScreen(),
         },
       ),
     );

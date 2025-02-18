@@ -58,11 +58,11 @@ class MyApp extends StatelessWidget {
           description: 'Grande tuile de detail d\'un quiz',
           builder: (context) => DetailQuizItem(quiz: quiz),
         ),
-        Story(
-          name: 'Widgets/StartButton',
-          description: 'Bouton pour commencer un quiz',
-          builder: (context) => StartButton(),
-        ),
+        // Story(
+        //   name: 'Widgets/StartButton',
+        //   description: 'Bouton pour commencer un quiz',
+        //   builder: (context) => StartButton(),
+        // ),
         Story(
           name: 'Widgets/Question',
           description: 'Zone dédié à la question dans un quiz',
@@ -75,7 +75,9 @@ class MyApp extends StatelessWidget {
           builder: (context) => AnswerItem(
             text: 'Martin',
             isCorrectAnswer: false,
-            click: () {},
+            showAnswer: false,
+            click: (index) {},
+            index: 0,
           ),
         ),
         Story(
@@ -87,11 +89,6 @@ class MyApp extends StatelessWidget {
           name: 'Widgets/QuestionTitleItem',
           description: 'Forme la question',
           builder: (context) => QuestionTitleItem(question: quiz.questions[0]),
-        ),
-        Story(
-          name: 'Widgets/QuestionPage',
-          description: 'Page contanant la question',
-          builder: (context) => QuestionPage(question: quiz.questions[0]),
         ),
         Story(
           name: 'Widgets/SearchBar',
@@ -110,9 +107,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: Scaffold(
-          body: Container(
-              color: Colors.black,
-              child: Expanded(child: Center(child: child))),
+          body: Container(color: Colors.black, child: Center(child: child)),
         ),
       ),
     );
