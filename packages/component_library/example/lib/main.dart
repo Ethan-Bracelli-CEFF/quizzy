@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Storybook(
-      initialStory: 'Widgets/QuestionTitleItem',
+      initialStory: 'List/Answers',
       stories: [
         Story(
           name: 'Widgets/QuizItem',
@@ -75,6 +75,7 @@ class MyApp extends StatelessWidget {
           builder: (context) => AnswerItem(
             text: 'Martin',
             isCorrectAnswer: false,
+            showAnswer: false,
             click: () {},
           ),
         ),
@@ -87,6 +88,19 @@ class MyApp extends StatelessWidget {
           name: 'Widgets/QuestionTitleItem',
           description: 'Forme la question',
           builder: (context) => QuestionTitleItem(question: quiz.questions[0]),
+        ),
+        Story(
+          name: 'List/Answers',
+          description: 'Affichage d\'une liste de réponses',
+          builder: (context) => Column(
+            children: [
+              QuestionTitleItem(question: quiz.questions[0]),
+              SizedBox(height: 30.0),
+              Expanded(
+                child: AnswerList(question: quiz.questions[0]),
+              )
+            ],
+          ),
         ),
         Story(
           name: 'Widgets/QuestionPage',
@@ -102,9 +116,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: Scaffold(
-          body: Container(
-              color: Colors.black,
-              child: Expanded(child: Center(child: child))),
+          body: Container(color: Colors.black, child: Center(child: child)),
         ),
       ),
     );
