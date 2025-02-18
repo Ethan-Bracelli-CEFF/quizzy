@@ -76,7 +76,8 @@ class MyApp extends StatelessWidget {
             text: 'Martin',
             isCorrectAnswer: false,
             showAnswer: false,
-            click: () {},
+            click: (index) {},
+            index: 0,
           ),
         ),
         Story(
@@ -89,19 +90,19 @@ class MyApp extends StatelessWidget {
           description: 'Forme la question',
           builder: (context) => QuestionTitleItem(question: quiz.questions[0]),
         ),
-        Story(
-          name: 'List/Answers',
-          description: 'Affichage d\'une liste de réponses',
-          builder: (context) => Column(
-            children: [
-              QuestionTitleItem(question: quiz.questions[0]),
-              SizedBox(height: 30.0),
-              Expanded(
-                child: AnswerList(question: quiz.questions[0]),
-              )
-            ],
-          ),
-        ),
+        // Story(
+        //   name: 'List/Answers',
+        //   description: 'Affichage d\'une liste de réponses',
+        //   builder: (context) => Column(
+        //     children: [
+        //       QuestionTitleItem(question: quiz.questions[0]),
+        //       SizedBox(height: 30.0),
+        //       Expanded(
+        //         child: AnswerList(question: quiz.questions[0]),
+        //       )
+        //     ],
+        //   ),
+        // ),
       ],
       wrapperBuilder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -59,7 +59,8 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
                     isCorrectAnswer:
                         index + 1 == question.rightAnswer ? true : false,
                     showAnswer: showAnswers,
-                    click: revealAnswers,
+                    click: (index) => handleAnswerAndReveal(index, question),
+                    index: index + 1,
                   ),
                   separatorBuilder: (context, index) =>
                       const SizedBox(height: 10.0),
@@ -85,7 +86,11 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
             : null);
   }
 
-  void revealAnswers() {
+  void handleAnswerAndReveal(int clickedIndex, Question question) {
+    if (clickedIndex == question.rightAnswer) {
+      context.read<QuizPoints>().points += 1;
+    }
+
     setState(() {
       showAnswers = true;
     });
