@@ -57,7 +57,7 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
                 animation: true,
                 animateFromLastPercent: true,
                 lineHeight: 40.0,
-                animationDuration: 1000,
+                animationDuration: 500,
                 percent: percentage,
                 center: Text(
                   "$index/${questions.length}",
