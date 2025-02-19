@@ -37,9 +37,21 @@ class DetailQuizItem extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            Text(
-              'Crée par : ${quiz.creator}',
-              style: TextStyle(color: Colors.white, fontSize: 17.0),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.account_circle,
+                  size: 24.0,
+                  color: Colors.white70,
+                ),
+                SizedBox(width: 7.0),
+                Text(
+                  quiz.creator,
+                  style: TextStyle(color: Colors.white, fontSize: 17.0),
+                ),
+              ],
             ),
             Text(
               '${quiz.questions.length} questions',
