@@ -101,7 +101,7 @@
                     "correct_answer": 3
                 },
                 {
-                    "title": "De quelle année dat ele record du monde de saut en longueur?",
+                    "title": "De quelle année date le record du monde de saut en longueur?",
                     "responses": [
                         "2011",
                         "2001",
@@ -114,7 +114,7 @@
                     "title": "Quel équipe à remporté le plus de coupe Stanley?",
                     "responses": [
                         "Toronto",
-                        "Monréal",
+                        "Montréal",
                         "Boston",
                         "Detroit"
                     ],
