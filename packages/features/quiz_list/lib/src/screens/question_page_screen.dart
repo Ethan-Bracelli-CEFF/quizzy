@@ -104,7 +104,15 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
             : null);
   }
 
+  bool answered = false;
+
   void handleAnswerAndReveal(int clickedIndex, Question question) {
+    if (answered) {
+      return;
+    }
+
+    answered = true;
+
     if (clickedIndex == question.rightAnswer) {
       context.read<QuizPoints>().points += 1;
     }
@@ -123,6 +131,7 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
       setState(() {
         this.index += 1;
         showAnswers = false;
+        answered = false;
       });
     } else {
       Navigator.of(context)
