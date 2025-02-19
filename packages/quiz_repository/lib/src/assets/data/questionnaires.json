@@ -266,12 +266,15 @@
         },
         {
             "creator": "Aitaneuh",
-            "title": "ICH-322 – Concevoir et implémenter des interfaces utilisateur",
+            "title": "Culture Flutter",
             "description": "Avez vous oublié les choses vues pendant ce module?",
             "id": "Guerdat",
             "tags": [
                 "ICH-322",
-                "UI",
+                "ICH-294",
+                "ICH-295",
+                "Culture",
+                "Flutter",
                 "ceff"
             ],
             "questions": [
