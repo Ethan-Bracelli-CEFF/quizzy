@@ -33,7 +33,7 @@ class AnswerItem extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 17.0),
+        padding: const EdgeInsets.all(17.0),
         child: Text(
           text,
           style: const TextStyle(fontSize: 25.0, color: Colors.white),
