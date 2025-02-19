@@ -71,12 +71,18 @@ class MyApp extends StatelessWidget {
         Story(
           name: 'Widgets/QuestionTitleItem',
           description: 'Forme la question',
-          builder: (context) => QuestionTitleItem(question: quiz.questions[0]),
+          builder: (context) => Padding(
+            padding: const EdgeInsets.all(17.0),
+            child: QuestionTitleItem(question: quiz.questions[0]),
+          ),
         ),
         Story(
           name: 'Widgets/SearchBar',
           description: 'Barre de recherche',
-          builder: (context) => SearchsBar(click: (String value) {}),
+          builder: (context) => Padding(
+            padding: const EdgeInsets.all(17.0),
+            child: SearchsBar(click: (String value) {}),
+          ),
         ),
       ],
       wrapperBuilder: (context, child) => MaterialApp(

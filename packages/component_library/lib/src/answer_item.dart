@@ -37,6 +37,7 @@ class AnswerItem extends StatelessWidget {
         child: Text(
           text,
           style: const TextStyle(fontSize: 25.0, color: Colors.white),
+          textAlign: TextAlign.center,
         ),
       ),
     );

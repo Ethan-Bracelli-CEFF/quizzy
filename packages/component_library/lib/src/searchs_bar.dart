@@ -30,9 +30,12 @@ class _SearchsBarState extends State<SearchsBar> {
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
-          prefixIcon: const Icon(Icons.search, color: Colors.grey),
+          prefixIcon: Padding(
+            padding: const EdgeInsets.only(left: 17.0),
+            child: const Icon(Icons.search, color: Colors.grey),
+          ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(25.0),
+            borderRadius: BorderRadius.circular(50.0),
             borderSide: BorderSide.none,
           ),
           contentPadding:

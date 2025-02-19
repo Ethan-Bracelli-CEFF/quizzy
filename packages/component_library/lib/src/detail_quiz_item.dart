@@ -45,7 +45,7 @@ class DetailQuizItem extends StatelessWidget {
               '${quiz.questions.length} questions',
               style: TextStyle(color: Colors.white, fontSize: 17.0),
             ),
-            const SizedBox(height: 35),
+            const SizedBox(height: 30),
             Text(
               quiz.description,
               style: const TextStyle(color: Colors.white70),

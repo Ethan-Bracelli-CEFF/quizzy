@@ -16,6 +16,7 @@ class QuestionTitleItem extends StatelessWidget {
       child: Text(
         question.title,
         style: const TextStyle(fontSize: 25),
+        textAlign: TextAlign.center,
       ),
     );
   }
