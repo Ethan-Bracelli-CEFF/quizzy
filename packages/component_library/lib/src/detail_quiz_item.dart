@@ -36,6 +36,15 @@ class DetailQuizItem extends StatelessWidget {
                   Tag(name: quiz.tags[i])
               ],
             ),
+            const SizedBox(height: 20),
+            Text(
+              'Crée par : ${quiz.creator}',
+              style: TextStyle(color: Colors.white, fontSize: 17.0),
+            ),
+            Text(
+              '${quiz.questions.length} questions',
+              style: TextStyle(color: Colors.white, fontSize: 17.0),
+            ),
             const SizedBox(height: 35),
             Text(
               quiz.description,

@@ -34,18 +34,30 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
         ),
       ),
       body: Center(
-        child: CircularPercentIndicator(
-          animation: true,
-          animationDuration: 1000,
-          radius: 200.0,
-          lineWidth: 30.0,
-          percent: percentage,
-          center: Text(
-            '${(percentage * 100).roundToDouble()}%',
-            style: TextStyle(color: Colors.white, fontSize: 50),
-          ),
-          progressColor: Colors.green,
-          backgroundColor: Colors.red,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircularPercentIndicator(
+              radius: 200.0,
+              lineWidth: 30.0,
+              percent: percentage,
+              center: Text(
+                '${(percentage * 100).roundToDouble()}%',
+                style: TextStyle(color: Colors.white, fontSize: 50),
+              ),
+              progressColor: Colors.green,
+              backgroundColor: Colors.red,
+            ),
+            SizedBox(height: 50),
+            Text(
+              'Votre score : $score / ${questions.length}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 27.0,
+              ),
+            )
+          ],
         ),
       ),
       backgroundColor: const Color.fromARGB(255, 18, 18, 18),

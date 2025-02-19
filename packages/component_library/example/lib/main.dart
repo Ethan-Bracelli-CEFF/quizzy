@@ -34,24 +34,16 @@ class MyApp extends StatelessWidget {
         ),
       ],
       tags: [
-        "#general",
-        "#culture",
-        "#inutile",
-        "#aigri",
+        "général",
+        "culture",
+        "test",
       ]);
 
   @override
   Widget build(BuildContext context) {
     return Storybook(
-      initialStory: 'Pages/Résultat',
+      initialStory: 'Widgets/QuizItem',
       stories: [
-        Story(
-          name: 'Pages/Résultat',
-          description: 'La page de résultat',
-          builder: (context) => ResultPage(
-            score: context.knobs.sliderInt(label: '% de bonne réponse'),
-          ),
-        ),
         Story(
           name: 'Widgets/QuizItem',
           description: 'La tuile d\'un quiz',
@@ -66,26 +58,15 @@ class MyApp extends StatelessWidget {
           builder: (context) => DetailQuizItem(quiz: quiz),
         ),
         Story(
-          name: 'Widgets/Question',
-          description: 'Zone dédié à la question dans un quiz',
-          builder: (context) =>
-              QuestionQuiz(text: 'Quel est le surnom de Fabian Marti?'),
-        ),
-        Story(
           name: 'Widgets/Answer',
           description: 'Bouton re réponse à une question',
           builder: (context) => AnswerItem(
-            text: 'Martin',
+            text: 'ICH-165 NoSQL',
             isCorrectAnswer: false,
             showAnswer: false,
             click: (index) {},
             index: 0,
           ),
-        ),
-        Story(
-          name: 'Widgets/DetailQuizPage',
-          description: 'Page de detail sur un quiz',
-          builder: (context) => DetailQuizPage(),
         ),
         Story(
           name: 'Widgets/QuestionTitleItem',
