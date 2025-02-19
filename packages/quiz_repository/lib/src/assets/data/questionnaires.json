@@ -975,6 +975,118 @@
                     "correct_answer": 2
                 }
             ]
+        },
+        {
+            "creator": "Aitaneuh",
+            "title": "Seconde Guerre Mondiale",
+            "description": "Avez-vous de bonnes notions historiques?",
+            "id": "JCM",
+            "tags": [
+                "guerre",
+                "histoire"
+            ],
+            "questions": [
+                {
+                    "title": "Quelle année marque le début de la Seconde Guerre mondiale?",
+                    "responses": [
+                        "1914",
+                        "1936",
+                        "1939",
+                        "1941"
+                    ],
+                    "correct_answer": 3
+                },
+                {
+                    "title": "Quel événement a déclenché la guerre en Europe?",
+                    "responses": [
+                        "L'attaque de Pearl Harbor",
+                        "L'invasion de la Pologne par l'Allemagne",
+                        "La bataille de Stalingrad",
+                        "Le bombardement de Londres"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Quel était le chef du gouvernement britannique pendant la majorité de la guerre?",
+                    "responses": [
+                        "Neville Chamberlain",
+                        "Winston Churchill",
+                        "Clement Attlee",
+                        "Franklin D. Roosevelt"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Quelle était l'opération militaire qui a permis le débarquement en Normandie?",
+                    "responses": [
+                        "Opération Market Garden",
+                        "Opération Overlord",
+                        "Opération Barbarossa",
+                        "Opération Torch"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Quel pays a subi les bombardements atomiques en 1945?",
+                    "responses": [
+                        "Allemagne",
+                        "Italie",
+                        "Japon",
+                        "Union soviétique"
+                    ],
+                    "correct_answer": 3
+                },
+                {
+                    "title": "Quel fut le principal camp de concentration nazi?",
+                    "responses": [
+                        "Treblinka",
+                        "Auschwitz",
+                        "Bergen-Belsen",
+                        "Dachau"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Quelle bataille fut un tournant décisif sur le front de l'Est?",
+                    "responses": [
+                        "Bataille de Koursk",
+                        "Bataille de Stalingrad",
+                        "Bataille de Moscou",
+                        "Bataille de Leningrad"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Quel pays a changé de camp en 1943 en déclarant la guerre à l'Allemagne?",
+                    "responses": [
+                        "France",
+                        "Italie",
+                        "Espagne",
+                        "Finlande"
+                    ],
+                    "correct_answer": 2
+                },
+                {
+                    "title": "Quel traité a mis officiellement fin à la guerre en Europe?",
+                    "responses": [
+                        "Traité de Versailles",
+                        "Accords de Yalta",
+                        "Capitulation de l'Allemagne",
+                        "Conférence de Potsdam"
+                    ],
+                    "correct_answer": 3
+                },
+                {
+                    "title": "Quel était le nom de code du projet de fabrication de la bombe atomique américaine?",
+                    "responses": [
+                        "Projet Paperclip",
+                        "Projet Overlord",
+                        "Projet Manhattan",
+                        "Projet Enigma"
+                    ],
+                    "correct_answer": 3
+                }
+            ]
         }
     ]
 }
