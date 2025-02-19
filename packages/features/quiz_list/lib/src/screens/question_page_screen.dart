@@ -59,6 +59,7 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
                 lineHeight: 40.0,
                 animationDuration: 500,
                 percent: percentage,
+                barRadius: Radius.circular(17.0),
                 center: Text(
                   "$index/${questions.length}",
                   style: TextStyle(fontSize: 30),
@@ -69,7 +70,7 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 100.0),
                 child: QuestionTitleItem(question: question),
               ),
-              const SizedBox(height: 100),
+              const SizedBox(height: 50),
               Expanded(
                 child: ListView.separated(
                   itemBuilder: (context, index) => AnswerItem(

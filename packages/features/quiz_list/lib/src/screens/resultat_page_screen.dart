@@ -39,6 +39,8 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             CircularPercentIndicator(
+              animation: true,
+              animationDuration: 1000,
               radius: 200.0,
               lineWidth: 30.0,
               percent: percentage,
