@@ -84,6 +84,25 @@ class MyApp extends StatelessWidget {
             child: SearchsBar(click: (String value) {}),
           ),
         ),
+        Story(
+          name: 'Widgets/StartButton',
+          description: 'Bouton pour démarrer un quiz',
+          builder: (context) => StartButton(click: () {}),
+        ),
+        Story(
+          name: 'Widgets/ProgressBar',
+          description: 'Barre de progression d\'un quiz',
+          builder: (context) => ProgressBar(
+              points: context.knobs
+                  .sliderInt(label: 'Nb de questions faites', max: 36, min: 0)),
+        ),
+        Story(
+          name: 'Widgets/ResultCircle',
+          description: 'Cercle du pourcentage de bonne réponses',
+          builder: (context) => ResultCircle(
+              points: context.knobs
+                  .sliderInt(label: 'Nombre de points', max: 36, min: 0)),
+        ),
       ],
       wrapperBuilder: (context, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
