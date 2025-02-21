@@ -31,6 +31,7 @@ class DetailQuizItem extends StatelessWidget {
             const SizedBox(height: 5),
             Wrap(
               spacing: 7,
+              runSpacing: 5.0,
               children: [
                 for (int i = 0; i < quiz.tags.length; i++)
                   Tag(name: quiz.tags[i])
