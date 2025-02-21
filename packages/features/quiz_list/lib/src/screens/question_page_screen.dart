@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:component_library/component_library.dart';
 import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
@@ -29,9 +31,8 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final id = ModalRoute.of(context)?.settings.arguments as String;
-    final quiz = context.read<QuizListProvider>().findQuizById(id);
-    final questions = quiz.questions;
+    final questions =
+        ModalRoute.of(context)?.settings.arguments as List<Question>;
 
     final question = questions[index];
 
@@ -123,9 +124,8 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
   }
 
   void _nextQuestion(BuildContext context, int index) {
-    final id = ModalRoute.of(context)?.settings.arguments as String;
-    final quiz = context.read<QuizListProvider>().findQuizById(id);
-    final questions = quiz.questions;
+    final questions =
+        ModalRoute.of(context)?.settings.arguments as List<Question>;
 
     if (index + 1 < questions.length) {
       setState(() {
@@ -134,8 +134,8 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
         answered = false;
       });
     } else {
-      Navigator.of(context)
-          .pushReplacementNamed(ResultatPageScreen.routeName, arguments: quiz);
+      Navigator.of(context).pushReplacementNamed(ResultatPageScreen.routeName,
+          arguments: questions);
     }
   }
 }

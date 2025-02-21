@@ -25,6 +25,9 @@ class Quizzy extends StatelessWidget {
         Provider<QuizPoints>(
           create: (context) => QuizPoints(),
         ),
+        Provider<QuizSeed>(
+          create: (context) => QuizSeed(),
+        ),
         ChangeNotifierProvider<QuizListProvider>(
           create: (context) => QuizListProvider(
             repository: context.read<QuizRepository>(),

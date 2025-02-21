@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:component_library/component_library.dart';
 import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
@@ -56,10 +58,20 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
 
   void _showQuestionPageScreen() {
     final id = ModalRoute.of(context)?.settings.arguments as String;
+    final quiz = context.read<QuizListProvider>().findQuizById(id);
+    final questions = quiz.questions;
+
+    context.read<QuizSeed>().seed = DateTime.now().millisecondsSinceEpoch;
+
+    questions.shuffle(Random(context.read<QuizSeed>().seed));
+
+    for (var question in questions) {
+      question.answers.shuffle(Random(context.read<QuizSeed>().seed));
+    }
 
     context.read<QuizPoints>().points = 0;
 
     Navigator.of(context)
-        .pushNamed(QuestionPageScreen.routeName, arguments: id);
+        .pushNamed(QuestionPageScreen.routeName, arguments: questions);
   }
 }

@@ -16,8 +16,9 @@ class ResultatPageScreen extends StatefulWidget {
 class _ResultatPageScreenState extends State<ResultatPageScreen> {
   @override
   Widget build(BuildContext context) {
-    final quiz = ModalRoute.of(context)?.settings.arguments as Quiz;
-    final questions = quiz.questions;
+    final questions =
+        ModalRoute.of(context)?.settings.arguments as List<Question>;
+
     int score = context.read<QuizPoints>().points;
 
     double percentage = score / questions.length;
@@ -92,7 +93,7 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
                 Icons.restart_alt,
                 size: 40.0,
               ),
-              onPressed: () => _retry(context, quiz),
+              onPressed: () => _retry(context, questions),
             ),
           ],
         ),
@@ -100,9 +101,9 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
     );
   }
 
-  void _retry(BuildContext context, Quiz quiz) {
-    Navigator.of(context)
-        .pushReplacementNamed(QuestionPageScreen.routeName, arguments: quiz.id);
+  void _retry(BuildContext context, List<Question> questions) {
+    Navigator.of(context).pushReplacementNamed(QuestionPageScreen.routeName,
+        arguments: questions);
     context.read<QuizPoints>().points = 0;
   }
 }
