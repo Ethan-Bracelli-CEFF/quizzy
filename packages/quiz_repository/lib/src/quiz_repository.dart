@@ -12,4 +12,12 @@ class QuizRepository {
       rethrow;
     }
   }
+
+  Future<List<User>> getAllUsers() async {
+    try {
+      return await storage.getAllUsers();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
