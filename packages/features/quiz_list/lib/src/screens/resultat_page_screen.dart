@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +27,13 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.home,
+            size: 40,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         foregroundColor: Colors.white,
         toolbarHeight: 100,
         backgroundColor: const Color.fromRGBO(70, 70, 70, 70),
@@ -74,34 +83,27 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
       backgroundColor: const Color.fromARGB(255, 18, 18, 18),
       bottomNavigationBar: BottomAppBar(
         color: const Color.fromRGBO(70, 70, 70, 70),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              color: Colors.white,
-              icon: const Icon(
-                Icons.home,
-                size: 40.0,
-              ),
-              onPressed: () {
-                Navigator.of(context).popUntil((route) => route.isFirst);
-              },
-            ),
-            IconButton(
-              color: Colors.white,
-              icon: const Icon(
-                Icons.restart_alt,
-                size: 40.0,
-              ),
-              onPressed: () => _retry(context, questions),
-            ),
-          ],
+        child: IconButton(
+          color: Colors.white,
+          icon: const Icon(
+            Icons.restart_alt,
+            size: 40.0,
+          ),
+          onPressed: () => _retry(context, questions),
         ),
       ),
     );
   }
 
   void _retry(BuildContext context, List<Question> questions) {
+    context.read<QuizSeed>().seed = DateTime.now().millisecondsSinceEpoch;
+
+    questions.shuffle(Random(context.read<QuizSeed>().seed));
+
+    for (var question in questions) {
+      question.answers.shuffle(Random(context.read<QuizSeed>().seed));
+    }
+
     Navigator.of(context).pushReplacementNamed(QuestionPageScreen.routeName,
         arguments: questions);
     context.read<QuizPoints>().points = 0;

@@ -71,7 +71,7 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
 
     context.read<QuizPoints>().points = 0;
 
-    Navigator.of(context)
-        .pushNamed(QuestionPageScreen.routeName, arguments: questions);
+    Navigator.of(context).pushReplacementNamed(QuestionPageScreen.routeName,
+        arguments: questions);
   }
 }
