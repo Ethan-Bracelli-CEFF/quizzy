@@ -44,6 +44,7 @@ dependencies:
   quiz_repository:
     path: packages/quiz_repository
   logger: ^2.5.0
+  firebase: ^9.0.3
 
 dev_dependencies:
   flutter_test:
