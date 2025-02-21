@@ -58,7 +58,15 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
                 color: Colors.white,
                 fontSize: 27.0,
               ),
-            )
+            ),
+            SizedBox(height: 15),
+            Text(
+              'Votre note : ${(score / questions.length * 5 + 1).toStringAsFixed(1)}',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 27.0,
+              ),
+            ),
           ],
         ),
       ),
