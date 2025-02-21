@@ -32,6 +32,11 @@ class Quizzy extends StatelessWidget {
           create: (context) => QuizListProvider(
             repository: context.read<QuizRepository>(),
           ),
+        ),
+        ChangeNotifierProvider<UserListProvider>(
+          create: (context) => UserListProvider(
+            repository: context.read<QuizRepository>(),
+          ),
         )
       ],
       child: MaterialApp(
@@ -41,7 +46,6 @@ class Quizzy extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
           useMaterial3: true,
         ),
-        // home: const HomePageScreen(),
         routes: {
           '/': (context) => const HomePageScreen(),
           DetailPageScreen.routeName: (context) => const DetailPageScreen(),
