@@ -113,7 +113,7 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
 
     answered = true;
 
-    if (question.answers[clickedIndex].correct) {
+    if (question.answers[clickedIndex - 1].correct) {
       context.read<QuizPoints>().points += 1;
     }
 
