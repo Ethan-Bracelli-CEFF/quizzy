@@ -19,18 +19,30 @@ class MyApp extends StatelessWidget {
         Question(
           title:
               'D\'une manière très objective quel est le meilleurs cours du jeudi?',
-          answers: ['Simon', 'Quentin', 'Martim', 'Fabian'],
-          rightAnswer: 2,
+          answers: [
+            Response(text: 'Simon', correct: false),
+            Response(text: 'Quentin', correct: true),
+            Response(text: 'Martim', correct: false),
+            Response(text: 'Fabian', correct: false),
+          ],
         ),
         Question(
           title: 'Laquelle de ces personnes préfère le cours de mobile?',
-          answers: ['Ewan', 'Quentin', 'Martim', 'Le Hockey'],
-          rightAnswer: 2,
+          answers: [
+            Response(text: 'Ewan', correct: false),
+            Response(text: 'Quentin', correct: true),
+            Response(text: 'Martim', correct: false),
+            Response(text: 'Le Hockey', correct: false)
+          ],
         ),
         Question(
           title: 'Qui a eu la meilleure note au cie 295?',
-          answers: ['Le Hockey', 'Quentin', 'Ewan', 'Fabian'],
-          rightAnswer: 2,
+          answers: [
+            Response(text: 'Le Hockey', correct: false),
+            Response(text: 'Quentin', correct: true),
+            Response(text: 'Ewan', correct: false),
+            Response(text: 'Fabian', correct: true)
+          ],
         ),
       ],
       tags: [

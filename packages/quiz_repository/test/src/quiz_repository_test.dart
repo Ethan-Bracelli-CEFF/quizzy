@@ -15,7 +15,7 @@ void main() {
       quizRepository = QuizRepository(storage: mockQuizLocalStorage);
     });
 
-    const quizLocal = [
+    final quizLocal = [
       Quiz(
         creator: 'Fabrioche',
         title: 'Étudiants de la classe ICH-2DEV',
@@ -25,8 +25,12 @@ void main() {
         questions: [
           Question(
             title: 'Quel est le nom de famille de Fabian?',
-            answers: ['Martin', 'Marti', 'Martim', 'Marteau'],
-            rightAnswer: 2,
+            answers: [
+              Response(text: 'Ewan', correct: false),
+              Response(text: 'Quentin', correct: true),
+              Response(text: 'Martim', correct: false),
+              Response(text: 'Le Hockey', correct: false),
+            ],
           )
         ],
       ),
@@ -39,8 +43,12 @@ void main() {
         questions: [
           Question(
             title: 'Quelle est la capitale de la suisse?',
-            answers: ['Berne', 'Genève', 'Zurich', 'Lausanne'],
-            rightAnswer: 1,
+            answers: [
+              Response(text: 'Le Hockey', correct: false),
+              Response(text: 'Quentin', correct: true),
+              Response(text: 'Ewan', correct: false),
+              Response(text: 'Fabian', correct: true),
+            ],
           )
         ],
       ),

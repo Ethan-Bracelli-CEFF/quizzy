@@ -14,7 +14,7 @@ class QuizLocalStorage implements QuizStorage {
       final quizzes = <Quiz>[];
 
       final dataString = await rootBundle.loadString(
-          'packages/quiz_repository/lib/src/assets/data/questionnaires.json');
+          'packages/quiz_repository/lib/src/assets/data/questions.json');
 
       final Map<String, dynamic> json = jsonDecode(dataString);
 
@@ -22,8 +22,13 @@ class QuizLocalStorage implements QuizStorage {
         json['questionnaires'].forEach((quizData) {
           final questions = <Question>[];
           quizData['questions'].forEach((questionData) {
-            questions.add(
-                QuestionLocalModel.fromJson(questionData).toDomainEntity());
+            final responses = <Response>[];
+            questionData['responses'].forEach((responseData) {
+              responses.add(
+                  ResponseLocalModel.fromJson(responseData).toDomainEntity());
+            });
+            questions.add(QuestionLocalModel.fromJson(questionData)
+                .toDomainEntity(responses));
           });
           quizzes
               .add(QuizLocalModel.fromJson(quizData).toDomainEntity(questions));

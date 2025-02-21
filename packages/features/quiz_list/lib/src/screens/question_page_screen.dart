@@ -74,9 +74,8 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
               Expanded(
                 child: ListView.separated(
                   itemBuilder: (context, index) => AnswerItem(
-                    text: question.answers[index],
-                    isCorrectAnswer:
-                        index + 1 == question.rightAnswer ? true : false,
+                    text: question.answers[index].text,
+                    isCorrectAnswer: question.answers[index].correct,
                     showAnswer: showAnswers,
                     click: (index) => handleAnswerAndReveal(index, question),
                     index: index + 1,
@@ -114,7 +113,7 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
 
     answered = true;
 
-    if (clickedIndex == question.rightAnswer) {
+    if (question.answers[clickedIndex].correct) {
       context.read<QuizPoints>().points += 1;
     }
 

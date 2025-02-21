@@ -54,22 +54,20 @@ class _HomePageScreenState extends State<HomePageScreen> {
       color: Color.fromARGB(255, 18, 18, 18),
       child: state.status == QuizListStatus.loading
           ? Center(
-              child: Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Fetching Data...',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    CircularProgressIndicator(
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Fetching Data...',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  CircularProgressIndicator(
+                    color: Colors.white,
+                  ),
+                ],
               ),
             )
           : Padding(

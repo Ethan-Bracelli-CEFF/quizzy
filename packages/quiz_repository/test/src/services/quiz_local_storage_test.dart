@@ -10,8 +10,12 @@ void main() {
   setUp(() {
     questionData = {
       "title": "Quel est le nom de famille de Fabian?",
-      "responses": ["Martin", "Marti", "Martim", "Marteau"],
-      "correct_answer": 2
+      "responses": [
+        {"text": "Ewan"},
+        {"text": "Quentin", "correct": true},
+        {"text": "Martim"},
+        {"text": "Le Hockey"},
+      ]
     };
     quizData = {
       "id": "quiz1",
@@ -92,19 +96,23 @@ void main() {
     };
     question = Question(
       title: 'Quel est le nom de famille de Fabian?',
-      answers: ['Martin', 'Marti', 'Martim', 'Marteau'],
-      rightAnswer: 2,
+      answers: [
+        Response(text: 'Ewan', correct: false),
+        Response(text: 'Quentin', correct: true),
+        Response(text: 'Martim', correct: false),
+        Response(text: 'Le Hockey', correct: false)
+      ],
     );
   });
 
   test('QuestionLocalModel.fromJson return a Question', () {
-    expect(QuestionLocalModel.fromJson(questionData).toDomainEntity(),
+    expect(QuestionLocalModel.fromJson(questionData).toDomainEntity([]),
         isA<Question>());
   });
 
   test('QuestionLocalModel.fromJson return a Question with good values', () {
     expect(
-        QuestionLocalModel.fromJson(questionData).toDomainEntity(), question);
+        QuestionLocalModel.fromJson(questionData).toDomainEntity([]), question);
   });
 
   test('QuizLocalModel.fromJson return a Quiz', () {
