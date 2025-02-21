@@ -1,8 +1,5 @@
 class ResponseLocalModel {
-  const ResponseLocalModel({
-    required this.text,
-    required this.correct,
-  });
+  const ResponseLocalModel({required this.text, required this.correct});
 
   factory ResponseLocalModel.fromJson(Map<String, dynamic> json) {
     return ResponseLocalModel(

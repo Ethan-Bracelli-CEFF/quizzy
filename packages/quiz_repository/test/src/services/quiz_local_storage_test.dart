@@ -6,6 +6,7 @@ void main() {
   late Map<String, dynamic> questionData;
   late Map<String, dynamic> quizData;
   late Question question;
+  late List<Response> responses;
 
   setUp(() {
     questionData = {
@@ -94,14 +95,15 @@ void main() {
         }
       ]
     };
+    responses = [
+      Response(text: 'Ewan', correct: false),
+      Response(text: 'Quentin', correct: true),
+      Response(text: 'Martim', correct: false),
+      Response(text: 'Le Hockey', correct: false)
+    ];
     question = Question(
       title: 'Quel est le nom de famille de Fabian?',
-      answers: [
-        Response(text: 'Ewan', correct: false),
-        Response(text: 'Quentin', correct: true),
-        Response(text: 'Martim', correct: false),
-        Response(text: 'Le Hockey', correct: false)
-      ],
+      answers: responses,
     );
   });
 
@@ -111,8 +113,8 @@ void main() {
   });
 
   test('QuestionLocalModel.fromJson return a Question with good values', () {
-    expect(
-        QuestionLocalModel.fromJson(questionData).toDomainEntity([]), question);
+    expect(QuestionLocalModel.fromJson(questionData).toDomainEntity(responses),
+        question);
   });
 
   test('QuizLocalModel.fromJson return a Quiz', () {

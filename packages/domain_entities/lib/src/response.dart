@@ -1,4 +1,6 @@
-class Response {
+import 'package:equatable/equatable.dart';
+
+class Response extends Equatable {
   const Response({
     required this.text,
     required this.correct,
@@ -13,4 +15,10 @@ class Response {
   }) {
     return Response(text: text ?? this.text, correct: correct ?? this.correct);
   }
+
+  @override
+  List<Object?> get props => [text, correct];
+
+  @override
+  bool? get stringify => true;
 }
