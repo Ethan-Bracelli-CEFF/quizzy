@@ -30,4 +30,44 @@ class UserListProvider with ChangeNotifier {
   User findUserById(String id) {
     return _state.users.firstWhere((user) => user.id == id);
   }
+
+  int findUserIndexById(String id) {
+    return _state.users.indexWhere((user) => user.id == id);
+  }
+
+  void addUser(User user) async {
+    try {
+      User newUser = await repository.addUser(user);
+      _state.users.add(newUser);
+      //TODO : refilter & delete this notify
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void updateUser(User user) async {
+    try {
+      final index = findUserIndexById(user.id);
+      if (index != -1) {
+        await repository.updateUser(user);
+        _state.users[index] = user;
+      }
+      //TODO : refilter & delete this notify
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void deleteUser(User user) async {
+    try {
+      await repository.deleteUser(user);
+      _state.users.remove(user);
+      //TODO : refilter & delete this notify
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
