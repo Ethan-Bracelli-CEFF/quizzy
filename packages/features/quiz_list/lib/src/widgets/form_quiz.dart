@@ -33,6 +33,7 @@ class _FormQuizState extends State<FormQuiz> {
           creator: '',
           title: '',
           description: '',
+          category: 'Autres',
           id: '',
           tags: [],
           questions: [],
@@ -47,6 +48,7 @@ class _FormQuizState extends State<FormQuiz> {
         creator: 'Me',
         title: '',
         description: '',
+        category: 'Autres',
         id: '',
         tags: [],
         questions: []);

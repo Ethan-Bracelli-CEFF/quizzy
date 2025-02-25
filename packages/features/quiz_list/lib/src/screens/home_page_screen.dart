@@ -1,5 +1,3 @@
-import 'dart:isolate';
-
 import 'package:flutter/material.dart';
 import 'package:component_library/component_library.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +27,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
     "Histoire",
     "Sport",
     "Informatique",
-    "Culture Médiatique",
+    "Films et Séries",
     "Autres"
   ];
 
