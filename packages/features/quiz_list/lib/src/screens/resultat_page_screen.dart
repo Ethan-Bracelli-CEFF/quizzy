@@ -71,7 +71,7 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
               ),
             ),
             SizedBox(height: 15),
-            AchievementItem.fromPercentage(percentage, size: 50)
+            AchievementItem.fromPercentage(percentage, size: 100)
           ],
         ),
       ),

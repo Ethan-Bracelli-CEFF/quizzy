@@ -24,13 +24,25 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
     );
   }
 
+  void _saveProgress({required int index, required String id}) {
+    int points = context.read<QuizPoints>().points;
+    int seed = context.read<QuizSeed>().seed;
+
+    var progress =
+        GameProgress(id: id, index: index, point: points, seed: seed);
+
+    // TODO: Ajouter la création de la progression quand le CRUD sera prêt
+    Navigator.of(context).pop();
+  }
+
   var showAnswers = false;
   int index = 0;
 
   @override
   Widget build(BuildContext context) {
-    final questions =
-        ModalRoute.of(context)?.settings.arguments as List<Question>;
+    var data = ModalRoute.of(context)?.settings.arguments as List<dynamic>;
+    List<Question> questions = data[0];
+    String quizId = data[1];
 
     final question = questions[index];
 
@@ -45,6 +57,13 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
           title: const Text(
             'Quizzy',
             style: TextStyle(color: Colors.white, fontSize: 60),
+          ),
+          leading: IconButton(
+            icon: Icon(
+              Icons.home,
+              size: 40,
+            ),
+            onPressed: () => _saveProgress(id: quizId, index: index),
           ),
         ),
         body: Padding(
@@ -122,8 +141,9 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
   }
 
   void _nextQuestion(BuildContext context, int index) {
-    final questions =
-        ModalRoute.of(context)?.settings.arguments as List<Question>;
+    final data = ModalRoute.of(context)?.settings.arguments as List<dynamic>;
+
+    final List<Question> questions = data[0];
 
     if (index + 1 < questions.length) {
       setState(() {
