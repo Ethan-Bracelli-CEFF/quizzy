@@ -45,7 +45,10 @@ class QuizRemoteStorage implements QuizStorage {
           });
           //TODO : Enlever toString quand BD id sont des string
           quizzes.add(QuizRemoteModel.fromJson(quizData)
-              .toDomainEntity(quizId.toString(), questions));
+              // .toDomainEntity(quizId.toString(), questions));
+              .toDomainEntity(
+                  quizId == quizId.toString() ? quizId : quizId.toString(),
+                  questions));
         });
       }
       return quizzes;
@@ -81,7 +84,11 @@ class QuizRemoteStorage implements QuizStorage {
           });
           //TODO : Enlever toString quand BD id sont des string
           users.add(UserRemoteModel.fromJson(userData)
-              .toDomainEntity(userId.toString(), gameProgress, achievement));
+              // .toDomainEntity(userId.toString(), gameProgress, achievement));
+              .toDomainEntity(
+                  userId == userId.toString() ? userId : userId.toString(),
+                  gameProgress,
+                  achievement));
         });
       }
       return users;

@@ -74,30 +74,30 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
                 ? Icon(
                     Icons.emoji_events,
                     color: Colors.yellowAccent,
-                    size: 60,
+                    size: 200,
                   )
                 : percentage < 1 && percentage >= 0.8
                     ? Icon(
                         Icons.star,
                         color: Colors.yellow,
-                        size: 260,
+                        size: 200,
                       )
                     : percentage < 0.8 && percentage >= 0.4
                         ? Icon(
                             Icons.star,
                             color: Colors.grey,
-                            size: 60,
+                            size: 200,
                           )
-                        : percentage < 0.5 && percentage > 0
+                        : percentage < 0.4 && percentage > 0
                             ? Icon(
                                 Icons.star,
                                 color: Colors.brown,
-                                size: 60,
+                                size: 200,
                               )
                             : Icon(
                                 Icons.sentiment_dissatisfied,
                                 color: Colors.white,
-                                size: 60,
+                                size: 200,
                               ),
           ],
         ),
