@@ -95,7 +95,7 @@ class QuizRemoteStorage implements QuizStorage {
       }
       questionDatas.add(question.toRemoteModel().toJson(responseDatas));
     }
-    final quizData = quiz.toRemoteModel().toJson(quiz.id, questionDatas);
+    final quizData = quiz.toRemoteModel().toJson(questionDatas);
     try {
       final parsedUrl =
           Uri.parse('${url}questionnaires/${quiz.id}.json$dbName');
@@ -139,7 +139,7 @@ class QuizRemoteStorage implements QuizStorage {
       }
       questionDatas.add(question.toRemoteModel().toJson(responseDatas));
     }
-    final quizData = quiz.toRemoteModel().toJson(quiz.id, questionDatas);
+    final quizData = quiz.toRemoteModel().toJson(questionDatas);
     try {
       final parsedUrl =
           Uri.parse('${url}questionnaires/${quiz.id}.json$dbName');
