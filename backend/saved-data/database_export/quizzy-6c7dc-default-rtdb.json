@@ -254,9 +254,9 @@
             "title": "Culture Sportive"
         },
         "-OJwBV5SQm_9Ld3MvEV0": {
+            "category": "Culture G",
             "creator": "Fabrioche",
             "description": "Savez vous des choses inutiles?",
-            "category": "Culture G",
             "id": "-OJwBV5SQm_9Ld3MvEV0",
             "questions": [
                 {
@@ -483,9 +483,9 @@
             "title": "Culture générale"
         },
         "-OJwBV5SQm_9Ld3MvEV1": {
+            "category": "Informatique",
             "creator": "Aitaneuh",
             "description": "Avez vous oublié les choses vues pendant ce module?",
-            "category": "Informatique",
             "id": "-OJwBV5SQm_9Ld3MvEV1",
             "questions": [
                 {
@@ -986,9 +986,9 @@
             "title": "Culture Flutter"
         },
         "-OJwBV5SQm_9Ld3MvEV2": {
+            "category": "Informatique",
             "creator": "Aitaneuh",
             "description": "Avez vous de bonne connaissances globales de l'informatique?",
-            "category": "Informatique",
             "id": "-OJwBV5SQm_9Ld3MvEV2",
             "questions": [
                 {
@@ -1360,9 +1360,9 @@
             "title": "Culture Informatique"
         },
         "-OJwBV5SQm_9Ld3MvEV3": {
+            "category": "Géographie",
             "creator": "Aitaneuh",
             "description": "Saurez répondre à toutes les questions?",
-            "category": "Géographie",
             "id": "-OJwBV5SQm_9Ld3MvEV3",
             "questions": [
                 {
@@ -1734,9 +1734,9 @@
             "title": "Géographie"
         },
         "-OJwBV5SQm_9Ld3MvEV4": {
+            "category": "Histoire",
             "creator": "Aitaneuh",
             "description": "Avez-vous de bonnes notions historiques?",
-            "category": "Histoire",
             "id": "-OJwBV5SQm_9Ld3MvEV4",
             "questions": [
                 {

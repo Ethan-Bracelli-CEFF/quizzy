@@ -1,3 +1,4 @@
+export 'src/achievement_item.dart';
 export 'src/answer_item.dart';
 export 'src/detail_quiz_item.dart';
 export 'src/progress_bar.dart';

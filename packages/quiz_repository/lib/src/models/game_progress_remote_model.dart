@@ -14,4 +14,7 @@ class GameProgressRemoteModel {
   final int index;
   final int point;
   final int seed;
+
+  Map<String, dynamic> toJson() =>
+      {"id": id, "index": index, "point": point, "seed": seed};
 }

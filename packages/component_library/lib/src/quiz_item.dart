@@ -3,8 +3,11 @@ import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 
 class QuizItem extends StatelessWidget {
-  const QuizItem({required this.quiz, required this.showDetail, super.key});
+  const QuizItem(
+      {required this.quiz, required this.showDetail, note, super.key})
+      : note = note ?? 0;
 
+  final int note;
   final Quiz quiz;
   final Function(String id) showDetail;
 
@@ -25,9 +28,10 @@ class QuizItem extends StatelessWidget {
           spacing: 20,
           children: [
             Wrap(
-              spacing: 15,
-              runSpacing: 5,
+              spacing: 10,
+              runSpacing: 10,
               children: [
+                AchievementItem(note: note),
                 Text(
                   quiz.title,
                   style: const TextStyle(color: Colors.white, fontSize: 25),

@@ -26,4 +26,16 @@ class QuizRemoteModel {
   final String description;
   final String category;
   final List<String> tags;
+
+  Map<String, dynamic> toJson(
+          String id, List<Map<String, dynamic>> questions) =>
+      {
+        "category": category,
+        "creator": creator,
+        "description": description,
+        "id": id,
+        "questions": questions,
+        "tags": tags,
+        "title": title,
+      };
 }

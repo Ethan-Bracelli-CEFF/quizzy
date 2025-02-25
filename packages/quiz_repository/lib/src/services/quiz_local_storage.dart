@@ -68,4 +68,40 @@ class QuizLocalStorage implements QuizStorage {
       rethrow;
     }
   }
+
+  @override
+  Future<Quiz> addQuiz(Quiz quiz) {
+    // TODO: implement addQuiz
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<User> addUser(User user) {
+    // TODO: implement addUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteQuiz(Quiz quiz) {
+    // TODO: implement deleteQuiz
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteUser(User user) {
+    // TODO: implement deleteUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateQuiz(Quiz quiz) {
+    // TODO: implement updateQuiz
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateUser(User user) {
+    // TODO: implement updateUser
+    throw UnimplementedError();
+  }
 }

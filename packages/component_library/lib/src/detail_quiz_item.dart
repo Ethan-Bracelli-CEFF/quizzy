@@ -3,9 +3,11 @@ import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 
 class DetailQuizItem extends StatelessWidget {
-  const DetailQuizItem({required this.quiz, super.key});
+  const DetailQuizItem({required this.quiz, note, super.key})
+      : note = note ?? 0;
 
   final Quiz quiz;
+  final int note;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,15 @@ class DetailQuizItem extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 14.0),
-              child: Text(
-                quiz.title,
-                style: const TextStyle(color: Colors.white, fontSize: 35),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    quiz.title,
+                    style: const TextStyle(color: Colors.white, fontSize: 35),
+                  ),
+                  AchievementItem(note: note)
+                ],
               ),
             ),
             const SizedBox(height: 5),

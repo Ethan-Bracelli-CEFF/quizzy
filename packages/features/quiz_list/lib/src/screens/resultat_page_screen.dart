@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:component_library/component_library.dart';
 import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -70,35 +71,7 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
               ),
             ),
             SizedBox(height: 15),
-            percentage == 1
-                ? Icon(
-                    Icons.emoji_events,
-                    color: Colors.yellowAccent,
-                    size: 200,
-                  )
-                : percentage < 1 && percentage >= 0.8
-                    ? Icon(
-                        Icons.star,
-                        color: Colors.yellow,
-                        size: 200,
-                      )
-                    : percentage < 0.8 && percentage >= 0.4
-                        ? Icon(
-                            Icons.star,
-                            color: Colors.grey,
-                            size: 200,
-                          )
-                        : percentage < 0.4 && percentage > 0
-                            ? Icon(
-                                Icons.star,
-                                color: Colors.brown,
-                                size: 200,
-                              )
-                            : Icon(
-                                Icons.sentiment_dissatisfied,
-                                color: Colors.white,
-                                size: 200,
-                              ),
+            AchievementItem.fromPercentage(percentage, size: 50)
           ],
         ),
       ),

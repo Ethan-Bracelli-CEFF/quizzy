@@ -58,6 +58,7 @@ class _FormQuizState extends State<FormQuiz> {
     if (values != null) {
       final title = values['Title'];
       final description = values['Description'];
+      final categorie = values['Categorie'];
 
       final List<String> tags = [];
       this.tags.forEach((t) => tags.add(t.text));
@@ -87,11 +88,13 @@ class _FormQuizState extends State<FormQuiz> {
       }
 
       quiz = quiz.copyWith(
-          title: title,
-          description: description,
-          questions: questions,
-          tags: tags,
-          id: _editedQuiz.id);
+        title: title,
+        description: description,
+        questions: questions,
+        tags: tags,
+        category: categorie,
+        id: _editedQuiz.id,
+      );
     }
     return quiz;
   }
@@ -185,6 +188,35 @@ class _FormQuizState extends State<FormQuiz> {
               runSpacing: 5.0,
               children: [...tags],
             ),
+          ),
+          FormBuilderRadioGroup<String>(
+            decoration: const InputDecoration(
+              label: Text(
+                'Categorie',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            initialValue: 'Autres',
+            name: 'Categorie',
+            options: [
+              'Culture G',
+              'Géographie',
+              'Histoire',
+              'Sport',
+              'Informatique',
+              'Films et Séries',
+              'Autres'
+            ]
+                .map(
+                  (lang) => FormBuilderFieldOption(
+                    value: lang,
+                    child: Text(
+                      lang,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                )
+                .toList(growable: false),
           ),
           Divider(thickness: 3.0),
           SizedBox(height: 15.0),

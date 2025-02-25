@@ -84,4 +84,74 @@ class QuizRemoteStorage implements QuizStorage {
       rethrow;
     }
   }
+
+  @override
+  Future<Quiz> addQuiz(Quiz quiz) {
+    // TODO: implement addQuiz
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<User> addUser(User user) {
+    // TODO: implement addUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteQuiz(Quiz quiz) {
+    // TODO: implement deleteQuiz
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteUser(User user) {
+    // TODO: implement deleteUser
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> updateQuiz(Quiz quiz) async {
+    final questionDatas = <Map<String, dynamic>>[];
+    for (var question in quiz.questions) {
+      final responseDatas = <Map<String, dynamic>>[];
+      for (var response in question.answers) {
+        responseDatas.add(response.toRemoteModel().toJson());
+      }
+      questionDatas.add(question.toRemoteModel().toJson(responseDatas));
+    }
+    final quizData = quiz.toRemoteModel().toJson(quiz.id, questionDatas);
+    try {
+      final parsedUrl =
+          Uri.parse('${url}questionnaires/${quiz.id}.json$dbName');
+      final response = await _client.put(parsedUrl, body: jsonEncode(quizData));
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> updateUser(User user) async {
+    final achievementDatas = <Map<String, dynamic>>[];
+    final gameProgressDatas = <Map<String, dynamic>>[];
+    for (var v in user.achievement) {
+      achievementDatas.add(v.toRemoteModel().toJson());
+    }
+    for (var v in user.gameProgress) {
+      gameProgressDatas.add(v.toRemoteModel().toJson());
+    }
+    final userData =
+        user.toRemoteModel().toJson(achievementDatas, gameProgressDatas);
+    try {
+      final parsedUrl = Uri.parse('${url}utilisateurs/${user.id}.json$dbName');
+      final response = await _client.put(parsedUrl, body: jsonEncode(userData));
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
