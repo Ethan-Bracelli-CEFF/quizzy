@@ -22,8 +22,8 @@ class Quizzy extends StatelessWidget {
         ),
         Provider<QuizRepository>(
           create: (context) => QuizRepository(
-            storage: context.read<QuizLocalStorage>(),
-            // storage: context.read<QuizRemoteStorage>(),
+            // storage: context.read<QuizLocalStorage>(),
+            storage: context.read<QuizRemoteStorage>(),
           ),
         ),
         Provider<QuizPoints>(
