@@ -29,10 +29,10 @@ class QuizRemoteStorage implements QuizStorage {
         throw HttpException('${response.statusCode}');
       }
 
-      final data = jsonDecode(response.body);
+      final Map<String, dynamic> data = jsonDecode(response.body);
 
-      if (data['questionnaires'] != null) {
-        data['questionnaires'].forEach((quizId, quizData) {
+      if (data != null) {
+        data.forEach((quizId, quizData) {
           final questions = <Question>[];
           quizData['questions'].forEach((questionData) {
             final responses = <Response>[];
@@ -67,8 +67,8 @@ class QuizRemoteStorage implements QuizStorage {
 
       final data = jsonDecode(response.body);
 
-      if (data['utilisateurs'] != null) {
-        data['utilisateurs'].forEach((userId, userData) {
+      if (data != null) {
+        data.forEach((userId, userData) {
           List<GameProgress> gameProgress = [];
           List<Achievement> achievement = [];
           userData['in_progress'].forEach((gameProgressData) {

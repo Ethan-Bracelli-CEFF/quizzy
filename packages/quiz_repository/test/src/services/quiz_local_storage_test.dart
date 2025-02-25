@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:quiz_repository/quiz_repository.dart';
