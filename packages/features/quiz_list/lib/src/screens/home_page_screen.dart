@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:quiz_list/quiz_list.dart';
 
 class HomePageScreen extends StatefulWidget {
-  static const routeName = 'home_screen';
+  static const routeName = '/';
 
   const HomePageScreen({super.key});
 
@@ -196,7 +196,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushReplacementNamed(HomePageScreen.routeName);
+                  },
                   icon: Icon(
                     Icons.home,
                     color: Colors.white,
@@ -212,12 +215,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     size: 28.0,
                   )),
               IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.person,
-                    color: Colors.white,
-                    size: 28.0,
-                  )),
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushReplacementNamed(UserPageScreen.routeName);
+                },
+                icon: Icon(
+                  Icons.person,
+                  color: Colors.white,
+                  size: 28.0,
+                ),
+              ),
             ],
           ),
         ),

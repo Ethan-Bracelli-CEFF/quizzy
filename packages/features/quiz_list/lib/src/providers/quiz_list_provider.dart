@@ -18,7 +18,7 @@ class QuizListProvider with ChangeNotifier {
     _state = _state.copyWith(status: QuizListStatus.loading);
     notifyListeners();
 
-    await Future.delayed(Duration(seconds: 1));
+    // await Future.delayed(Duration(seconds: 1));
 
     final repositoryQuizzes = await repository.getAllQuizzes();
 
@@ -32,6 +32,10 @@ class QuizListProvider with ChangeNotifier {
 
   Quiz findQuizById(String id) {
     return _state.quizzes.firstWhere((quiz) => quiz.id == id);
+  }
+
+  List<Quiz> findQuizzesByAuthor(String author) {
+    return _state.quizzes.where((q) => q.creator == author).toList();
   }
 
   void filterQuizzes(String value) {

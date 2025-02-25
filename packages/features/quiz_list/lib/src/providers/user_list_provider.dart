@@ -23,7 +23,7 @@ class UserListProvider with ChangeNotifier {
       users: repositoryUsers,
     );
     _userState =
-        _userState.copyWith(user: _state.users[1], status: UserStatus.loaded);
+        _userState.copyWith(user: _state.users[2], status: UserStatus.loaded);
     notifyListeners();
   }
 

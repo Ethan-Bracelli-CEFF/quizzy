@@ -196,7 +196,7 @@ class _FormQuizState extends State<FormQuiz> {
                 style: TextStyle(color: Colors.white),
               ),
             ),
-            initialValue: 'Autres',
+            initialValue: _editedQuiz.category,
             name: 'Categorie',
             options: [
               'Culture G',
