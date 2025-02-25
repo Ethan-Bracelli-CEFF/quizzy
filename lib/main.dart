@@ -55,7 +55,8 @@ class Quizzy extends StatelessWidget {
           DetailPageScreen.routeName: (context) => const DetailPageScreen(),
           QuestionPageScreen.routeName: (context) => const QuestionPageScreen(),
           ResultatPageScreen.routeName: (context) => const ResultatPageScreen(),
-          CreateQuizScreen.routeName: (context) => CreateQuizScreen()
+          CreateQuizScreen.routeName: (context) => CreateQuizScreen(),
+          UserPageScreen.routeName: (context) => UserPageScreen()
         },
       ),
     );
