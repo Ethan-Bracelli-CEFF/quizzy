@@ -86,9 +86,29 @@ class QuizRemoteStorage implements QuizStorage {
   }
 
   @override
-  Future<Quiz> addQuiz(Quiz quiz) {
-    // TODO: implement addQuiz
-    throw UnimplementedError();
+  Future<Quiz> addQuiz(Quiz quiz) async {
+    final questionDatas = <Map<String, dynamic>>[];
+    for (var question in quiz.questions) {
+      final responseDatas = <Map<String, dynamic>>[];
+      for (var response in question.answers) {
+        responseDatas.add(response.toRemoteModel().toJson());
+      }
+      questionDatas.add(question.toRemoteModel().toJson(responseDatas));
+    }
+    final quizData = quiz.toRemoteModel().toJson(quiz.id, questionDatas);
+    try {
+      final parsedUrl =
+          Uri.parse('${url}questionnaires/${quiz.id}.json$dbName');
+      final response =
+          await _client.post(parsedUrl, body: jsonEncode(quizData));
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+      final id = jsonDecode(response.body)['name'];
+      return quiz.copyWith(id: id);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
