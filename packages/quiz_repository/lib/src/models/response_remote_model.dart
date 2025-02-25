@@ -10,4 +10,8 @@ class ResponseRemoteModel {
 
   final String text;
   final bool correct;
+
+  Map<String, dynamic> toJson() {
+    return correct ? {"text": text, "correct": correct} : {"text": text};
+  }
 }

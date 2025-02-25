@@ -10,4 +10,7 @@ class QuestionRemoteModel {
   }
 
   final String title;
+
+  Map<String, dynamic> toJson(List<Map<String, dynamic>> responses) =>
+      {"responses": responses, "title": title};
 }
