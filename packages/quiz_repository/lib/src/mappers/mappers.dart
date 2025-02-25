@@ -11,6 +11,9 @@ export 'modeltodomain/achievement_remote_mapper.dart';
 export 'modeltodomain/game_progress_local_mapper.dart';
 export 'modeltodomain/game_progress_remote_mapper.dart';
 
-export 'domaintomodel/user_to_model_remote.dart';
-export 'domaintomodel/achievement_to_model_remote.dart';
-export 'domaintomodel/game_progress_to_model_remote.dart';
+export 'domaintomodel/user_to_remote_model.dart';
+export 'domaintomodel/achievement_to_remote_model.dart';
+export 'domaintomodel/game_progress_to_remote_model.dart';
+export 'domaintomodel/quiz_to_remote_model.dart';
+export 'domaintomodel/question_to_remote_model.dart';
+export 'domaintomodel/response_to_remote_model.dart';
