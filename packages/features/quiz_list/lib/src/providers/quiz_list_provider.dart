@@ -84,4 +84,11 @@ class QuizListProvider with ChangeNotifier {
     _state = _state.copyWith(filteredCategory: quizzes);
     notifyListeners();
   }
+
+  void addQuiz(Quiz quiz) async {
+    Quiz newQuiz = await repository.addQuiz(quiz);
+    _state.quizzes.add(newQuiz);
+    //TODO : refilter & delete this notify
+    notifyListeners();
+  }
 }
