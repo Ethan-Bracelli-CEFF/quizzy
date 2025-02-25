@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:diacritic/diacritic.dart';
 import 'package:domain_entities/domain_entities.dart';
 import 'package:equatable/equatable.dart';
@@ -104,7 +102,7 @@ class QuizListProvider with ChangeNotifier {
 
   void updateQuiz(Quiz quiz) async {
     try {
-      final index = findQuizIndexById(quiz.id);
+      final index = findQuizIndexById(quiz.id ?? '');
       if (index != -1) {
         await repository.updateQuiz(quiz);
         _state.quizzes[index] = quiz;

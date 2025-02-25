@@ -13,7 +13,7 @@ class User extends Equatable {
   });
 
   final String username;
-  final String id;
+  final String? id;
   final List<String> interests;
   final List<String> likes;
   final List<GameProgress> gameProgress;
