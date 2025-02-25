@@ -64,4 +64,22 @@ class QuizListProvider with ChangeNotifier {
     _state = _state.copyWith(filtered: quizzes);
     notifyListeners();
   }
+
+  void filterCategories(String value) async {
+    final cleanValue = removeDiacritics(value.toLowerCase());
+    List<Quiz> quizzes = <Quiz>[];
+
+    if (value != "Tous") {
+      for (Quiz quiz in _state.quizzes) {
+        if (removeDiacritics(quiz.category.toLowerCase()) == cleanValue) {
+          quizzes.add(quiz);
+        }
+      }
+    } else {
+      quizzes = _state.quizzes;
+    }
+
+    _state = _state.copyWith(filtered: quizzes);
+    notifyListeners();
+  }
 }

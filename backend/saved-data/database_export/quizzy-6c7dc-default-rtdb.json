@@ -1,7 +1,7 @@
 {
     "questionnaires": {
         "-OJwBV5ROYsuWVMratrR": {
-            "category": "dev",
+            "category": "Autres",
             "creator": "Aitaneuh le meilleur dev du monde",
             "description": "Juste un Quiz de test",
             "id": "-OJwBV5ROYsuWVMratrR",
@@ -25,7 +25,7 @@
             "title": "Quiz Dev"
         },
         "-OJwBV5ROYsuWVMratrS": {
-            "category": "sport",
+            "category": "Sport",
             "creator": "Aitaneuh",
             "description": "Pensez vous être incollable sur le sport?",
             "id": "-OJwBV5ROYsuWVMratrS",
@@ -256,6 +256,7 @@
         "-OJwBV5SQm_9Ld3MvEV0": {
             "creator": "Fabrioche",
             "description": "Savez vous des choses inutiles?",
+            "category": "Culture G",
             "id": "-OJwBV5SQm_9Ld3MvEV0",
             "questions": [
                 {
@@ -484,6 +485,7 @@
         "-OJwBV5SQm_9Ld3MvEV1": {
             "creator": "Aitaneuh",
             "description": "Avez vous oublié les choses vues pendant ce module?",
+            "category": "Informatique",
             "id": "-OJwBV5SQm_9Ld3MvEV1",
             "questions": [
                 {
@@ -986,6 +988,7 @@
         "-OJwBV5SQm_9Ld3MvEV2": {
             "creator": "Aitaneuh",
             "description": "Avez vous de bonne connaissances globales de l'informatique?",
+            "category": "Informatique",
             "id": "-OJwBV5SQm_9Ld3MvEV2",
             "questions": [
                 {
@@ -1359,6 +1362,7 @@
         "-OJwBV5SQm_9Ld3MvEV3": {
             "creator": "Aitaneuh",
             "description": "Saurez répondre à toutes les questions?",
+            "category": "Géographie",
             "id": "-OJwBV5SQm_9Ld3MvEV3",
             "questions": [
                 {
@@ -1732,6 +1736,7 @@
         "-OJwBV5SQm_9Ld3MvEV4": {
             "creator": "Aitaneuh",
             "description": "Avez-vous de bonnes notions historiques?",
+            "category": "Histoire",
             "id": "-OJwBV5SQm_9Ld3MvEV4",
             "questions": [
                 {
