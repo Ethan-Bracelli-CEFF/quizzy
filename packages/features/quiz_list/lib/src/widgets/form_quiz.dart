@@ -71,24 +71,35 @@ class _FormQuizState extends State<FormQuiz> {
           TextButton(
             child: Text('Ajouter une question'),
             onPressed: () {
-              final newTextFieldName = 'question_${_newTextFieldId++}';
-              final newTextFieldKey = ValueKey(_newTextFieldId);
-              setState(() {
-                fields.add(QuestionItem(
-                  key: newTextFieldKey,
-                  name: newTextFieldName,
-                  onDelete: () {
-                    setState(() {
-                      fields.removeWhere((e) => e.key == newTextFieldKey);
-                    });
-                  },
-                ));
-              });
+              createQuestion();
             },
           )
         ],
         // TODO Button cancel and send
       ),
+    );
+  }
+
+  void createQuestion({Question? question}) {
+    final Question editedQuestion =
+        question ?? Question(title: '', answers: [], rightAnswer: 0);
+
+    final newTextFieldName = 'question_${_newTextFieldId++}';
+    final newTextFieldKey = ValueKey(_newTextFieldId);
+    setState(
+      () {
+        fields.add(
+          QuestionItem(
+            key: newTextFieldKey,
+            name: newTextFieldName,
+            onDelete: () {
+              setState(() {
+                fields.removeWhere((e) => e.key == newTextFieldKey);
+              });
+            },
+          ),
+        );
+      },
     );
   }
 }
