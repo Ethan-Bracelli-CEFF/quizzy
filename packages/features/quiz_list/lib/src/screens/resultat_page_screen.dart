@@ -70,13 +70,35 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
               ),
             ),
             SizedBox(height: 15),
-            Text(
-              'Votre note : ${(score / questions.length * 5 + 1).toStringAsFixed(1)}',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 27.0,
-              ),
-            ),
+            percentage == 1
+                ? Icon(
+                    Icons.emoji_events,
+                    color: Colors.yellowAccent,
+                    size: 60,
+                  )
+                : percentage < 1 && percentage >= 0.8
+                    ? Icon(
+                        Icons.star,
+                        color: Colors.yellow,
+                        size: 260,
+                      )
+                    : percentage < 0.8 && percentage >= 0.4
+                        ? Icon(
+                            Icons.star,
+                            color: Colors.grey,
+                            size: 60,
+                          )
+                        : percentage < 0.5 && percentage > 0
+                            ? Icon(
+                                Icons.star,
+                                color: Colors.brown,
+                                size: 60,
+                              )
+                            : Icon(
+                                Icons.sentiment_dissatisfied,
+                                color: Colors.white,
+                                size: 60,
+                              ),
           ],
         ),
       ),
