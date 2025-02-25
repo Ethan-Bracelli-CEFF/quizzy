@@ -16,21 +16,83 @@ class FormQuiz extends StatefulWidget {
 class _FormQuizState extends State<FormQuiz> {
   final _form = GlobalKey<FormBuilderState>();
 
-  final List<Widget> fields = [];
+  final List<QuestionItem> fields = [];
+  final List<Widget> tags = [];
   var _newTextFieldId = 0;
+  var _newTagFieldId = 0;
   String savedValue = '';
+
+  late Quiz _editedQuiz;
 
   @override
   void initState() {
-    savedValue = _form.currentState?.value.toString() ?? '';
     super.initState();
+
+    _editedQuiz = widget.quiz ??
+        Quiz(
+          creator: '',
+          title: '',
+          description: '',
+          id: '',
+          tags: [],
+          questions: [],
+        );
+  }
+
+  Quiz _getQuizFromValues() {
+    Quiz quiz = Quiz(
+        creator: 'Me',
+        title: '',
+        description: '',
+        id: '',
+        tags: [],
+        questions: []);
+
+    _form.currentState?.save();
+    Map? values = _form.currentState?.value;
+    if (values != null) {
+      final title = values['Title'];
+      final description = values['Description'];
+
+      final List<Question> questions = [];
+
+      for (int i = 0; i < fields.length + 5; i++) {
+        final List<Response> responses = [];
+
+        if (values.keys.contains('question_$i') &&
+            values['question_$i'] != null) {
+          for (int j = 0; j < 25; j++) {
+            final repString = 'question_$i\_rep_$j';
+            if (values.keys.contains(repString) && values[repString] != null) {
+              responses.add(
+                Response(
+                    text: values[repString],
+                    correct: values['$repString\_correct']),
+              );
+            }
+          }
+
+          questions.add(
+            Question(title: values['question_$i'], answers: responses),
+          );
+        }
+      }
+
+      quiz = quiz.copyWith(
+          title: title, description: description, questions: questions);
+    }
+    return quiz;
+  }
+
+  void _saveForm(Quiz quiz) {
+    // TODO Add the quiz to the provider
+    Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
     return FormBuilder(
       key: _form,
-      clearValueOnUnregister: true,
       child: Column(
         children: [
           Container(
@@ -44,6 +106,9 @@ class _FormQuizState extends State<FormQuiz> {
                 name: 'Title',
                 validator: FormBuilderValidators.required(),
                 decoration: InputDecoration(labelText: 'Titre'),
+                onSaved: (value) {
+                  _editedQuiz.copyWith(title: value);
+                },
               ),
             ),
           ),
@@ -59,11 +124,33 @@ class _FormQuizState extends State<FormQuiz> {
                 name: 'Description',
                 validator: FormBuilderValidators.required(),
                 decoration: InputDecoration(labelText: 'Description'),
+                onSaved: (value) {
+                  _editedQuiz.copyWith(description: value);
+                },
               ),
             ),
           ),
           SizedBox(height: 15.0),
-          // TODO Tags field
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: FormBuilderTextField(
+                name: 'Tags',
+                decoration: InputDecoration(labelText: 'Tags'),
+                onSubmitted: (value) {
+                  if (value != null && value.trim() != '') {
+                    createTag(value);
+                    value = null;
+                  }
+                },
+              ),
+            ),
+          ),
+          ...tags,
           Divider(thickness: 3.0),
           SizedBox(height: 15.0),
           ...fields,
@@ -73,7 +160,19 @@ class _FormQuizState extends State<FormQuiz> {
             onPressed: () {
               createQuestion();
             },
-          )
+          ),
+          TextButton(
+            child: Text('Sauvegarder'),
+            onPressed: () {
+              _form.currentState?.validate();
+              if (_form.currentState != null && !_form.currentState!.isValid) {
+                return;
+              }
+
+              Quiz quiz = _getQuizFromValues();
+              _saveForm(quiz);
+            },
+          ),
         ],
         // TODO Button cancel and send
       ),
@@ -82,7 +181,7 @@ class _FormQuizState extends State<FormQuiz> {
 
   void createQuestion({Question? question}) {
     final Question editedQuestion =
-        question ?? Question(title: '', answers: [], rightAnswer: 0);
+        question ?? Question(answers: [], title: '');
 
     final newTextFieldName = 'question_${_newTextFieldId++}';
     final newTextFieldKey = ValueKey(_newTextFieldId);
@@ -92,6 +191,7 @@ class _FormQuizState extends State<FormQuiz> {
           QuestionItem(
             key: newTextFieldKey,
             name: newTextFieldName,
+            form: _form,
             onDelete: () {
               setState(() {
                 fields.removeWhere((e) => e.key == newTextFieldKey);
@@ -100,6 +200,45 @@ class _FormQuizState extends State<FormQuiz> {
           ),
         );
       },
+    );
+  }
+
+  void createTag(String text) {
+    final newTextFieldName = 'tag_${_newTagFieldId++}';
+    final newTextFieldKey = ValueKey('tag_$_newTagFieldId');
+
+    setState(() {
+      tags.add(
+        Tag(
+          key: newTextFieldKey,
+          name: newTextFieldName,
+          text: text,
+          onDelete: () {
+            setState(() {
+              tags.removeWhere((e) => e.key == newTextFieldKey);
+            });
+          },
+        ),
+      );
+    });
+  }
+}
+
+class Tag extends StatelessWidget {
+  const Tag({required this.name, required this.text, this.onDelete, super.key});
+
+  final String name;
+  final String text;
+  final VoidCallback? onDelete;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: onDelete,
+      child: Container(
+        color: Colors.white,
+        child: Text(text),
+      ),
     );
   }
 }

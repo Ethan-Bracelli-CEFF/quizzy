@@ -25,9 +25,11 @@ class _CreateQuizScreenState extends State<CreateQuizScreen> {
         ),
       ),
       backgroundColor: Color.fromARGB(255, 18, 18, 18),
-      body: Padding(
-        padding: const EdgeInsets.all(17.0),
-        child: FormQuiz(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(17.0),
+          child: FormQuiz(),
+        ),
       ),
     );
   }
