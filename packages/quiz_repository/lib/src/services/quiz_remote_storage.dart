@@ -29,25 +29,21 @@ class QuizRemoteStorage implements QuizStorage {
         throw HttpException('${response.statusCode}');
       }
 
-      final data = jsonDecode(response.body);
-
-      if (data['questionnaires'] != null) {
-        data['questionnaires'].forEach((quizId, quizData) {
-          final questions = <Question>[];
-          quizData['questions'].forEach((questionData) {
-            final responses = <Response>[];
-            questionData['responses'].forEach((responseData) {
-              responses.add(
-                  ResponseRemoteModel.fromJson(responseData).toDomainEntity());
-            });
-            questions.add(QuestionRemoteModel.fromJson(questionData)
-                .toDomainEntity(responses));
+      final Map<String, dynamic> data = jsonDecode(response.body);
+      data.forEach((quizId, quizData) {
+        final questions = <Question>[];
+        quizData['questions'].forEach((questionData) {
+          final responses = <Response>[];
+          questionData['responses'].forEach((responseData) {
+            responses.add(
+                ResponseRemoteModel.fromJson(responseData).toDomainEntity());
           });
-          //TODO : Enlever toString quand BD id sont des string
-          quizzes.add(QuizRemoteModel.fromJson(quizData)
-              .toDomainEntity(quizId.toString(), questions));
+          questions.add(QuestionRemoteModel.fromJson(questionData)
+              .toDomainEntity(responses));
         });
-      }
+        quizzes.add(QuizRemoteModel.fromJson(quizData)
+            .toDomainEntity(quizId.toString(), questions));
+      });
       return quizzes;
     } catch (e) {
       rethrow;
@@ -67,8 +63,8 @@ class QuizRemoteStorage implements QuizStorage {
 
       final data = jsonDecode(response.body);
 
-      if (data['utilisateurs'] != null) {
-        data['utilisateurs'].forEach((userId, userData) {
+      if (data != null) {
+        data.forEach((userId, userData) {
           List<GameProgress> gameProgress = [];
           List<Achievement> achievement = [];
           userData['in_progress'].forEach((gameProgressData) {
@@ -79,7 +75,6 @@ class QuizRemoteStorage implements QuizStorage {
             achievement.add(AchievementRemoteModel.fromJson(achievementData)
                 .toDomainEntity());
           });
-          //TODO : Enlever toString quand BD id sont des string
           users.add(UserRemoteModel.fromJson(userData)
               .toDomainEntity(userId.toString(), gameProgress, achievement));
         });

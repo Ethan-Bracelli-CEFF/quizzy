@@ -18,6 +18,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   void initState() {
     super.initState();
     _fetchQuizes();
+    _fetchUsers();
   }
 
   _fetchQuizes() {
@@ -28,8 +29,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
     }
   }
 
+  _fetchUsers() {
+    if (context.read<UserListProvider>().state.users.isEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        context.read<UserListProvider>().fetchAndSetUsers();
+      });
+    }
+  }
+
   Widget _showQuiz() {
     final state = context.watch<QuizListProvider>().state;
+    final user = context.watch<UserListProvider>().userState;
 
     if (state.status == QuizListStatus.initial) {
       return const Center(

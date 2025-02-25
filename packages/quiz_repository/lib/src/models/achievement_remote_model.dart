@@ -6,6 +6,6 @@ class AchievementRemoteModel {
   }
 
   final String id;
-  final double star;
+  final int star;
   final int hightscore;
 }
