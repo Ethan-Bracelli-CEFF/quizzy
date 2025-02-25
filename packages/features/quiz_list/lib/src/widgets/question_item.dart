@@ -65,7 +65,7 @@ class _QuestionItemState extends State<QuestionItem> {
                 },
                 icon: Icon(
                   Icons.add,
-                  // color: Colors.white,
+                  color: Colors.white,
                 ),
                 iconSize: 20.0,
               ),
