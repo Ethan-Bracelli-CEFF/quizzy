@@ -118,9 +118,18 @@ class QuizRemoteStorage implements QuizStorage {
   }
 
   @override
-  Future<void> deleteQuiz(Quiz quiz) {
-    // TODO: implement deleteQuiz
-    throw UnimplementedError();
+  Future<void> deleteQuiz(Quiz quiz) async {
+    try {
+      final parsedUrl =
+          Uri.parse('${url}questionnaires/${quiz.id}.json$dbName');
+
+      final response = await _client.delete(parsedUrl);
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
