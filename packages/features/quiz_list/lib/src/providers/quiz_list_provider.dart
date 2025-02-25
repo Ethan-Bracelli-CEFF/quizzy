@@ -115,4 +115,15 @@ class QuizListProvider with ChangeNotifier {
       rethrow;
     }
   }
+
+  void deleteQuiz(Quiz quiz) async {
+    try {
+      await repository.deleteQuiz(quiz);
+      _state.quizzes.remove(quiz);
+      //TODO : refilter & delete this notify
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
