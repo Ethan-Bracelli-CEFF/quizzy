@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:component_library/component_library.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_list/quiz_list.dart';
-import 'package:quiz_list/src/screens/create_quiz_screen.dart';
 
 class HomePageScreen extends StatefulWidget {
   static const routeName = 'home_screen';

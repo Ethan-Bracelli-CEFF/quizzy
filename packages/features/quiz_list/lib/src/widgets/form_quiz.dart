@@ -17,7 +17,7 @@ class _FormQuizState extends State<FormQuiz> {
   final _form = GlobalKey<FormBuilderState>();
 
   final List<QuestionItem> fields = [];
-  final List<Widget> tags = [];
+  final List<Tag> tags = [];
   var _newTextFieldId = 0;
   var _newTagFieldId = 0;
   String savedValue = '';
@@ -143,38 +143,102 @@ class _FormQuizState extends State<FormQuiz> {
                 decoration: InputDecoration(labelText: 'Tags'),
                 onSubmitted: (value) {
                   if (value != null && value.trim() != '') {
+                    if (tags.indexWhere((t) => t.text == value) != -1) {
+                      return;
+                    }
                     createTag(value);
-                    value = null;
                   }
                 },
               ),
             ),
           ),
-          ...tags,
+          Wrap(
+            spacing: 5.0,
+            runSpacing: 5.0,
+            children: [...tags],
+          ),
           Divider(thickness: 3.0),
           SizedBox(height: 15.0),
           ...fields,
-          // TODO Button decoration
           TextButton(
-            child: Text('Ajouter une question'),
+            style: ButtonStyle(
+              backgroundColor: WidgetStatePropertyAll(Colors.white),
+              foregroundColor: WidgetStatePropertyAll(Colors.black),
+              shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.add,
+                  color: Colors.green,
+                ),
+                SizedBox(width: 5.0),
+                Text('Ajouter une question'),
+              ],
+            ),
             onPressed: () {
               createQuestion();
             },
           ),
-          TextButton(
-            child: Text('Sauvegarder'),
-            onPressed: () {
-              _form.currentState?.validate();
-              if (_form.currentState != null && !_form.currentState!.isValid) {
-                return;
-              }
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 14.0),
+            child: Divider(thickness: 3.0),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStatePropertyAll(Colors.white),
+                  foregroundColor: WidgetStatePropertyAll(Colors.red),
+                  shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+                child: Text(
+                  'Annuler',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              SizedBox(width: 20.0),
+              TextButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStatePropertyAll(Colors.white),
+                  foregroundColor: WidgetStatePropertyAll(Colors.black),
+                  shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+                child: Text(
+                  'Sauvegarder',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+                onPressed: () {
+                  _form.currentState?.validate();
+                  if (_form.currentState != null &&
+                      !_form.currentState!.isValid) {
+                    return;
+                  }
 
-              Quiz quiz = _getQuizFromValues();
-              _saveForm(quiz);
-            },
+                  Quiz quiz = _getQuizFromValues();
+                  _saveForm(quiz);
+                },
+              ),
+            ],
           ),
         ],
-        // TODO Button cancel and send
       ),
     );
   }
@@ -235,9 +299,22 @@ class Tag extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: onDelete,
-      child: Container(
-        color: Colors.white,
-        child: Text(text),
+      style: ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(Colors.white),
+        foregroundColor: WidgetStatePropertyAll(Colors.black),
+        shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(text),
+          SizedBox(width: 2.0),
+          Icon(Icons.close, color: Colors.red, size: 15.0),
+        ],
       ),
     );
   }
