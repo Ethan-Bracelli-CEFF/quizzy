@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:diacritic/diacritic.dart';
 import 'package:domain_entities/domain_entities.dart';
 import 'package:equatable/equatable.dart';
@@ -32,6 +34,10 @@ class QuizListProvider with ChangeNotifier {
 
   Quiz findQuizById(String id) {
     return _state.quizzes.firstWhere((quiz) => quiz.id == id);
+  }
+
+  int findQuizIndexById(String id) {
+    return _state.quizzes.indexWhere((quiz) => quiz.id == id);
   }
 
   List<Quiz> findQuizzesByAuthor(String author) {
@@ -87,5 +93,41 @@ class QuizListProvider with ChangeNotifier {
     _state = _state.copyWith(filtered: quizzes);
     _state = _state.copyWith(filteredCategory: quizzes);
     notifyListeners();
+  }
+
+  void addQuiz(Quiz quiz) async {
+    try {
+      Quiz newQuiz = await repository.addQuiz(quiz);
+      _state.quizzes.add(newQuiz);
+      //TODO : refilter & delete this notify
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void updateQuiz(Quiz quiz) async {
+    try {
+      final index = findQuizIndexById(quiz.id);
+      if (index != -1) {
+        await repository.updateQuiz(quiz);
+        _state.quizzes[index] = quiz;
+      }
+      //TODO : refilter & delete this notify
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void deleteQuiz(Quiz quiz) async {
+    try {
+      await repository.deleteQuiz(quiz);
+      _state.quizzes.remove(quiz);
+      //TODO : refilter & delete this notify
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
   }
 }

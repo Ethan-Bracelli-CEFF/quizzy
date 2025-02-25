@@ -86,27 +86,89 @@ class QuizRemoteStorage implements QuizStorage {
   }
 
   @override
-  Future<Quiz> addQuiz(Quiz quiz) {
-    // TODO: implement addQuiz
-    throw UnimplementedError();
+  Future<Quiz> addQuiz(Quiz quiz) async {
+    final questionDatas = <Map<String, dynamic>>[];
+
+    for (var question in quiz.questions) {
+      final responseDatas = <Map<String, dynamic>>[];
+
+      for (var response in question.answers) {
+        responseDatas.add(response.toRemoteModel().toJson());
+      }
+
+      questionDatas.add(question.toRemoteModel().toJson(responseDatas));
+    }
+    final quizData = quiz.toRemoteModel().toJson(questionDatas);
+
+    try {
+      final parsedUrl = Uri.parse('${url}questionnaires.json$dbName');
+      final response =
+          await _client.post(parsedUrl, body: jsonEncode(quizData));
+
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+
+      final id = jsonDecode(response.body)['name'];
+
+      return quiz.copyWith(id: id);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<User> addUser(User user) {
-    // TODO: implement addUser
-    throw UnimplementedError();
+  Future<User> addUser(User user) async {
+    final achievementDatas = <Map<String, dynamic>>[];
+    final gameProgressDatas = <Map<String, dynamic>>[];
+    for (var v in user.achievement) {
+      achievementDatas.add(v.toRemoteModel().toJson());
+    }
+    for (var v in user.gameProgress) {
+      gameProgressDatas.add(v.toRemoteModel().toJson());
+    }
+    final userData =
+        user.toRemoteModel().toJson(achievementDatas, gameProgressDatas);
+    try {
+      final parsedUrl = Uri.parse('${url}utilisateurs.json$dbName');
+      final response =
+          await _client.post(parsedUrl, body: jsonEncode(userData));
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+      final id = jsonDecode(response.body)['name'];
+      return user.copyWith(id: id);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<void> deleteQuiz(Quiz quiz) {
-    // TODO: implement deleteQuiz
-    throw UnimplementedError();
+  Future<void> deleteQuiz(Quiz quiz) async {
+    try {
+      final parsedUrl =
+          Uri.parse('${url}questionnaires/${quiz.id}.json$dbName');
+      final response = await _client.delete(parsedUrl);
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
-  Future<void> deleteUser(User user) {
-    // TODO: implement deleteUser
-    throw UnimplementedError();
+  Future<void> deleteUser(User user) async {
+    try {
+      final parsedUrl =
+          Uri.parse('${url}questionnaires/${user.id}.json$dbName');
+      final response = await _client.delete(parsedUrl);
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
@@ -119,7 +181,7 @@ class QuizRemoteStorage implements QuizStorage {
       }
       questionDatas.add(question.toRemoteModel().toJson(responseDatas));
     }
-    final quizData = quiz.toRemoteModel().toJson(quiz.id, questionDatas);
+    final quizData = quiz.toRemoteModel().toJson(questionDatas);
     try {
       final parsedUrl =
           Uri.parse('${url}questionnaires/${quiz.id}.json$dbName');
