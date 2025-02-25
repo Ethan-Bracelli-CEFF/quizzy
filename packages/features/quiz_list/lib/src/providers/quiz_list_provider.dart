@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:diacritic/diacritic.dart';
 import 'package:domain_entities/domain_entities.dart';
 import 'package:equatable/equatable.dart';
