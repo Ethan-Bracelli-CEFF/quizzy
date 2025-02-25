@@ -4,12 +4,12 @@ class AchievementItem extends StatelessWidget {
   const AchievementItem({required this.note, size, super.key})
       : size = size ?? 32.0;
 
-  factory AchievementItem.fromPercentage(percentage, {size}) {
+  factory AchievementItem.fromPercentage(double percentage, {size}) {
     int note = 0;
 
     while (percentage > 0) {
       note++;
-      percentage -= 0.2;
+      percentage = double.parse((percentage - 0.2).toStringAsFixed(1));
     }
 
     return AchievementItem(note: note, size: size);
@@ -31,7 +31,7 @@ class AchievementItem extends StatelessWidget {
       case 1:
         return Colors.brown;
       default:
-        return Colors.black38;
+        return Colors.white24;
     }
   }
 
