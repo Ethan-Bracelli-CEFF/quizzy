@@ -18,4 +18,14 @@ class Question extends Equatable {
 
   @override
   bool? get stringify => true;
+
+  Question copyWith({
+    String? title,
+    List<Response>? answers,
+  }) {
+    return Question(
+      title: title ?? this.title,
+      answers: answers ?? this.answers,
+    );
+  }
 }
