@@ -37,6 +37,9 @@ class _FormQuizState extends State<FormQuiz> {
           tags: [],
           questions: [],
         );
+
+    _createExistingTags();
+    _createExistingQuestions();
   }
 
   Quiz _getQuizFromValues() {
@@ -53,6 +56,9 @@ class _FormQuizState extends State<FormQuiz> {
     if (values != null) {
       final title = values['Title'];
       final description = values['Description'];
+
+      final List<String> tags = [];
+      this.tags.forEach((t) => tags.add(t.text));
 
       final List<Question> questions = [];
 
@@ -79,7 +85,11 @@ class _FormQuizState extends State<FormQuiz> {
       }
 
       quiz = quiz.copyWith(
-          title: title, description: description, questions: questions);
+          title: title,
+          description: description,
+          questions: questions,
+          tags: tags,
+          id: _editedQuiz.id);
     }
     return quiz;
   }
@@ -87,6 +97,18 @@ class _FormQuizState extends State<FormQuiz> {
   void _saveForm(Quiz quiz) {
     // TODO Add the quiz to the provider
     Navigator.of(context).pop();
+  }
+
+  void _createExistingTags() {
+    for (int i = 0; i < _editedQuiz.tags.length; i++) {
+      createTag(_editedQuiz.tags[i]);
+    }
+  }
+
+  void _createExistingQuestions() {
+    for (int i = 0; i < _editedQuiz.questions.length; i++) {
+      createQuestion(question: _editedQuiz.questions[i]);
+    }
   }
 
   @override
@@ -106,6 +128,7 @@ class _FormQuizState extends State<FormQuiz> {
                 name: 'Title',
                 validator: FormBuilderValidators.required(),
                 decoration: InputDecoration(labelText: 'Titre'),
+                initialValue: _editedQuiz.title,
                 onSaved: (value) {
                   _editedQuiz.copyWith(title: value);
                 },
@@ -124,6 +147,7 @@ class _FormQuizState extends State<FormQuiz> {
                 name: 'Description',
                 validator: FormBuilderValidators.required(),
                 decoration: InputDecoration(labelText: 'Description'),
+                initialValue: _editedQuiz.description,
                 onSaved: (value) {
                   _editedQuiz.copyWith(description: value);
                 },
@@ -139,8 +163,8 @@ class _FormQuizState extends State<FormQuiz> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: FormBuilderTextField(
-                name: 'Tags',
-                decoration: InputDecoration(labelText: 'Tags'),
+                name: 'Tag',
+                decoration: InputDecoration(labelText: 'Tag'),
                 onSubmitted: (value) {
                   if (value != null && value.trim() != '') {
                     if (tags.indexWhere((t) => t.text == value) != -1) {
@@ -152,10 +176,13 @@ class _FormQuizState extends State<FormQuiz> {
               ),
             ),
           ),
-          Wrap(
-            spacing: 5.0,
-            runSpacing: 5.0,
-            children: [...tags],
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Wrap(
+              spacing: 5.0,
+              runSpacing: 5.0,
+              children: [...tags],
+            ),
           ),
           Divider(thickness: 3.0),
           SizedBox(height: 15.0),
@@ -256,6 +283,8 @@ class _FormQuizState extends State<FormQuiz> {
             key: newTextFieldKey,
             name: newTextFieldName,
             form: _form,
+            text: editedQuestion.title,
+            answers: editedQuestion.answers,
             onDelete: () {
               setState(() {
                 fields.removeWhere((e) => e.key == newTextFieldKey);

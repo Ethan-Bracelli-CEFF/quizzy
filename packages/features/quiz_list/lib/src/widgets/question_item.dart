@@ -1,14 +1,22 @@
+import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
 class QuestionItem extends StatefulWidget {
   const QuestionItem(
-      {required this.name, required this.form, this.onDelete, super.key});
+      {required this.name,
+      required this.form,
+      this.onDelete,
+      this.text,
+      this.answers,
+      super.key});
 
   final String name;
   final VoidCallback? onDelete;
   final GlobalKey<FormBuilderState> form;
+  final String? text;
+  final List<Response>? answers;
 
   @override
   State<QuestionItem> createState() => _QuestionItemState();
@@ -17,6 +25,21 @@ class QuestionItem extends StatefulWidget {
 class _QuestionItemState extends State<QuestionItem> {
   final List<ResponseField> fields = [];
   var _newTextFieldId = 0;
+
+  void _createExistingAnswers(List<Response> answers) {
+    for (int i = 0; i < answers.length; i++) {
+      createAnswer(answers[i].text, answers[i].correct);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.answers != null) {
+      _createExistingAnswers(widget.answers!);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +56,7 @@ class _QuestionItemState extends State<QuestionItem> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: FormBuilderTextField(
+                initialValue: widget.text,
                 name: widget.name,
                 decoration: InputDecoration(
                   labelText: 'Question',
@@ -75,24 +99,8 @@ class _QuestionItemState extends State<QuestionItem> {
               IconButton(
                 onPressed: () {
                   setState(() {
-                    final newTextFieldName =
-                        '${widget.name}_rep_${_newTextFieldId++}';
-                    final newTextFieldKey = ValueKey(_newTextFieldId);
-
                     if (fields.length < 15) {
-                      fields.add(
-                        ResponseField(
-                          key: newTextFieldKey,
-                          name: newTextFieldName,
-                          form: widget.form,
-                          onDelete: () {
-                            setState(() {
-                              fields
-                                  .removeWhere((e) => e.key == newTextFieldKey);
-                            });
-                          },
-                        ),
-                      );
+                      createAnswer('', false);
                     }
                   });
                 },
@@ -114,6 +122,31 @@ class _QuestionItemState extends State<QuestionItem> {
       ),
     );
   }
+
+  void createAnswer(String text, bool correct) {
+    final newTextFieldName = '${widget.name}_rep_${_newTextFieldId++}';
+    final newTextFieldKey = ValueKey(_newTextFieldId);
+
+    fields.add(
+      ResponseField(
+        correct: correct,
+        text: text,
+        key: newTextFieldKey,
+        name: newTextFieldName,
+        form: widget.form,
+        onDelete: () {
+          setState(() {
+            fields.removeWhere((e) => e.key == newTextFieldKey);
+          });
+        },
+      ),
+    );
+
+    widget.form.currentState
+        ?.setInternalFieldValue('${newTextFieldName}_correct', correct);
+    widget.form.currentState?.setInternalFieldValue(newTextFieldName, text);
+    widget.form.currentState?.save();
+  }
 }
 
 class ResponseField extends StatefulWidget {
@@ -122,6 +155,7 @@ class ResponseField extends StatefulWidget {
       required this.form,
       this.onDelete,
       this.correct,
+      this.text,
       super.key})
       : isCorrect = correct ?? false;
 
@@ -130,20 +164,13 @@ class ResponseField extends StatefulWidget {
   final bool? correct;
   bool isCorrect;
   GlobalKey<FormBuilderState> form;
+  final String? text;
 
   @override
   State<ResponseField> createState() => _ResponseFieldState();
 }
 
 class _ResponseFieldState extends State<ResponseField> {
-  @override
-  void initState() {
-    super.initState();
-
-    widget.form.currentState
-        ?.setInternalFieldValue('${widget.name}_correct', false);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -161,6 +188,7 @@ class _ResponseFieldState extends State<ResponseField> {
                 child: FormBuilderTextField(
                   name: widget.name,
                   decoration: InputDecoration(labelText: 'Réponse'),
+                  initialValue: widget.text,
                   validator: FormBuilderValidators.required(),
                 ),
               ),
