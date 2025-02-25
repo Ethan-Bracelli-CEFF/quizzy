@@ -9,12 +9,12 @@ class Achievement extends Equatable {
   });
 
   final String id;
-  final double star;
+  final int star;
   final int hightscore;
 
   Achievement copyWith({
     String? id,
-    double? star,
+    int? star,
     int? hightscore,
   }) {
     return Achievement(
