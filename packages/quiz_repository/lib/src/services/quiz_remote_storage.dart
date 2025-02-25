@@ -30,23 +30,20 @@ class QuizRemoteStorage implements QuizStorage {
       }
 
       final Map<String, dynamic> data = jsonDecode(response.body);
-
-      if (data != null) {
-        data.forEach((quizId, quizData) {
-          final questions = <Question>[];
-          quizData['questions'].forEach((questionData) {
-            final responses = <Response>[];
-            questionData['responses'].forEach((responseData) {
-              responses.add(
-                  ResponseRemoteModel.fromJson(responseData).toDomainEntity());
-            });
-            questions.add(QuestionRemoteModel.fromJson(questionData)
-                .toDomainEntity(responses));
+      data.forEach((quizId, quizData) {
+        final questions = <Question>[];
+        quizData['questions'].forEach((questionData) {
+          final responses = <Response>[];
+          questionData['responses'].forEach((responseData) {
+            responses.add(
+                ResponseRemoteModel.fromJson(responseData).toDomainEntity());
           });
-          quizzes.add(QuizRemoteModel.fromJson(quizData)
-              .toDomainEntity(quizId.toString(), questions));
+          questions.add(QuestionRemoteModel.fromJson(questionData)
+              .toDomainEntity(responses));
         });
-      }
+        quizzes.add(QuizRemoteModel.fromJson(quizData)
+            .toDomainEntity(quizId.toString(), questions));
+      });
       return quizzes;
     } catch (e) {
       rethrow;
