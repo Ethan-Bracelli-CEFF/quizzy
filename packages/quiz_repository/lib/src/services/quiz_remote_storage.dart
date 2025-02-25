@@ -141,7 +141,6 @@ class QuizRemoteStorage implements QuizStorage {
     try {
       final parsedUrl =
           Uri.parse('${url}questionnaires/${quiz.id}.json$dbName');
-
       final response = await _client.delete(parsedUrl);
       if (response.statusCode / 100 != 2) {
         throw HttpException('${response.statusCode}');
@@ -152,9 +151,17 @@ class QuizRemoteStorage implements QuizStorage {
   }
 
   @override
-  Future<void> deleteUser(User user) {
-    // TODO: implement deleteUser
-    throw UnimplementedError();
+  Future<void> deleteUser(User user) async {
+    try {
+      final parsedUrl =
+          Uri.parse('${url}questionnaires/${user.id}.json$dbName');
+      final response = await _client.delete(parsedUrl);
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
