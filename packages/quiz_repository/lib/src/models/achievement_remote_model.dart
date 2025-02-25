@@ -8,4 +8,7 @@ class AchievementRemoteModel {
   final String id;
   final int star;
   final int hightscore;
+
+  Map<String, dynamic> toJson() =>
+      {"id": id, "star": star, "highscore": hightscore};
 }
