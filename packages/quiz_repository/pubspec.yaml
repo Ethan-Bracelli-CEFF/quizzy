@@ -10,6 +10,7 @@ dependencies:
   domain_entities:
     path: ../domain_entities
   logger: ^2.5.0
+  http: ^1.3.0
 dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_test:

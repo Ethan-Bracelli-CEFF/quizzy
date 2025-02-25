@@ -1,6 +1,12 @@
 export 'quiz_local_model.dart';
+export 'quiz_remote_model.dart';
 export 'question_local_model.dart';
+export 'question_remote_model.dart';
 export 'response_local_model.dart';
+export 'response_remote_model.dart';
 export 'user_local_model.dart';
+export 'user_remote_model.dart';
 export 'game_progress_local_model.dart';
+export 'game_progress_remote_model.dart';
 export 'achievement_local_model.dart';
+export 'achievement_remote_model.dart';

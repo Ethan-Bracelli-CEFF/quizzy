@@ -1,5 +1,12 @@
-export 'quiz_local_model_to_domain.dart';
-export 'question_local_model_to_domain.dart';
-export 'response_local_model_to_domain.dart';
-export 'user_local_model_to_domain.dart';
+export 'quiz_local_mapper.dart';
+export 'quiz_remote_mapper.dart';
+export 'question_local_mapper.dart';
+export 'question_remote_mapper.dart';
+export 'response_local_mapper.dart';
+export 'response_remote_mapper.dart';
+export 'user_local_mapper.dart';
+export 'user_remote_mapper.dart';
 export 'achievement_local_mapper.dart';
+export 'achievement_remote_mapper.dart';
+export 'game_progress_local_mapper.dart';
+export 'game_progress_remote_mapper.dart';

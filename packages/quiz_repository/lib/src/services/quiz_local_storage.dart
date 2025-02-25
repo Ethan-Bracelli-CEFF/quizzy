@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/services.dart';
 import 'package:quiz_repository/quiz_repository.dart';
-import 'package:quiz_repository/src/mappers/game_progress_local_mapper.dart';
 
 class QuizLocalStorage implements QuizStorage {
   @override
