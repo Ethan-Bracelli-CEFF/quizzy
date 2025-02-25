@@ -26,4 +26,8 @@ class QuizRemoteModel {
   final String description;
   final String category;
   final List<String> tags;
+
+  Map<String, dynamic> toJson() => {
+        "creator": "",
+      };
 }
