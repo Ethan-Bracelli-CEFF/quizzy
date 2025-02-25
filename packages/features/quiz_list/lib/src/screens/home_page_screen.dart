@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:flutter/material.dart';
 import 'package:component_library/component_library.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +22,19 @@ class _HomePageScreenState extends State<HomePageScreen> {
     _fetchUsers();
   }
 
+  final List<String> categories = [
+    "Tous",
+    "Culture G",
+    "Géographie",
+    "Histoire",
+    "Sport",
+    "Informatique",
+    "Culture Médiatique",
+    "Autres"
+  ];
+
+  String selectedCategorie = "Tous";
+
   _fetchQuizes() {
     if (context.read<QuizListProvider>().state.quizzes.isEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -34,6 +49,42 @@ class _HomePageScreenState extends State<HomePageScreen> {
         context.read<UserListProvider>().fetchAndSetUsers();
       });
     }
+  }
+
+  void _updateCategories({required int categoryIndex}) {
+    String category = categories[categoryIndex];
+    selectedCategorie = category;
+
+    context.read<QuizListProvider>().filterCategories(category);
+  }
+
+  Widget _categoryButton(
+      {required String value,
+      required Function(int index) updateCategories,
+      required int index}) {
+    return TextButton(
+      onPressed: () => updateCategories(index),
+      style: ButtonStyle(
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+            side: BorderSide(color: Colors.grey),
+          ),
+        ),
+        backgroundColor: selectedCategorie == value
+            ? WidgetStatePropertyAll(Colors.grey)
+            : WidgetStatePropertyAll(Colors.transparent),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child: Text(
+          value,
+          style: TextStyle(
+            color: selectedCategorie == value ? Colors.black : Colors.grey,
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _showQuiz() {
@@ -91,7 +142,21 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       context.read<QuizListProvider>().filterQuizzes(value);
                     }),
                   ),
-                  // SizedBox(height: 30.0),
+                  SizedBox(height: 5.0),
+                  Wrap(
+                    runSpacing: 5.0,
+                    spacing: 10.0,
+                    children: [
+                      for (int i = 0; i < categories.length; i++)
+                        _categoryButton(
+                          value: categories[i],
+                          updateCategories: (int index) =>
+                              _updateCategories(categoryIndex: index),
+                          index: i,
+                        ),
+                    ],
+                  ),
+                  SizedBox(height: 30.0),
                   Expanded(
                     child: ListView.separated(
                       itemBuilder: (context, index) => QuizItem(

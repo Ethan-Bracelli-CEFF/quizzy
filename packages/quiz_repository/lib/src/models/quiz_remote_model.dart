@@ -3,6 +3,7 @@ class QuizRemoteModel {
     required this.creator,
     required this.title,
     required this.description,
+    required this.category,
     required this.tags,
   });
 
@@ -15,6 +16,7 @@ class QuizRemoteModel {
       creator: json['creator'],
       title: json['title'],
       description: json['description'],
+      category: json['category'],
       tags: tags,
     );
   }
@@ -22,5 +24,6 @@ class QuizRemoteModel {
   final String creator;
   final String title;
   final String description;
+  final String category;
   final List<String> tags;
 }
