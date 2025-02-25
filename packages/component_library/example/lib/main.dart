@@ -63,6 +63,7 @@ class MyApp extends StatelessWidget {
           builder: (context) => QuizItem(
             quiz: quiz,
             showDetail: (String id) {},
+            note: 0,
           ),
         ),
         Story(
@@ -88,6 +89,13 @@ class MyApp extends StatelessWidget {
             padding: const EdgeInsets.all(17.0),
             child: QuestionTitleItem(question: quiz.questions[0]),
           ),
+        ),
+        Story(
+          name: 'Widgets/AchievementItem',
+          description: 'Icône représentant la note',
+          builder: (context) => Padding(
+              padding: const EdgeInsets.all(17.0),
+              child: AchievementItem(note: 0)),
         ),
         Story(
           name: 'Widgets/SearchBar',
