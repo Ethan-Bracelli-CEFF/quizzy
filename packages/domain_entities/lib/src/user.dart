@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:domain_entities/domain_entities.dart';
+import 'package:equatable/equatable.dart';
 
-class User {
+class User extends Equatable {
   const User({
     required this.username,
     required this.id,
@@ -35,4 +36,11 @@ class User {
       achievement: achievement ?? this.achievement,
     );
   }
+
+  @override
+  List<Object?> get props =>
+      [username, id, interests, likes, gameProgress, achievement];
+
+  @override
+  bool? get stringify => true;
 }

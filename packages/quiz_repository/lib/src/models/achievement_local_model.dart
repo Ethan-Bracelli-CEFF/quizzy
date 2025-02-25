@@ -6,6 +6,7 @@ class AchievementLocalModel {
   }
 
   final String id;
+  //TODO : int / double
   final double star;
   final int hightscore;
 }

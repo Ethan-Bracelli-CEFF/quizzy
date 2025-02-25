@@ -8,8 +8,8 @@ import 'package:quiz_repository/quiz_repository.dart';
 import 'package:http/http.dart' as http;
 
 class QuizRemoteStorage implements QuizStorage {
-  static const url = 'http://127.0.0.1:9000';
-  static const dbName = '?ns=cie-295-a3703-default-rtdb';
+  static const url = 'http://localhost:9000/';
+  static const dbName = '?ns=quizzy-6c7dc-default-rtdb';
 
   QuizRemoteStorage({@visibleForTesting http.Client? client})
       : _client = client ?? http.Client();
@@ -21,7 +21,7 @@ class QuizRemoteStorage implements QuizStorage {
   @override
   Future<List<Quiz>> getAllQuizzes() async {
     try {
-      final parsedUrl = Uri.parse('$url/questionnaires.json$dbName');
+      final parsedUrl = Uri.parse('${url}questionnaires.json$dbName');
 
       final response = await _client.get(parsedUrl);
 
@@ -57,7 +57,7 @@ class QuizRemoteStorage implements QuizStorage {
   @override
   Future<List<User>> getAllUsers() async {
     try {
-      final parsedUrl = Uri.parse('$url/utilisateurs.json$dbName');
+      final parsedUrl = Uri.parse('${url}utilisateurs.json$dbName');
 
       final response = await _client.get(parsedUrl);
 

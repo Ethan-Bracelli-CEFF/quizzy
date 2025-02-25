@@ -1,4 +1,6 @@
-class GameProgress {
+import 'package:equatable/equatable.dart';
+
+class GameProgress extends Equatable {
   const GameProgress({
     required this.id,
     required this.index,
@@ -24,4 +26,10 @@ class GameProgress {
       seed: seed ?? this.seed,
     );
   }
+
+  @override
+  List<Object?> get props => [id, index, point, seed];
+
+  @override
+  bool? get stringify => true;
 }
