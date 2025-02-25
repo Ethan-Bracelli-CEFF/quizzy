@@ -7,6 +7,7 @@ extension QuizLocalModelToDomain on QuizLocalModel {
       creator: creator,
       title: title,
       description: description,
+      category: category,
       id: id,
       tags: tags,
       questions: questions,

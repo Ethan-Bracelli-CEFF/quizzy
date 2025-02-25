@@ -20,6 +20,19 @@ class _HomePageScreenState extends State<HomePageScreen> {
     _fetchUsers();
   }
 
+  final List<String> categories = [
+    "Tous",
+    "Culture G",
+    "Géographie",
+    "Histoire",
+    "Sport",
+    "Informatique",
+    "Films et Séries",
+    "Autres"
+  ];
+
+  String selectedCategorie = "Tous";
+
   _fetchQuizes() {
     if (context.read<QuizListProvider>().state.quizzes.isEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -34,6 +47,42 @@ class _HomePageScreenState extends State<HomePageScreen> {
         context.read<UserListProvider>().fetchAndSetUsers();
       });
     }
+  }
+
+  void _updateCategories({required int categoryIndex}) {
+    String category = categories[categoryIndex];
+    selectedCategorie = category;
+
+    context.read<QuizListProvider>().filterCategories(category);
+  }
+
+  Widget _categoryButton(
+      {required String value,
+      required Function(int index) updateCategories,
+      required int index}) {
+    return TextButton(
+      onPressed: () => updateCategories(index),
+      style: ButtonStyle(
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+            side: BorderSide(color: Colors.grey),
+          ),
+        ),
+        backgroundColor: selectedCategorie == value
+            ? WidgetStatePropertyAll(Colors.grey)
+            : WidgetStatePropertyAll(Colors.transparent),
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child: Text(
+          value,
+          style: TextStyle(
+            color: selectedCategorie == value ? Colors.black : Colors.grey,
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _showQuiz() {
@@ -81,14 +130,29 @@ class _HomePageScreenState extends State<HomePageScreen> {
               ),
             )
           : Padding(
-              padding: const EdgeInsets.all(17.0),
+              padding: const EdgeInsets.symmetric(horizontal: 17.0),
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30.0, vertical: 17.0),
                     child: SearchsBar(click: (String value) {
                       context.read<QuizListProvider>().filterQuizzes(value);
                     }),
+                  ),
+                  SizedBox(height: 5.0),
+                  Wrap(
+                    runSpacing: 5.0,
+                    spacing: 10.0,
+                    children: [
+                      for (int i = 0; i < categories.length; i++)
+                        _categoryButton(
+                          value: categories[i],
+                          updateCategories: (int index) =>
+                              _updateCategories(categoryIndex: index),
+                          index: i,
+                        ),
+                    ],
                   ),
                   SizedBox(height: 30.0),
                   Expanded(
@@ -114,16 +178,50 @@ class _HomePageScreenState extends State<HomePageScreen> {
     return Scaffold(
       appBar: AppBar(
         foregroundColor: Colors.white,
-        toolbarHeight: 100,
-        backgroundColor: const Color.fromRGBO(70, 70, 70, 70),
+        backgroundColor: const Color.fromARGB(255, 70, 70, 70),
+        toolbarHeight: 70.0,
         centerTitle: true,
         title: Text(
           'Quizzy',
-          style: TextStyle(color: Colors.white, fontSize: 60),
+          style: TextStyle(color: Colors.white, fontSize: 40),
         ),
       ),
       body: _showQuiz(),
       backgroundColor: Color.fromARGB(255, 18, 18, 18),
+      bottomNavigationBar: Container(
+        color: const Color.fromARGB(255, 70, 70, 70),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.home,
+                    color: Colors.white,
+                    size: 28.0,
+                  )),
+              IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(CreateQuizScreen.routeName);
+                  },
+                  icon: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 28.0,
+                  )),
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.person,
+                    color: Colors.white,
+                    size: 28.0,
+                  )),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

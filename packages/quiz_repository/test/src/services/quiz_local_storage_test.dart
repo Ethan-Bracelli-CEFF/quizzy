@@ -60,6 +60,7 @@ void main() {
           creator: 'Fabrioche',
           title: 'Étudiants de la classe ICH-2DEV',
           description: 'Connaissez vous les étudiants de la classe ICH-2DEV?',
+          category: 'Culture G',
           tags: ['#Etudiant', '#Ecole'],
           questions: [question]);
     });

@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       creator: 'Fabrioche',
       title: 'Culture générale',
       description: 'Connaissez vous des choses inutiles?',
+      category: "Culture G",
       id: 'Salam',
       questions: [
         Question(

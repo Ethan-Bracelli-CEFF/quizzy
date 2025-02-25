@@ -25,6 +25,7 @@ class QuizListProvider with ChangeNotifier {
     _state = _state.copyWith(
         status: QuizListStatus.loaded,
         quizzes: repositoryQuizzes,
+        filteredCategory: repositoryQuizzes,
         filtered: repositoryQuizzes);
     notifyListeners();
   }
@@ -39,7 +40,7 @@ class QuizListProvider with ChangeNotifier {
     final cleanValue = removeDiacritics(value.toLowerCase());
 
     if (value.isNotEmpty) {
-      for (Quiz quiz in _state.quizzes) {
+      for (Quiz quiz in _state.filteredCategory) {
         if (value[0] == "#") {
           for (String tag in quiz.tags) {
             final cleanTag = removeDiacritics(tag.toLowerCase());
@@ -58,10 +59,29 @@ class QuizListProvider with ChangeNotifier {
         }
       }
     } else {
+      quizzes = _state.filteredCategory;
+    }
+
+    _state = _state.copyWith(filtered: quizzes);
+    notifyListeners();
+  }
+
+  void filterCategories(String value) async {
+    final cleanValue = removeDiacritics(value.toLowerCase());
+    List<Quiz> quizzes = <Quiz>[];
+
+    if (value != "Tous") {
+      for (Quiz quiz in _state.quizzes) {
+        if (removeDiacritics(quiz.category.toLowerCase()) == cleanValue) {
+          quizzes.add(quiz);
+        }
+      }
+    } else {
       quizzes = _state.quizzes;
     }
 
     _state = _state.copyWith(filtered: quizzes);
+    _state = _state.copyWith(filteredCategory: quizzes);
     notifyListeners();
   }
 }
