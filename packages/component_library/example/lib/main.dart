@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Storybook(
-      initialStory: 'Widgets/QuizItem',
+      initialStory: 'Widgets/QuizDetail',
       stories: [
         Story(
           name: 'Widgets/QuizItem',

@@ -2,6 +2,7 @@ import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:provider/provider.dart';
 import 'package:quiz_list/quiz_list.dart';
 
 class FormQuiz extends StatefulWidget {
@@ -30,7 +31,7 @@ class _FormQuizState extends State<FormQuiz> {
 
     _editedQuiz = widget.quiz ??
         Quiz(
-          creator: '',
+          creator: context.read<UserListProvider>().userState.user.username,
           title: '',
           description: '',
           category: 'Autres',
@@ -45,7 +46,7 @@ class _FormQuizState extends State<FormQuiz> {
 
   Quiz _getQuizFromValues() {
     Quiz quiz = Quiz(
-        creator: 'Me',
+        creator: context.read<UserListProvider>().userState.user.username,
         title: '',
         description: '',
         category: 'Autres',
@@ -100,7 +101,13 @@ class _FormQuizState extends State<FormQuiz> {
   }
 
   void _saveForm(Quiz quiz) {
-    // TODO Add the quiz to the provider
+    if (quiz.id != '') {
+      context.read<QuizListProvider>().updateQuiz(quiz);
+      Navigator.of(context).pop();
+
+      return;
+    }
+    context.read<QuizListProvider>().addQuiz(quiz);
     Navigator.of(context).pop();
   }
 
