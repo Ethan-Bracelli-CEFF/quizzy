@@ -48,7 +48,7 @@ class UserListProvider with ChangeNotifier {
 
   void updateUser(User user) async {
     try {
-      final index = findUserIndexById(user.id);
+      final index = findUserIndexById(user.id ?? '');
       if (index != -1) {
         await repository.updateUser(user);
         _state.users[index] = user;

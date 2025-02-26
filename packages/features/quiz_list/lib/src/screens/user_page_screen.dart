@@ -1,5 +1,4 @@
 import 'package:component_library/component_library.dart';
-import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_list/quiz_list.dart';
@@ -21,9 +20,9 @@ class _UserPageScreenState extends State<UserPageScreen> {
         context.watch<QuizListProvider>().findQuizzesByAuthor(user.username);
 
     int pointsTot = 0;
-    user.achievement.forEach((v) {
+    for (var v in user.achievement) {
       pointsTot += v.star;
-    });
+    }
 
     return Scaffold(
       appBar: AppBar(

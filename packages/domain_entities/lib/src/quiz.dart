@@ -16,7 +16,7 @@ class Quiz extends Equatable {
   final String title;
   final String description;
   final String category;
-  final String id;
+  final String? id;
   final List<String> tags;
   final List<Question> questions;
 

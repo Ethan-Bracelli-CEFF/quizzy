@@ -14,7 +14,7 @@ class QuizItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => showDetail(quiz.id),
+      onTap: () => showDetail(quiz.id ?? ''),
       child: Container(
         padding: const EdgeInsets.all(18.0),
         decoration: BoxDecoration(
