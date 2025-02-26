@@ -37,11 +37,11 @@ class _HomePageScreenState extends State<HomePageScreen> {
       required List<Achievement> achievements,
       required List<Quiz> quizzes}) {
     int note = 0;
-    achievements.forEach((achievement) {
+    for (var achievement in achievements) {
       if (achievement.id == quizzes[index].id) {
         note = achievement.star;
       }
-    });
+    }
     return note;
   }
 
