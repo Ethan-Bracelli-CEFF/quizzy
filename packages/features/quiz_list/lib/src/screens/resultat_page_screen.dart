@@ -100,7 +100,7 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
     }
 
     Navigator.of(context).pushReplacementNamed(QuestionPageScreen.routeName,
-        arguments: questions);
+        arguments: [questions, '']);
     context.read<QuizPoints>().points = 0;
   }
 }

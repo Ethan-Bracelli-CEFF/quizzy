@@ -25,15 +25,10 @@ class DetailQuizItem extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 14.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    quiz.title,
-                    style: const TextStyle(color: Colors.white, fontSize: 35),
-                  ),
-                  AchievementItem(note: note)
-                ],
+              child: Text(
+                quiz.title,
+                style: const TextStyle(color: Colors.white, fontSize: 35),
+                overflow: TextOverflow.clip,
               ),
             ),
             const SizedBox(height: 5),
@@ -43,6 +38,15 @@ class DetailQuizItem extends StatelessWidget {
               children: [
                 for (int i = 0; i < quiz.tags.length; i++)
                   Tag(name: quiz.tags[i])
+              ],
+            ),
+            const SizedBox(height: 15),
+            Row(
+              children: [
+                for (int i = 0; i < 5; i++)
+                  i < note
+                      ? AchievementItem(note: note)
+                      : AchievementItem(note: 0),
               ],
             ),
             const SizedBox(height: 20),
@@ -66,10 +70,12 @@ class DetailQuizItem extends StatelessWidget {
               '${quiz.questions.length} questions',
               style: TextStyle(color: Colors.white, fontSize: 17.0),
             ),
-            const SizedBox(height: 30),
-            Text(
-              quiz.description,
-              style: const TextStyle(color: Colors.white70),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: Text(
+                quiz.description,
+                style: const TextStyle(color: Colors.white70),
+              ),
             )
           ],
         ),

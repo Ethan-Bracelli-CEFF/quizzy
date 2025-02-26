@@ -7,7 +7,7 @@ class AchievementItem extends StatelessWidget {
   factory AchievementItem.fromPercentage(double percentage, {size}) {
     int note = 0;
 
-    while (percentage > 0) {
+    while (percentage >= 0.2) {
       note++;
       percentage = double.parse((percentage - 0.2).toStringAsFixed(1));
     }

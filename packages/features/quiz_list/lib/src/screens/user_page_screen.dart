@@ -18,7 +18,7 @@ class _UserPageScreenState extends State<UserPageScreen> {
   Widget build(BuildContext context) {
     final user = context.read<UserListProvider>().userState.user;
     final quizzes =
-        context.read<QuizListProvider>().findQuizzesByAuthor(user.username);
+        context.watch<QuizListProvider>().findQuizzesByAuthor(user.username);
 
     int pointsTot = 0;
     user.achievement.forEach((v) {
@@ -97,7 +97,13 @@ class _UserPageScreenState extends State<UserPageScreen> {
                         ),
                         SizedBox(height: 10.0),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              context
+                                  .read<QuizListProvider>()
+                                  .deleteQuiz(quizzes[index]);
+                            });
+                          },
                           icon:
                               Icon(Icons.delete, color: Colors.red, size: 35.0),
                         ),
