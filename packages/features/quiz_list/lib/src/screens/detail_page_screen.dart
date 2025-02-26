@@ -62,7 +62,8 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
   }
 
   void _showQuestionPageScreen() {
-    final id = ModalRoute.of(context)?.settings.arguments as String;
+    final data = ModalRoute.of(context)?.settings.arguments as List;
+    final id = data[0] as String;
     final quiz = context.read<QuizListProvider>().findQuizById(id);
     final questions = quiz.questions;
 
