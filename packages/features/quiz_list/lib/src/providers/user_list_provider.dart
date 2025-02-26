@@ -70,4 +70,30 @@ class UserListProvider with ChangeNotifier {
       rethrow;
     }
   }
+
+  int findAchievementIndexById(User user, String id) {
+    return user.achievement.indexWhere((a) => a.id == id);
+  }
+
+  void addAchievement(Achievement achievement, User user) async {
+    await repository.addAchievement(
+        achievement, user.id!, user.achievement.length);
+    _state.users
+        .firstWhere((u) => u.id == user.id)
+        .achievement
+        .add(achievement);
+    notifyListeners();
+  }
+
+  void updateAchievement(
+      Achievement achievement, User user, String quizId) async {
+    final index = findAchievementIndexById(user, quizId);
+
+    await repository.addAchievement(achievement, user.id!, index);
+    _state.users
+        .firstWhere((u) => u.id == user.id)
+        .achievement
+        .add(achievement);
+    notifyListeners();
+  }
 }

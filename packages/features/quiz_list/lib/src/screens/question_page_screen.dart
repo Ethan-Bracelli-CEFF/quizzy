@@ -144,6 +144,7 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
     final data = ModalRoute.of(context)?.settings.arguments as List<dynamic>;
 
     final List<Question> questions = data[0];
+    final String id = data[1];
 
     if (index + 1 < questions.length) {
       setState(() {
@@ -153,7 +154,7 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
       });
     } else {
       Navigator.of(context).pushReplacementNamed(ResultatPageScreen.routeName,
-          arguments: questions);
+          arguments: [questions, id]);
     }
   }
 }

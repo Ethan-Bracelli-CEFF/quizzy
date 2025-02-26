@@ -216,4 +216,21 @@ class QuizRemoteStorage implements QuizStorage {
       rethrow;
     }
   }
+
+  @override
+  Future<void> addAchievement(
+      Achievement achievement, String userId, int index) async {
+    final data = achievement.toRemoteModel().toJson();
+
+    try {
+      final parsedUrl = Uri.parse(
+          '${url}utilisateurs/$userId/achievements/$index.json$dbName');
+      final response = await _client.put(parsedUrl, body: jsonEncode(data));
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

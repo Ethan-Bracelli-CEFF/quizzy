@@ -68,4 +68,13 @@ class QuizRepository {
       rethrow;
     }
   }
+
+  Future<void> addAchievement(
+      Achievement achievement, String userId, int index) async {
+    try {
+      await storage.addAchievement(achievement, userId, index);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

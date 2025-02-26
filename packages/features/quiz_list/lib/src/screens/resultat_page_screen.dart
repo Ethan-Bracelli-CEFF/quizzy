@@ -19,12 +19,36 @@ class ResultatPageScreen extends StatefulWidget {
 class _ResultatPageScreenState extends State<ResultatPageScreen> {
   @override
   Widget build(BuildContext context) {
-    final questions =
-        ModalRoute.of(context)?.settings.arguments as List<Question>;
+    final data = ModalRoute.of(context)?.settings.arguments as List<dynamic>;
+
+    final questions = data[0];
+    final id = data[1];
+    final user = context.read<UserListProvider>().userState.user;
 
     int score = context.read<QuizPoints>().points;
 
     double percentage = score / questions.length;
+
+    void updateAchievement() {
+      for (var a in user.achievement) {
+        if (a.id == id) {
+          context.read<UserListProvider>().updateAchievement(
+                Achievement(
+                    id: id, star: (percentage * 5).floor(), hightscore: 0),
+                user,
+                a.id,
+              );
+          return;
+        }
+      }
+
+      context.read<UserListProvider>().addAchievement(
+            Achievement(id: id, star: (percentage * 5).floor(), hightscore: 0),
+            user,
+          );
+    }
+
+    updateAchievement();
 
     return Scaffold(
       appBar: AppBar(
@@ -84,13 +108,17 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
             Icons.restart_alt,
             size: 40.0,
           ),
-          onPressed: () => _retry(context, questions),
+          onPressed: () => _retry(
+            context,
+            questions,
+            id,
+          ),
         ),
       ),
     );
   }
 
-  void _retry(BuildContext context, List<Question> questions) {
+  void _retry(BuildContext context, List<Question> questions, String id) {
     context.read<QuizSeed>().seed = DateTime.now().millisecondsSinceEpoch;
 
     questions.shuffle(Random(context.read<QuizSeed>().seed));
@@ -100,7 +128,7 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
     }
 
     Navigator.of(context).pushReplacementNamed(QuestionPageScreen.routeName,
-        arguments: [questions, '']);
+        arguments: [questions, id]);
     context.read<QuizPoints>().points = 0;
   }
 }
