@@ -1,3 +1,4 @@
+import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 import 'package:component_library/component_library.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,17 @@ class _HomePageScreenState extends State<HomePageScreen> {
     "Films et Séries",
     "Autres"
   ];
+
+  int _getNote(
+      {required int index,
+      required List<Achievement> achievements,
+      required List<Quiz> quizzes}) {
+    int note = 0;
+    achievements.forEach((achievement) => {
+          if (achievement.id == quizzes[index].id) {note = achievement.star}
+        });
+    return note;
+  }
 
   String selectedCategorie = "Tous";
 
@@ -158,8 +170,20 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   Expanded(
                     child: ListView.separated(
                       itemBuilder: (context, index) => QuizItem(
+                        note: _getNote(
+                          index: index,
+                          achievements: user.achievement,
+                          quizzes: state.filtered,
+                        ),
                         quiz: state.filtered[index],
-                        showDetail: (id) => _showDetailQuizScreen(id),
+                        showDetail: (id) => _showDetailQuizScreen(
+                          id,
+                          _getNote(
+                            index: index,
+                            achievements: user.achievement,
+                            quizzes: state.filtered,
+                          ),
+                        ),
                       ),
                       separatorBuilder: (context, index) => SizedBox(
                         height: 20,
@@ -232,7 +256,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
     );
   }
 
-  void _showDetailQuizScreen(String id) {
-    Navigator.of(context).pushNamed(DetailPageScreen.routeName, arguments: id);
+  void _showDetailQuizScreen(String id, int note) {
+    Navigator.of(context)
+        .pushNamed(DetailPageScreen.routeName, arguments: [id, note]);
   }
 }

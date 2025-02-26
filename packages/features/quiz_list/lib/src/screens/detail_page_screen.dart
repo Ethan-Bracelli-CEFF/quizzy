@@ -16,7 +16,7 @@ class DetailPageScreen extends StatefulWidget {
 }
 
 class _DetailPageScreenState extends State<DetailPageScreen> {
-  Widget body(Quiz quiz) {
+  Widget body(Quiz quiz, int note) {
     return Padding(
       padding: const EdgeInsets.all(17.0),
       child: Center(
@@ -24,7 +24,10 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            DetailQuizItem(quiz: quiz),
+            DetailQuizItem(
+              quiz: quiz,
+              note: note,
+            ),
             const SizedBox(height: 80),
             StartButton(
               click: () => _showQuestionPageScreen(),
@@ -37,7 +40,9 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final id = ModalRoute.of(context)?.settings.arguments as String;
+    final data = ModalRoute.of(context)?.settings.arguments as List;
+    final id = data[0] as String;
+    final note = data[1] as int;
     final quiz = context.read<QuizListProvider>().findQuizById(id);
 
     return Scaffold(
@@ -51,7 +56,7 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
           style: TextStyle(color: Colors.white, fontSize: 60),
         ),
       ),
-      body: body(quiz),
+      body: body(quiz, note),
       backgroundColor: Color.fromARGB(255, 18, 18, 18),
     );
   }
