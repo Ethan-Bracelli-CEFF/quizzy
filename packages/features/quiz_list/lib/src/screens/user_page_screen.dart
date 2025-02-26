@@ -1,4 +1,5 @@
 import 'package:component_library/component_library.dart';
+import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_list/quiz_list.dart';
@@ -13,6 +14,19 @@ class UserPageScreen extends StatefulWidget {
 }
 
 class _UserPageScreenState extends State<UserPageScreen> {
+  int _getNote(
+      {required int index,
+      required List<Achievement> achievements,
+      required List<Quiz> quizzes}) {
+    int note = 0;
+    for (var achievement in achievements) {
+      if (achievement.id == quizzes[index].id) {
+        note = achievement.star;
+      }
+    }
+    return note;
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = context.read<UserListProvider>().userState.user;
@@ -81,7 +95,14 @@ class _UserPageScreenState extends State<UserPageScreen> {
                             showDetail: (id) {
                               Navigator.of(context).pushNamed(
                                   DetailPageScreen.routeName,
-                                  arguments: id);
+                                  arguments: [
+                                    id,
+                                    _getNote(
+                                      index: index,
+                                      achievements: user.achievement,
+                                      quizzes: quizzes,
+                                    ),
+                                  ]);
                             })),
                     Column(
                       children: [
