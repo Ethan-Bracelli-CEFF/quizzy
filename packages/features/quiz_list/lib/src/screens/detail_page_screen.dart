@@ -16,6 +16,25 @@ class DetailPageScreen extends StatefulWidget {
 }
 
 class _DetailPageScreenState extends State<DetailPageScreen> {
+  void _like(id) {
+    context.read<UserListProvider>().addLike(null, id);
+    final quiz = context.read<QuizListProvider>().findQuizById(id);
+
+    for (String tag in quiz.tags) {
+      context.read<UserListProvider>().addInterest(null, tag);
+    }
+  }
+
+  void _dislike(id) {
+    context.read<UserListProvider>().deleteLike(null, id);
+
+    final quiz = context.read<QuizListProvider>().findQuizById(id);
+
+    for (String tag in quiz.tags) {
+      context.read<UserListProvider>().deleteInterest(null, tag);
+    }
+  }
+
   Widget body(Quiz quiz, int note, bool liked) {
     return Padding(
       padding: const EdgeInsets.all(17.0),
@@ -28,7 +47,8 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
               quiz: quiz,
               note: note,
               liked: liked,
-              onLike: () {},
+              onLike: (id) => _like(id),
+              onDislike: (id) => _dislike(id),
             ),
             const SizedBox(height: 80),
             StartButton(

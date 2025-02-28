@@ -68,6 +68,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
     final user = context.read<UserListProvider>().userState.user;
 
     String category = categories[categoryIndex];
+    if (selectedCategorie == category) {
+      return;
+    }
+
     selectedCategorie = category;
 
     context.read<QuizListProvider>().filterQuizzes(

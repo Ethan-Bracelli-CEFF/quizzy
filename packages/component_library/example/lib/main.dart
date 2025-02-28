@@ -71,7 +71,8 @@ class MyApp extends StatelessWidget {
           description: 'Grande tuile de detail d\'un quiz',
           builder: (context) => DetailQuizItem(
             quiz: quiz,
-            onLike: () {},
+            onLike: (id) {},
+            onDislike: (id) {},
           ),
         ),
         Story(

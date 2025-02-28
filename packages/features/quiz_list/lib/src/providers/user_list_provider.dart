@@ -114,10 +114,13 @@ class UserListProvider with ChangeNotifier {
 
   void deleteLike(User? user, String like) async {
     final User finalUser = user ?? userState.user;
-    final int index = finalUser.interests.indexWhere((l) => l == like);
+    final int index = finalUser.likes.indexWhere((l) => l == like);
     try {
       await repository.deleteLike(finalUser, index);
-      _state.users.firstWhere((u) => u.id == finalUser.id).likes.remove(index);
+      _state.users
+          .firstWhere((u) => u.id == finalUser.id)
+          .likes
+          .removeAt(index);
       //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
@@ -127,13 +130,20 @@ class UserListProvider with ChangeNotifier {
 
   void addInterest(User? user, String interest) async {
     final User finalUser = user ?? userState.user;
+
+    if (finalUser.interests.contains(interest.toLowerCase())) {
+      return;
+    }
+
     try {
       await repository.addInterest(
-          finalUser, interest, finalUser.interests.length);
+          finalUser, interest.toLowerCase(), finalUser.interests.length);
+
       _state.users
           .firstWhere((u) => u.id == finalUser.id)
           .interests
-          .add(interest);
+          .add(interest.toLowerCase());
+
       //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
@@ -144,6 +154,10 @@ class UserListProvider with ChangeNotifier {
   void deleteInterest(User? user, String interest) async {
     final User finalUser = user ?? userState.user;
     final int index = finalUser.interests.indexWhere((i) => i == interest);
+    if (index == -1) {
+      return;
+    }
+
     try {
       await repository.deleteInterest(finalUser, index);
       _state.users

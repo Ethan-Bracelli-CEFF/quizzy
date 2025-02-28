@@ -4,14 +4,20 @@ import 'package:flutter/material.dart';
 
 class DetailQuizItem extends StatefulWidget {
   const DetailQuizItem(
-      {required this.quiz, required this.onLike, note, liked, super.key})
+      {required this.quiz,
+      required this.onLike,
+      required this.onDislike,
+      note,
+      liked,
+      super.key})
       : note = note ?? 0,
         liked = liked ?? false;
 
   final Quiz quiz;
   final int note;
   final bool liked;
-  final VoidCallback onLike;
+  final Function(String id) onLike;
+  final Function(String id) onDislike;
 
   @override
   State<DetailQuizItem> createState() => _DetailQuizItemState();
@@ -49,7 +55,9 @@ class _DetailQuizItemState extends State<DetailQuizItem> {
                 IconButton(
                     iconSize: 30.0,
                     onPressed: () {
-                      widget.onLike;
+                      liked!
+                          ? widget.onDislike(widget.quiz.id!)
+                          : widget.onLike(widget.quiz.id!);
                       setState(() {
                         liked = !liked!;
                       });

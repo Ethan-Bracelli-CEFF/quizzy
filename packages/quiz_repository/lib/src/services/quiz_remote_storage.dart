@@ -240,7 +240,7 @@ class QuizRemoteStorage implements QuizStorage {
   Future<void> addLike(User user, String like, int index) async {
     try {
       final parsedUrl =
-          Uri.parse('${url}utilisateurs/${user.id}}/likes/$index.json$dbName');
+          Uri.parse('${url}utilisateurs/${user.id}/likes/$index.json$dbName');
       final response = await _client.put(parsedUrl, body: jsonEncode(like));
       if (response.statusCode / 100 != 2) {
         throw HttpException('${response.statusCode}');
@@ -254,7 +254,7 @@ class QuizRemoteStorage implements QuizStorage {
   Future<void> deleteLike(User user, int index) async {
     try {
       final parsedUrl =
-          Uri.parse('${url}utilisateurs/${user.id}}/likes/$index.json$dbName');
+          Uri.parse('${url}utilisateurs/${user.id}/likes/$index.json$dbName');
       final response = await _client.delete(parsedUrl);
       if (response.statusCode / 100 != 2) {
         throw HttpException('${response.statusCode}');
@@ -268,7 +268,7 @@ class QuizRemoteStorage implements QuizStorage {
   Future<void> addInterest(User user, String interest, int index) async {
     try {
       final parsedUrl = Uri.parse(
-          '${url}utilisateurs/${user.id}}/interests/$index.json$dbName');
+          '${url}utilisateurs/${user.id}/interests/$index.json$dbName');
       final response = await _client.put(parsedUrl, body: jsonEncode(interest));
       if (response.statusCode / 100 != 2) {
         throw HttpException('${response.statusCode}');
@@ -282,7 +282,7 @@ class QuizRemoteStorage implements QuizStorage {
   Future<void> deleteInterest(User user, int index) async {
     try {
       final parsedUrl = Uri.parse(
-          '${url}utilisateurs/${user.id}}/interests/$index.json$dbName');
+          '${url}utilisateurs/${user.id}/interests/$index.json$dbName');
       final response = await _client.delete(parsedUrl);
       if (response.statusCode / 100 != 2) {
         throw HttpException('${response.statusCode}');
