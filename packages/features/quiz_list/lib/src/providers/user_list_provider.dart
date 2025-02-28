@@ -24,7 +24,7 @@ class UserListProvider with ChangeNotifier {
         users: repositoryUsers,
       );
       _userState =
-          _userState.copyWith(user: _state.users[0], status: UserStatus.loaded);
+          _userState.copyWith(user: _state.users[2], status: UserStatus.loaded);
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -55,7 +55,7 @@ class UserListProvider with ChangeNotifier {
   }
 
   void deleteUser(User? user) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
     try {
       await repository.deleteUser(finalUser);
       _state.users.remove(user);
@@ -74,7 +74,7 @@ class UserListProvider with ChangeNotifier {
   }
 
   void addAchievement({required Achievement achievement, User? user}) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
     try {
       await repository.addAchievement(
           achievement, finalUser.id!, finalUser.achievement.length);
@@ -92,7 +92,7 @@ class UserListProvider with ChangeNotifier {
       {required Achievement achievement,
       User? user,
       required String quizId}) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
     final int index = finalUser.achievement.indexWhere((a) => a.id == quizId);
     try {
       await repository.addAchievement(achievement, finalUser.id!, index);
@@ -105,7 +105,7 @@ class UserListProvider with ChangeNotifier {
   }
 
   void addLike({User? user, required String like}) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
     try {
       await repository.addLike(finalUser, like, finalUser.likes.length);
       _state.users.firstWhere((u) => u.id == finalUser.id).likes.add(like);
@@ -116,7 +116,7 @@ class UserListProvider with ChangeNotifier {
   }
 
   void deleteLike({User? user, required String like}) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
     final int index = finalUser.likes.indexWhere((l) => l == like);
     try {
       await repository.deleteLike(finalUser, index);
@@ -131,7 +131,7 @@ class UserListProvider with ChangeNotifier {
   }
 
   void addInterest({User? user, required String interest}) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
 
     if (finalUser.interests.contains(interest.toLowerCase())) {
       return;
@@ -146,7 +146,6 @@ class UserListProvider with ChangeNotifier {
           .interests
           .add(interest.toLowerCase());
 
-      _userState = _userState.copyWith(user: _state.users[0]);
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -154,7 +153,7 @@ class UserListProvider with ChangeNotifier {
   }
 
   void deleteInterest({User? user, required String interest}) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
     final int index = finalUser.interests.indexWhere((i) => i == interest);
     if (index == -1) {
       return;
@@ -169,7 +168,6 @@ class UserListProvider with ChangeNotifier {
           .firstWhere((u) => u.id == finalUser.id)
           .interests
           .remove(interest);
-      _userState = _userState.copyWith(user: _state.users[0]);
       notifyListeners();
     } catch (e) {
       rethrow;
