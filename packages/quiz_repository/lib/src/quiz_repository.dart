@@ -85,4 +85,28 @@ class QuizRepository {
       rethrow;
     }
   }
+
+  Future<void> deleteLike(User user, int index) async {
+    try {
+      await storage.deleteLike(user, index);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> addInterest(User user, String like, int index) async {
+    try {
+      await storage.addInterest(user, like, index);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> deleteInterest(User user, int index) async {
+    try {
+      await storage.deleteInterest(user, index);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -247,4 +247,46 @@ class QuizRemoteStorage implements QuizStorage {
       rethrow;
     }
   }
+
+  @override
+  Future<void> deleteLike(User user, int index) async {
+    try {
+      final parsedUrl =
+          Uri.parse('${url}utilisateurs/${user.id}}/likes/$index.json$dbName');
+      final response = await _client.delete(parsedUrl);
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> addInterest(User user, String interest, int index) async {
+    try {
+      final parsedUrl = Uri.parse(
+          '${url}utilisateurs/${user.id}}/interests/$index.json$dbName');
+      final response = await _client.put(parsedUrl, body: jsonEncode(interest));
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> deleteInterest(User user, int index) async {
+    try {
+      final parsedUrl = Uri.parse(
+          '${url}utilisateurs/${user.id}}/interests/$index.json$dbName');
+      final response = await _client.delete(parsedUrl);
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

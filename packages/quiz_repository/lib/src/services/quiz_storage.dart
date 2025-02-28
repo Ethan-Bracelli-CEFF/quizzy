@@ -13,5 +13,10 @@ abstract class QuizStorage {
 
   Future<void> addAchievement(
       Achievement achievement, String userId, int index);
+
   Future<void> addLike(User user, String like, int index);
+  Future<void> deleteLike(User user, int index);
+
+  Future<void> addInterest(User user, String interest, int index);
+  Future<void> deleteInterest(User user, int index);
 }
