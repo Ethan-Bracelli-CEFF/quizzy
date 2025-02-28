@@ -173,9 +173,11 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
         answered = false;
       });
     } else {
-      context
-          .read<UserListProvider>()
-          .deleteProgress(user.id as String, progress as GameProgress);
+      if (progress != null) {
+        context
+            .read<UserListProvider>()
+            .deleteProgress(user.id as String, progress as GameProgress);
+      }
       final points = context.read<QuizPoints>().points;
       double percentage = points / questions.length;
       void updateAchievement() {
