@@ -73,7 +73,9 @@ class _FormQuizState extends State<FormQuiz> {
       final categorie = values['Categorie'];
 
       final List<String> tags = [];
-      this.tags.forEach((t) => tags.add(t.text));
+      for (var t in this.tags) {
+        tags.add(t.text);
+      }
 
       final List<Question> questions = [];
 
@@ -207,8 +209,7 @@ class _FormQuizState extends State<FormQuiz> {
                 ),
                 IconButton(
                   onPressed: () {
-                    if (tagController.text != null &&
-                        tagController.text.trim() != '') {
+                    if (tagController.text.trim() != '') {
                       if (tags.indexWhere(
                               (t) => t.text == tagController.text) !=
                           -1) {

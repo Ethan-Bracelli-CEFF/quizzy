@@ -24,7 +24,7 @@ class UserListProvider with ChangeNotifier {
         users: repositoryUsers,
       );
       _userState =
-          _userState.copyWith(user: _state.users[0], status: UserStatus.loaded);
+          _userState.copyWith(user: _state.users[2], status: UserStatus.loaded);
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -35,7 +35,6 @@ class UserListProvider with ChangeNotifier {
     try {
       User newUser = await repository.addUser(user);
       _state.users.add(newUser);
-      //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -49,7 +48,6 @@ class UserListProvider with ChangeNotifier {
         await repository.updateUser(user);
         _state.users[index] = user;
       }
-      //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -57,11 +55,10 @@ class UserListProvider with ChangeNotifier {
   }
 
   void deleteUser(User? user) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
     try {
       await repository.deleteUser(finalUser);
       _state.users.remove(user);
-      //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -77,7 +74,7 @@ class UserListProvider with ChangeNotifier {
   }
 
   void addAchievement({required Achievement achievement, User? user}) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
     try {
       await repository.addAchievement(
           achievement, finalUser.id!, finalUser.achievement.length);
@@ -85,7 +82,6 @@ class UserListProvider with ChangeNotifier {
           .firstWhere((u) => u.id == finalUser.id)
           .achievement
           .add(achievement);
-      //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -96,13 +92,12 @@ class UserListProvider with ChangeNotifier {
       {required Achievement achievement,
       User? user,
       required String quizId}) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
     final int index = finalUser.achievement.indexWhere((a) => a.id == quizId);
     try {
       await repository.addAchievement(achievement, finalUser.id!, index);
       _state.users.firstWhere((u) => u.id == finalUser.id).achievement[index] =
           achievement;
-      //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -110,11 +105,10 @@ class UserListProvider with ChangeNotifier {
   }
 
   void addLike({User? user, required String like}) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
     try {
       await repository.addLike(finalUser, like, finalUser.likes.length);
       _state.users.firstWhere((u) => u.id == finalUser.id).likes.add(like);
-      //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -122,7 +116,7 @@ class UserListProvider with ChangeNotifier {
   }
 
   void deleteLike({User? user, required String like}) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
     final int index = finalUser.likes.indexWhere((l) => l == like);
     try {
       await repository.deleteLike(finalUser, index);
@@ -130,7 +124,6 @@ class UserListProvider with ChangeNotifier {
           .firstWhere((u) => u.id == finalUser.id)
           .likes
           .removeAt(index);
-      //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -138,23 +131,19 @@ class UserListProvider with ChangeNotifier {
   }
 
   void addInterest({User? user, required String interest}) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
 
     if (finalUser.interests.contains(interest.toLowerCase())) {
       return;
     }
-
     try {
       await repository.addInterest(
           finalUser, interest.toLowerCase(), finalUser.interests.length);
-
       _state.users
           .firstWhere((u) => u.id == finalUser.id)
           .interests
           .add(interest.toLowerCase());
 
-      //TODO : refilter & delete this notify
-      _userState = _userState.copyWith(user: _state.users[0]);
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -162,12 +151,11 @@ class UserListProvider with ChangeNotifier {
   }
 
   void deleteInterest({User? user, required String interest}) async {
-    final User finalUser = user ?? userState.user;
+    final User finalUser = user ?? _userState.user;
     final int index = finalUser.interests.indexWhere((i) => i == interest);
     if (index == -1) {
       return;
     }
-
     final interests =
         _state.users.firstWhere((u) => u.id == finalUser.id).interests;
     try {
@@ -177,8 +165,6 @@ class UserListProvider with ChangeNotifier {
           .firstWhere((u) => u.id == finalUser.id)
           .interests
           .remove(interest);
-      //TODO : refilter & delete this notify
-      _userState = _userState.copyWith(user: _state.users[0]);
       notifyListeners();
     } catch (e) {
       rethrow;

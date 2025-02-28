@@ -114,7 +114,7 @@ class _UserPageScreenState extends State<UserPageScreen> {
                         flex: 1,
                         child: SizedBox(),
                       ),
-                      TextButton(
+                      IconButton(
                         onPressed: () {
                           context
                               .read<UserListProvider>()
@@ -129,7 +129,7 @@ class _UserPageScreenState extends State<UserPageScreen> {
                             ),
                           ),
                         ),
-                        child: Text('+'),
+                        icon: Icon(Icons.add),
                       )
                     ],
                   ),

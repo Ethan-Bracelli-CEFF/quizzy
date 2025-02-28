@@ -116,7 +116,6 @@ class QuizListProvider with ChangeNotifier {
     try {
       Quiz newQuiz = await repository.addQuiz(quiz);
       _state.quizzes.add(newQuiz);
-      //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -130,7 +129,6 @@ class QuizListProvider with ChangeNotifier {
         await repository.updateQuiz(quiz);
         _state.quizzes[index] = quiz;
       }
-      //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
       rethrow;
@@ -141,7 +139,6 @@ class QuizListProvider with ChangeNotifier {
     try {
       await repository.deleteQuiz(quiz);
       _state.quizzes.remove(quiz);
-      //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
       rethrow;

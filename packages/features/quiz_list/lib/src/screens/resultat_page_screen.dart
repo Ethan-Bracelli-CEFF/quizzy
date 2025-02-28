@@ -21,7 +21,7 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)?.settings.arguments as List<dynamic>;
 
-    final questions = data[0];
+    // final questions = data[0];
     final id = data[1];
     int questionTotCount = data[2];
     final user = context.read<UserListProvider>().userState.user;
