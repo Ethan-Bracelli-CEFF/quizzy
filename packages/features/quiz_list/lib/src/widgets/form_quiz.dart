@@ -85,12 +85,12 @@ class _FormQuizState extends State<FormQuiz> {
         if (values.keys.contains('question_$i') &&
             values['question_$i'] != null) {
           for (int j = 0; j < 25; j++) {
-            final repString = 'question_$i\_rep_$j';
+            final repString = 'question_${i}_rep_$j';
             if (values.keys.contains(repString) && values[repString] != null) {
               responses.add(
                 Response(
                     text: values[repString],
-                    correct: values['$repString\_correct']),
+                    correct: values['${repString}_correct']),
               );
             }
           }

@@ -173,6 +173,9 @@ class _QuestionItemState extends State<QuestionItem> {
           setState(() {
             fields.removeWhere((e) => e.key == newTextFieldKey);
           });
+          widget.form.currentState?.removeInternalFieldValue(newTextFieldName);
+          widget.form.currentState
+              ?.removeInternalFieldValue('${newTextFieldName}_correct');
         },
       ),
     );
