@@ -1,7 +1,6 @@
 import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 
 class QuestionItem extends StatefulWidget {
   const QuestionItem(
@@ -64,15 +63,11 @@ class _QuestionItemState extends State<QuestionItem> {
                 ),
                 validator: (value) {
                   if (value == null || value == '') {
-                    return 'This field cannot be empty';
+                    return 'Veuillez entrer une question';
                   }
 
                   if (fields.length < 2) {
-                    return 'Have at least 2 responses fields';
-                  }
-
-                  if (fields.length > 15) {
-                    return 'You can\'t have more than 15 questions';
+                    return 'Veuillez avoir au minimum 2 réponses';
                   }
 
                   late ResponseField? field;
@@ -87,7 +82,7 @@ class _QuestionItemState extends State<QuestionItem> {
                   );
 
                   if (field.isCorrect == true) return null;
-                  return 'You must have at least one correct field';
+                  return 'Veuillez avoir au minimum une bonne réponse';
                 },
               ),
             ),
@@ -227,7 +222,13 @@ class _ResponseFieldState extends State<ResponseField> {
                   name: widget.name,
                   decoration: InputDecoration(labelText: 'Réponse'),
                   initialValue: widget.text,
-                  validator: FormBuilderValidators.required(),
+                  validator: (value) {
+                    if (value != null && value.trim() == "") {
+                      return "Veuillez entrer une réponse";
+                    }
+
+                    return null;
+                  },
                 ),
               ),
             ),

@@ -1,7 +1,6 @@
 import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_list/quiz_list.dart';
 
@@ -151,7 +150,17 @@ class _FormQuizState extends State<FormQuiz> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: FormBuilderTextField(
                 name: 'Title',
-                validator: FormBuilderValidators.required(),
+                validator: (value) {
+                  if (value != null && value.trim() == "") {
+                    return "Veuillez entrer un titre";
+                  }
+
+                  if (fields.isEmpty) {
+                    return "Veuillez avoir au moins une question";
+                  }
+
+                  return null;
+                },
                 decoration: InputDecoration(labelText: 'Titre'),
                 initialValue: _editedQuiz.title,
                 onSaved: (value) {
@@ -170,7 +179,13 @@ class _FormQuizState extends State<FormQuiz> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: FormBuilderTextField(
                 name: 'Description',
-                validator: FormBuilderValidators.required(),
+                validator: (value) {
+                  if (value != null && value.trim() == "") {
+                    return "Veuillez entrer une description";
+                  }
+
+                  return null;
+                },
                 decoration: InputDecoration(labelText: 'Description'),
                 initialValue: _editedQuiz.description,
                 onSaved: (value) {
@@ -375,6 +390,7 @@ class _FormQuizState extends State<FormQuiz> {
               setState(() {
                 fields.removeWhere((e) => e.key == newTextFieldKey);
               });
+              _form.currentState?.removeInternalFieldValue(newTextFieldName);
             },
           ),
         );
