@@ -115,6 +115,7 @@ class QuizListProvider with ChangeNotifier {
   void addQuiz(Quiz quiz) async {
     try {
       Quiz newQuiz = await repository.addQuiz(quiz);
+      await repository.updateQuiz(newQuiz);
       _state.quizzes.add(newQuiz);
       notifyListeners();
     } catch (e) {
