@@ -14,4 +14,10 @@ abstract class QuizStorage {
 
   Future<void> addAchievement(
       Achievement achievement, String userId, int index);
+
+  Future<void> addProgress(GameProgress progress, String userId, int index);
+
+  Future<List<GameProgress>> getAllProgressByUser(User user);
+
+  Future<void> deleteProgress(User user, GameProgress progress);
 }

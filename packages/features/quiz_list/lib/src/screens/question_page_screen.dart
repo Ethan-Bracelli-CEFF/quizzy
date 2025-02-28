@@ -31,22 +31,37 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
     var progress =
         GameProgress(id: id, index: index, point: points, seed: seed);
 
-    // TODO: Ajouter la création de la progression quand le CRUD sera prêt
+    final user = context.read<UserListProvider>().userState.user;
+
+    context
+        .read<UserListProvider>()
+        .addProgresss(progress, user.id as String, index);
     Navigator.of(context).pop();
   }
 
   var showAnswers = false;
+
+  bool setup = false;
   int index = 0;
+  int initialIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     var data = ModalRoute.of(context)?.settings.arguments as List<dynamic>;
     List<Question> questions = data[0];
     String quizId = data[1];
+    if (!setup) {
+      index = data[2];
+      initialIndex = index;
+      setup = true;
+    }
+    int questionTotCount = data[3];
 
-    final question = questions[index];
+    int questionIndex = index - initialIndex;
 
-    double percentage = index / questions.length;
+    final question = questions[questionIndex];
+
+    double percentage = index / questionTotCount;
 
     return Scaffold(
         appBar: AppBar(
@@ -79,7 +94,7 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
                 percent: percentage,
                 barRadius: Radius.circular(17.0),
                 center: Text(
-                  "$index/${questions.length}",
+                  "$index/$questionTotCount",
                   style: TextStyle(fontSize: 30),
                 ),
                 progressColor: Colors.blue.shade400,
@@ -145,16 +160,24 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
 
     final List<Question> questions = data[0];
     final String id = data[1];
+    int questionTotCount = data[3];
+    final user = context.read<UserListProvider>().userState.user;
+    final quiz = context.read<QuizListProvider>().findQuizById(id);
+    final progress =
+        context.read<UserListProvider>().getQuizProgression(quiz, user);
 
-    if (index + 1 < questions.length) {
+    if (index + 1 < questionTotCount) {
       setState(() {
         this.index += 1;
         showAnswers = false;
         answered = false;
       });
     } else {
+      context
+          .read<UserListProvider>()
+          .deleteProgress(user.id as String, progress as GameProgress);
       Navigator.of(context).pushReplacementNamed(ResultatPageScreen.routeName,
-          arguments: [questions, id]);
+          arguments: [questions, id, questionTotCount]);
     }
   }
 }

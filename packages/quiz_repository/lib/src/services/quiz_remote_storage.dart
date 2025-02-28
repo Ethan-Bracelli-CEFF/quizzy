@@ -233,4 +233,64 @@ class QuizRemoteStorage implements QuizStorage {
       rethrow;
     }
   }
+
+  @override
+  Future<void> addProgress(
+      GameProgress progress, String userId, int index) async {
+    final data = progress.toRemoteModel().toJson();
+
+    try {
+      final parsedUrl = Uri.parse(
+          '${url}utilisateurs/$userId/in_progress/${progress.id}.json$dbName');
+      final response = await _client.put(parsedUrl, body: jsonEncode(data));
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<GameProgress>> getAllProgressByUser(User user) async {
+    final userId = user.id;
+    try {
+      final parsedUrl =
+          Uri.parse('${url}utilisateurs/$userId/in_progress.json$dbName');
+
+      final response = await _client.get(parsedUrl);
+
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+
+      final data = jsonDecode(response.body);
+      List<GameProgress> gameProgress = [];
+
+      if (data != null) {
+        data.forEach((gameProgressData) {
+          gameProgress.add(GameProgressRemoteModel.fromJson(gameProgressData)
+              .toDomainEntity());
+        });
+      }
+
+      return gameProgress;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> deleteProgress(User user, GameProgress progress) async {
+    try {
+      final parsedUrl = Uri.parse(
+          '${url}utilisateurs/${user.id}/in_progress/${progress.id}.json$dbName');
+      final response = await _client.delete(parsedUrl);
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

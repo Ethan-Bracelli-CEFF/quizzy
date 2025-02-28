@@ -9,6 +9,8 @@ part 'quiz_list_state.dart';
 class QuizListProvider with ChangeNotifier {
   QuizListState _state = QuizListState.initial();
 
+  List constQuizzes = [];
+
   QuizListProvider({required this.repository});
   final QuizRepository repository;
 
@@ -22,12 +24,18 @@ class QuizListProvider with ChangeNotifier {
 
     final repositoryQuizzes = await repository.getAllQuizzes();
 
+    constQuizzes = repositoryQuizzes;
+
     _state = _state.copyWith(
         status: QuizListStatus.loaded,
         quizzes: repositoryQuizzes,
         filteredCategory: repositoryQuizzes,
         filtered: repositoryQuizzes);
     notifyListeners();
+  }
+
+  Quiz findUnshuffledQuizById(String id) {
+    return constQuizzes.firstWhere((quiz) => quiz.id == id);
   }
 
   Quiz findQuizById(String id) {

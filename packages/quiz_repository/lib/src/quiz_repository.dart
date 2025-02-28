@@ -77,4 +77,29 @@ class QuizRepository {
       rethrow;
     }
   }
+
+  Future<void> addProgresss(
+      GameProgress progress, String userId, int index) async {
+    try {
+      await storage.addProgress(progress, userId, index);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<GameProgress>> getAllProgressByUser(User user) async {
+    try {
+      return await storage.getAllProgressByUser(user);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> deleteProgress(User user, GameProgress progress) async {
+    try {
+      return await storage.deleteProgress(user, progress);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

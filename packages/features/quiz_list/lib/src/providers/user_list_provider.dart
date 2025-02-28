@@ -75,6 +75,10 @@ class UserListProvider with ChangeNotifier {
     return user.achievement.indexWhere((a) => a.id == id);
   }
 
+  int findProgressIndexById(User user, String id) {
+    return user.gameProgress.indexWhere((a) => a.id == id);
+  }
+
   void addAchievement(Achievement achievement, User user) async {
     await repository.addAchievement(
         achievement, user.id!, user.achievement.length);
@@ -95,5 +99,40 @@ class UserListProvider with ChangeNotifier {
         .achievement
         .add(achievement);
     notifyListeners();
+  }
+
+  GameProgress? getQuizProgression(Quiz quiz, User user) {
+    final List<GameProgress> progressions =
+        _state.users.firstWhere((u) => u.id == user.id).gameProgress;
+
+    for (GameProgress progress in progressions) {
+      if (progress.id == quiz.id) {
+        return progress;
+      }
+    }
+    return null;
+  }
+
+  Future<void> addProgresss(
+      GameProgress progress, String userId, int index) async {
+    await repository.addProgresss(progress, userId, index);
+    User user = findUserById(userId);
+    int stateIndex = findProgressIndexById(user, progress.id);
+    if (stateIndex != -1) {
+      _state.users.firstWhere((u) => u.id == userId).gameProgress[stateIndex] =
+          progress;
+    } else {
+      _state.users.firstWhere((u) => u.id == userId).gameProgress.add(progress);
+    }
+    notifyListeners();
+  }
+
+  Future<void> deleteProgress(String userId, GameProgress progress) async {
+    User user = findUserById(userId);
+    await repository.deleteProgress(user, progress);
+    _state.users
+        .firstWhere((u) => u.id == userId)
+        .gameProgress
+        .remove(progress);
   }
 }

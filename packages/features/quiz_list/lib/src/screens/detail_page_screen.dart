@@ -65,19 +65,41 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
     final data = ModalRoute.of(context)?.settings.arguments as List<dynamic>;
     final id = data[0];
     final quiz = context.read<QuizListProvider>().findQuizById(id);
-    final questions = quiz.questions;
+    List<Question> questions = quiz.questions;
+    int questionTotalCount = questions.length;
+    final user = context.read<UserListProvider>().userState.user;
+    final progress =
+        context.read<UserListProvider>().getQuizProgression(quiz, user);
 
-    context.read<QuizSeed>().seed = DateTime.now().millisecondsSinceEpoch;
+    if (progress != null) {
+      context.read<QuizSeed>().seed = progress.seed;
+    } else {
+      context.read<QuizSeed>().seed = DateTime.now().millisecondsSinceEpoch;
+      questions.shuffle(Random(context.read<QuizSeed>().seed));
 
-    questions.shuffle(Random(context.read<QuizSeed>().seed));
-
-    for (var question in questions) {
-      question.answers.shuffle(Random(context.read<QuizSeed>().seed));
+      for (var question in questions) {
+        question.answers.shuffle(Random(context.read<QuizSeed>().seed));
+      }
     }
 
-    context.read<QuizPoints>().points = 0;
+    int index;
+
+    if (progress != null) {
+      List<Question> newQuestions = questions;
+      questions = [];
+      for (int index = 0; index < newQuestions.length; index++) {
+        if (index >= progress.index) {
+          questions.add(newQuestions[index]);
+        }
+      }
+      context.read<QuizPoints>().points = progress.point;
+      index = progress.index;
+    } else {
+      context.read<QuizPoints>().points = 0;
+      index = 0;
+    }
 
     Navigator.of(context).pushReplacementNamed(QuestionPageScreen.routeName,
-        arguments: [questions, id]);
+        arguments: [questions, id, index, questionTotalCount]);
   }
 }

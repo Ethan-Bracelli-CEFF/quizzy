@@ -23,11 +23,12 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
 
     final questions = data[0];
     final id = data[1];
+    int questionTotCount = data[2];
     final user = context.read<UserListProvider>().userState.user;
 
     int score = context.read<QuizPoints>().points;
 
-    double percentage = score / questions.length;
+    double percentage = score / questionTotCount;
 
     void updateAchievement() {
       for (var a in user.achievement) {
@@ -88,7 +89,7 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
             ),
             SizedBox(height: 50),
             Text(
-              'Votre score : $score / ${questions.length}',
+              'Votre score : $score / $questionTotCount',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 27.0,
@@ -110,7 +111,6 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
           ),
           onPressed: () => _retry(
             context,
-            questions,
             id,
           ),
         ),
@@ -118,8 +118,10 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
     );
   }
 
-  void _retry(BuildContext context, List<Question> questions, String id) {
+  void _retry(BuildContext context, String id) {
     context.read<QuizSeed>().seed = DateTime.now().millisecondsSinceEpoch;
+    final quiz = context.read<QuizListProvider>().findUnshuffledQuizById(id);
+    List<Question> questions = quiz.questions;
 
     questions.shuffle(Random(context.read<QuizSeed>().seed));
 
@@ -128,7 +130,7 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
     }
 
     Navigator.of(context).pushReplacementNamed(QuestionPageScreen.routeName,
-        arguments: [questions, id]);
+        arguments: [questions, id, 0, questions.length]);
     context.read<QuizPoints>().points = 0;
   }
 }
