@@ -25,6 +25,15 @@ class _FormQuizState extends State<FormQuiz> {
 
   late Quiz _editedQuiz;
 
+  late TextEditingController tagController;
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    tagController.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -42,6 +51,8 @@ class _FormQuizState extends State<FormQuiz> {
 
     _createExistingTags();
     _createExistingQuestions();
+
+    tagController = TextEditingController();
   }
 
   Quiz _getQuizFromValues() {
@@ -172,20 +183,53 @@ class _FormQuizState extends State<FormQuiz> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(12.0),
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: FormBuilderTextField(
-                name: 'Tag',
-                decoration: InputDecoration(labelText: 'Tag'),
-                onSubmitted: (value) {
-                  if (value != null && value.trim() != '') {
-                    if (tags.indexWhere((t) => t.text == value) != -1) {
-                      return;
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: FormBuilderTextField(
+                      controller: tagController,
+                      name: 'Tag',
+                      decoration: InputDecoration(labelText: 'Tag'),
+                      onSubmitted: (value) {
+                        if (value != null && value.trim() != '') {
+                          if (tags.indexWhere((t) => t.text == value) != -1) {
+                            return;
+                          }
+                          createTag(value);
+                        }
+
+                        tagController.text = "";
+                      },
+                    ),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    if (tagController.text != null &&
+                        tagController.text.trim() != '') {
+                      if (tags.indexWhere(
+                              (t) => t.text == tagController.text) !=
+                          -1) {
+                        return;
+                      }
+                      createTag(tagController.text);
                     }
-                    createTag(value);
-                  }
-                },
-              ),
+                    tagController.text = "";
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(Colors.white),
+                    foregroundColor: WidgetStatePropertyAll(Colors.green),
+                    shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
+                  icon: Icon(Icons.add),
+                )
+              ],
             ),
           ),
           Padding(

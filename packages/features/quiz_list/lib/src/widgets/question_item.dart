@@ -46,7 +46,8 @@ class _QuestionItemState extends State<QuestionItem> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
       child: ExpansionTile(
-        // collapsedBackgroundColor: Colors.white,
+        iconColor: Colors.white,
+        collapsedIconColor: Colors.white,
         title: Expanded(
           child: Container(
             decoration: BoxDecoration(
@@ -93,29 +94,63 @@ class _QuestionItemState extends State<QuestionItem> {
           ),
         ),
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    if (fields.length < 15) {
-                      createAnswer('', false);
-                    }
-                  });
-                },
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.white,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(Colors.white),
+                    foregroundColor: WidgetStatePropertyAll(Colors.black),
+                    shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      if (fields.length < 15) {
+                        createAnswer('', false);
+                      }
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.add,
+                        color: Colors.green,
+                      ),
+                      SizedBox(width: 5.0),
+                      Text('Ajouter une réponse'),
+                    ],
+                  ),
                 ),
-                iconSize: 20.0,
-              ),
-              IconButton(
-                onPressed: widget.onDelete,
-                icon: Icon(Icons.delete),
-                color: Colors.red,
-              ),
-            ],
+                TextButton(
+                  onPressed: widget.onDelete,
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(Colors.white),
+                    foregroundColor: WidgetStatePropertyAll(Colors.black),
+                    shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
+                      SizedBox(width: 5.0),
+                      Text('Supprimer la question'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           ...fields,
         ],
