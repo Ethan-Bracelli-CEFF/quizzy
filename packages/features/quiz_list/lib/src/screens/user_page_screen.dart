@@ -192,6 +192,7 @@ class _UserPageScreenState extends State<UserPageScreen> {
                                       achievements: user.achievement,
                                       quizzes: quizzes,
                                     ),
+                                    user.likes.contains(id)
                                   ]);
                             })),
                     Column(
