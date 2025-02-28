@@ -153,6 +153,35 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
         answered = false;
       });
     } else {
+      final user = context.read<UserListProvider>().userState.user;
+      final points = context.read<QuizPoints>().points;
+      double percentage = points / questions.length;
+      void updateAchievement() {
+        for (var a in user.achievement) {
+          if (a.id == id && a.hightscore < points) {
+            context.read<UserListProvider>().updateAchievement(
+                  Achievement(
+                      id: id,
+                      star: (percentage * 5).floor(),
+                      hightscore: points),
+                  user,
+                  a.id,
+                );
+            return;
+          } else if (a.id == id && a.hightscore >= points) {
+            return;
+          }
+        }
+
+        context.read<UserListProvider>().addAchievement(
+              Achievement(
+                  id: id, star: (percentage * 5).floor(), hightscore: points),
+              user,
+            );
+      }
+
+      updateAchievement();
+
       Navigator.of(context).pushReplacementNamed(ResultatPageScreen.routeName,
           arguments: [questions, id]);
     }

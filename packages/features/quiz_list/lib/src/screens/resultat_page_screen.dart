@@ -23,32 +23,10 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
 
     final questions = data[0];
     final id = data[1];
-    final user = context.read<UserListProvider>().userState.user;
 
     int score = context.read<QuizPoints>().points;
 
     double percentage = score / questions.length;
-
-    void updateAchievement() {
-      for (var a in user.achievement) {
-        if (a.id == id) {
-          context.read<UserListProvider>().updateAchievement(
-                Achievement(
-                    id: id, star: (percentage * 5).floor(), hightscore: 0),
-                user,
-                a.id,
-              );
-          return;
-        }
-      }
-
-      context.read<UserListProvider>().addAchievement(
-            Achievement(id: id, star: (percentage * 5).floor(), hightscore: 0),
-            user,
-          );
-    }
-
-    updateAchievement();
 
     return Scaffold(
       appBar: AppBar(

@@ -92,6 +92,10 @@ class _UserPageScreenState extends State<UserPageScreen> {
                     Expanded(
                         child: QuizItem(
                             quiz: quizzes[index],
+                            note: _getNote(
+                                index: index,
+                                achievements: user.achievement,
+                                quizzes: quizzes),
                             showDetail: (id) {
                               Navigator.of(context).pushNamed(
                                   DetailPageScreen.routeName,
