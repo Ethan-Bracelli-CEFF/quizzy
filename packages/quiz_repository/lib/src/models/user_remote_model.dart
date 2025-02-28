@@ -13,9 +13,11 @@ class UserRemoteModel {
         interests.add(v.toString());
       });
     }
-    json['likes'].forEach((v) {
-      likes.add(v.toString());
-    });
+    if (json['likes'] != null) {
+      json['likes'].forEach((v) {
+        likes.add(v.toString());
+      });
+    }
     return UserRemoteModel(
       json['username'],
       interests,

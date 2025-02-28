@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 
 class QuizItem extends StatelessWidget {
   const QuizItem(
-      {required this.quiz, required this.showDetail, note, super.key})
-      : note = note ?? 0;
+      {required this.quiz, required this.showDetail, note, liked, super.key})
+      : note = note ?? 0,
+        liked = liked ?? false;
 
   final int note;
+  final bool liked;
   final Quiz quiz;
   final Function(String id) showDetail;
 
@@ -20,7 +22,8 @@ class QuizItem extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: const Color.fromARGB(255, 80, 80, 80),
-          border: Border.all(color: Colors.white, width: 2.0),
+          border:
+              Border.all(color: liked ? Colors.pink : Colors.white, width: 2.0),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

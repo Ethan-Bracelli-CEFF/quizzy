@@ -115,10 +115,13 @@ class UserListProvider with ChangeNotifier {
 
   void deleteLike({User? user, required String like}) async {
     final User finalUser = user ?? userState.user;
+    final int index = finalUser.likes.indexWhere((l) => l == like);
     try {
-      await repository.deleteLike(
-          finalUser, finalUser.interests.indexWhere((l) => l == like));
-      _state.users.firstWhere((u) => u.id == finalUser.id).likes.remove(like);
+      await repository.deleteLike(finalUser, index);
+      _state.users
+          .firstWhere((u) => u.id == finalUser.id)
+          .likes
+          .removeAt(index);
       //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
@@ -128,13 +131,20 @@ class UserListProvider with ChangeNotifier {
 
   void addInterest({User? user, required String interest}) async {
     final User finalUser = user ?? userState.user;
+
+    if (finalUser.interests.contains(interest.toLowerCase())) {
+      return;
+    }
+
     try {
       await repository.addInterest(
-          finalUser, interest, finalUser.interests.length);
+          finalUser, interest.toLowerCase(), finalUser.interests.length);
+
       _state.users
           .firstWhere((u) => u.id == finalUser.id)
           .interests
-          .add(interest);
+          .add(interest.toLowerCase());
+
       //TODO : refilter & delete this notify
       _userState = _userState.copyWith(user: _state.users[0]);
       notifyListeners();
@@ -145,6 +155,11 @@ class UserListProvider with ChangeNotifier {
 
   void deleteInterest({User? user, required String interest}) async {
     final User finalUser = user ?? userState.user;
+    final int index = finalUser.interests.indexWhere((i) => i == interest);
+    if (index == -1) {
+      return;
+    }
+
     final interests =
         _state.users.firstWhere((u) => u.id == finalUser.id).interests;
     try {

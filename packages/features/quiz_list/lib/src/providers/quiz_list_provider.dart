@@ -53,6 +53,7 @@ class QuizListProvider with ChangeNotifier {
 
     final total = <Quiz>[];
     total.addAll(quizzes.toSet().toList());
+    total.shuffle();
     total.addAll(listToFilter.toSet().difference(quizzes.toSet()).toList());
 
     return total;

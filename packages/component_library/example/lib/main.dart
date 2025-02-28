@@ -69,7 +69,11 @@ class MyApp extends StatelessWidget {
         Story(
           name: 'Widgets/QuizDetail',
           description: 'Grande tuile de detail d\'un quiz',
-          builder: (context) => DetailQuizItem(quiz: quiz),
+          builder: (context) => DetailQuizItem(
+            quiz: quiz,
+            onLike: (id) {},
+            onDislike: (id) {},
+          ),
         ),
         Story(
           name: 'Widgets/Answer',

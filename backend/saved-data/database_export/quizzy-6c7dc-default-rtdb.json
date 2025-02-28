@@ -1938,14 +1938,8 @@
                     "seed": 2
                 }
             ],
-            "interests": [
-                "ceff",
-                "foot",
-                "manger"
-            ],
-            "likes": [
-                "-asdkjhus"
-            ],
+            "interests": [],
+            "likes": [],
             "username": "Fabrioche"
         },
         "-OJwEXOeDQT39s7x-SIc": {
@@ -1958,9 +1952,8 @@
                     "seed": 2
                 }
             ],
-            "likes": [
-                "-asdkjhus"
-            ],
+            "interests": [],
+            "likes": [],
             "username": "Burri"
         },
         "-OJwEXOeDQT39s7x-SId": {
@@ -1973,9 +1966,8 @@
                     "seed": 2
                 }
             ],
-            "likes": [
-                "-asdkjhus"
-            ],
+            "interests": [],
+            "likes": [],
             "username": "Aitaneuh"
         }
     }
