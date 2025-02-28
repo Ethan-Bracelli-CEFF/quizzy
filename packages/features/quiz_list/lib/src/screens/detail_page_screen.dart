@@ -16,7 +16,7 @@ class DetailPageScreen extends StatefulWidget {
 }
 
 class _DetailPageScreenState extends State<DetailPageScreen> {
-  Widget body(Quiz quiz, int note) {
+  Widget body(Quiz quiz, int note, bool liked) {
     return Padding(
       padding: const EdgeInsets.all(17.0),
       child: Center(
@@ -27,6 +27,8 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
             DetailQuizItem(
               quiz: quiz,
               note: note,
+              liked: liked,
+              onLike: () {},
             ),
             const SizedBox(height: 80),
             StartButton(
@@ -43,6 +45,7 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
     final data = ModalRoute.of(context)?.settings.arguments as List;
     final id = data[0] as String;
     final note = data[1] as int;
+    final liked = data[2] as bool;
     final quiz = context.read<QuizListProvider>().findQuizById(id);
 
     return Scaffold(
@@ -56,7 +59,7 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
           style: TextStyle(color: Colors.white, fontSize: 60),
         ),
       ),
-      body: body(quiz, note),
+      body: body(quiz, note, liked),
       backgroundColor: Color.fromARGB(255, 18, 18, 18),
     );
   }

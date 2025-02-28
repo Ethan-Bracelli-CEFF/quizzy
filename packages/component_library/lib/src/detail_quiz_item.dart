@@ -2,15 +2,28 @@ import 'package:component_library/component_library.dart';
 import 'package:domain_entities/domain_entities.dart';
 import 'package:flutter/material.dart';
 
-class DetailQuizItem extends StatelessWidget {
-  const DetailQuizItem({required this.quiz, note, super.key})
-      : note = note ?? 0;
+class DetailQuizItem extends StatefulWidget {
+  const DetailQuizItem(
+      {required this.quiz, required this.onLike, note, liked, super.key})
+      : note = note ?? 0,
+        liked = liked ?? false;
 
   final Quiz quiz;
   final int note;
+  final bool liked;
+  final VoidCallback onLike;
+
+  @override
+  State<DetailQuizItem> createState() => _DetailQuizItemState();
+}
+
+class _DetailQuizItemState extends State<DetailQuizItem> {
+  bool? liked;
 
   @override
   Widget build(BuildContext context) {
+    liked ??= widget.liked;
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -23,29 +36,50 @@ class DetailQuizItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 14.0),
-              child: Text(
-                quiz.title,
-                style: const TextStyle(color: Colors.white, fontSize: 35),
-                overflow: TextOverflow.clip,
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    widget.quiz.title,
+                    style: const TextStyle(color: Colors.white, fontSize: 35),
+                    overflow: TextOverflow.clip,
+                  ),
+                ),
+                IconButton(
+                    iconSize: 30.0,
+                    onPressed: () {
+                      widget.onLike;
+                      setState(() {
+                        liked = !liked!;
+                      });
+                    },
+                    icon: liked!
+                        ? Icon(
+                            Icons.favorite,
+                            color: Colors.pink,
+                          )
+                        : Icon(
+                            Icons.favorite_border,
+                            color: Colors.white,
+                          ))
+              ],
             ),
             const SizedBox(height: 5),
             Wrap(
               spacing: 7,
               runSpacing: 5.0,
               children: [
-                for (int i = 0; i < quiz.tags.length; i++)
-                  Tag(name: quiz.tags[i])
+                for (int i = 0; i < widget.quiz.tags.length; i++)
+                  Tag(name: widget.quiz.tags[i])
               ],
             ),
             const SizedBox(height: 15),
             Row(
               children: [
                 for (int i = 0; i < 5; i++)
-                  i < note
-                      ? AchievementItem(note: note)
+                  i < widget.note
+                      ? AchievementItem(note: widget.note)
                       : AchievementItem(note: 0),
               ],
             ),
@@ -61,19 +95,19 @@ class DetailQuizItem extends StatelessWidget {
                 ),
                 SizedBox(width: 7.0),
                 Text(
-                  quiz.creator,
+                  widget.quiz.creator,
                   style: TextStyle(color: Colors.white, fontSize: 17.0),
                 ),
               ],
             ),
             Text(
-              '${quiz.questions.length} questions',
+              '${widget.quiz.questions.length} questions',
               style: TextStyle(color: Colors.white, fontSize: 17.0),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               child: Text(
-                quiz.description,
+                widget.quiz.description,
                 style: const TextStyle(color: Colors.white70),
               ),
             )

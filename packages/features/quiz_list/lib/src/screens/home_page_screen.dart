@@ -64,7 +64,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
     }
   }
 
-  void _updateCategories({required int categoryIndex}) {
+  _updateCategories({required int categoryIndex}) {
     final user = context.read<UserListProvider>().userState.user;
 
     String category = categories[categoryIndex];
@@ -190,15 +190,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
                           achievements: user.achievement,
                           quizzes: state.filtered,
                         ),
+                        liked: user.likes.contains(state.filtered[index].id),
                         quiz: state.filtered[index],
                         showDetail: (id) => _showDetailQuizScreen(
-                          id,
-                          _getNote(
-                            index: index,
-                            achievements: user.achievement,
-                            quizzes: state.filtered,
-                          ),
-                        ),
+                            id,
+                            _getNote(
+                              index: index,
+                              achievements: user.achievement,
+                              quizzes: state.filtered,
+                            ),
+                            user.likes.contains(id)),
                       ),
                       separatorBuilder: (context, index) => SizedBox(
                         height: 20,
@@ -271,8 +272,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
     );
   }
 
-  void _showDetailQuizScreen(String id, int note) {
+  void _showDetailQuizScreen(String id, int note, bool liked) {
     Navigator.of(context)
-        .pushNamed(DetailPageScreen.routeName, arguments: [id, note]);
+        .pushNamed(DetailPageScreen.routeName, arguments: [id, note, liked]);
   }
 }
