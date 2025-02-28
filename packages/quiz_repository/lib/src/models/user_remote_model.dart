@@ -8,9 +8,11 @@ class UserRemoteModel {
   factory UserRemoteModel.fromJson(Map<String, dynamic> json) {
     final interests = <String>[];
     final likes = <String>[];
-    json['interests'].forEach((v) {
-      interests.add(v.toString());
-    });
+    if (json['interests'] != null) {
+      json['interests'].forEach((v) {
+        interests.add(v.toString());
+      });
+    }
     json['likes'].forEach((v) {
       likes.add(v.toString());
     });
