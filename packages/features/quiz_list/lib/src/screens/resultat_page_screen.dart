@@ -34,18 +34,19 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
       for (var a in user.achievement) {
         if (a.id == id) {
           context.read<UserListProvider>().updateAchievement(
-                Achievement(
+                achievement: Achievement(
                     id: id, star: (percentage * 5).floor(), hightscore: 0),
-                user,
-                a.id,
+                user: user,
+                quizId: a.id,
               );
           return;
         }
       }
 
       context.read<UserListProvider>().addAchievement(
-            Achievement(id: id, star: (percentage * 5).floor(), hightscore: 0),
-            user,
+            achievement: Achievement(
+                id: id, star: (percentage * 5).floor(), hightscore: 0),
+            user: user,
           );
     }
 

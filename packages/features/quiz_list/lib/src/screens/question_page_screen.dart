@@ -176,7 +176,6 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
       context
           .read<UserListProvider>()
           .deleteProgress(user.id as String, progress as GameProgress);
-      final user = context.read<UserListProvider>().userState.user;
       final points = context.read<QuizPoints>().points;
       double percentage = points / questions.length;
       void updateAchievement() {
