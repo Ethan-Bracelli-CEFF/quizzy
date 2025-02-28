@@ -136,11 +136,9 @@ class UserListProvider with ChangeNotifier {
     if (finalUser.interests.contains(interest.toLowerCase())) {
       return;
     }
-
     try {
       await repository.addInterest(
           finalUser, interest.toLowerCase(), finalUser.interests.length);
-
       _state.users
           .firstWhere((u) => u.id == finalUser.id)
           .interests
@@ -158,7 +156,6 @@ class UserListProvider with ChangeNotifier {
     if (index == -1) {
       return;
     }
-
     final interests =
         _state.users.firstWhere((u) => u.id == finalUser.id).interests;
     try {
