@@ -37,7 +37,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
       required List<Achievement> achievements,
       required List<Quiz> quizzes}) {
     int note = 0;
-    for (var achievement in achievements) {
+    for (Achievement achievement in achievements) {
       if (achievement.id == quizzes[index].id) {
         note = achievement.star;
       }
@@ -46,6 +46,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   }
 
   String selectedCategorie = "Tous";
+  String searchedValue = "";
 
   _fetchQuizes() {
     if (context.read<QuizListProvider>().state.quizzes.isEmpty) {
@@ -63,11 +64,20 @@ class _HomePageScreenState extends State<HomePageScreen> {
     }
   }
 
-  void _updateCategories({required int categoryIndex}) {
+  _updateCategories({required int categoryIndex}) {
+    final user = context.read<UserListProvider>().userState.user;
+
     String category = categories[categoryIndex];
+    if (selectedCategorie == category) {
+      return;
+    }
+
     selectedCategorie = category;
 
-    context.read<QuizListProvider>().filterCategories(category);
+    context.read<QuizListProvider>().filterQuizzes(
+        searchedValue == "" ? null : searchedValue,
+        selectedCategorie,
+        user.interests);
   }
 
   Widget _categoryButton(
@@ -100,8 +110,13 @@ class _HomePageScreenState extends State<HomePageScreen> {
   }
 
   Widget _showQuiz() {
-    final state = context.watch<QuizListProvider>().state;
     final user = context.watch<UserListProvider>().userState.user;
+
+    context
+        .read<QuizListProvider>()
+        .filterQuizzes(searchedValue, selectedCategorie, user.interests);
+
+    final state = context.watch<QuizListProvider>().state;
 
     if (state.status == QuizListStatus.initial) {
       return const Center(
@@ -151,7 +166,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 30.0, vertical: 17.0),
                     child: SearchsBar(click: (String value) {
-                      context.read<QuizListProvider>().filterQuizzes(value);
+                      searchedValue = value;
+                      context.read<QuizListProvider>().filterQuizzes(
+                          searchedValue, selectedCategorie, user.interests);
                     }),
                   ),
                   SizedBox(height: 5.0),
@@ -177,15 +194,16 @@ class _HomePageScreenState extends State<HomePageScreen> {
                           achievements: user.achievement,
                           quizzes: state.filtered,
                         ),
+                        liked: user.likes.contains(state.filtered[index].id),
                         quiz: state.filtered[index],
                         showDetail: (id) => _showDetailQuizScreen(
-                          id,
-                          _getNote(
-                            index: index,
-                            achievements: user.achievement,
-                            quizzes: state.filtered,
-                          ),
-                        ),
+                            id,
+                            _getNote(
+                              index: index,
+                              achievements: user.achievement,
+                              quizzes: state.filtered,
+                            ),
+                            user.likes.contains(id)),
                       ),
                       separatorBuilder: (context, index) => SizedBox(
                         height: 20,
@@ -258,8 +276,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
     );
   }
 
-  void _showDetailQuizScreen(String id, int note) {
+  void _showDetailQuizScreen(String id, int note, bool liked) {
     Navigator.of(context)
-        .pushNamed(DetailPageScreen.routeName, arguments: [id, note]);
+        .pushNamed(DetailPageScreen.routeName, arguments: [id, note, liked]);
   }
 }

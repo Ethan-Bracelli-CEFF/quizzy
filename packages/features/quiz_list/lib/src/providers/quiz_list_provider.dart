@@ -27,10 +27,10 @@ class QuizListProvider with ChangeNotifier {
     constQuizzes = repositoryQuizzes;
 
     _state = _state.copyWith(
-        status: QuizListStatus.loaded,
-        quizzes: repositoryQuizzes,
-        filteredCategory: repositoryQuizzes,
-        filtered: repositoryQuizzes);
+      status: QuizListStatus.loaded,
+      quizzes: repositoryQuizzes,
+      filtered: [],
+    );
     notifyListeners();
   }
 
@@ -50,54 +50,65 @@ class QuizListProvider with ChangeNotifier {
     return _state.quizzes.where((q) => q.creator == author).toList();
   }
 
-  void filterQuizzes(String value) {
+  List<Quiz> orderFilteredListByTag(List<String> tags, [List<Quiz>? list]) {
+    final listToFilter = list ?? _state.quizzes;
+
     List<Quiz> quizzes = <Quiz>[];
 
-    final cleanValue = removeDiacritics(value.toLowerCase());
-
-    if (value.isNotEmpty) {
-      for (Quiz quiz in _state.filteredCategory) {
-        if (value[0] == "#") {
-          for (String tag in quiz.tags) {
-            final cleanTag = removeDiacritics(tag.toLowerCase());
-
-            if (cleanTag.contains(cleanValue.substring(1))) {
-              quizzes.add(quiz);
-              break;
-            }
-          }
-        } else {
-          final cleanTitle = removeDiacritics(quiz.title.toLowerCase());
-
-          if (cleanTitle.contains(cleanValue)) {
-            quizzes.add(quiz);
-          }
-        }
-      }
-    } else {
-      quizzes = _state.filteredCategory;
+    for (String tag in tags) {
+      quizzes.addAll(listToFilter.where((q) => q.tags.contains(tag)));
     }
 
-    _state = _state.copyWith(filtered: quizzes);
-    notifyListeners();
+    final total = <Quiz>[];
+    total.addAll(quizzes.toSet().toList());
+    total.shuffle();
+    total.addAll(listToFilter.toSet().difference(quizzes.toSet()).toList());
+
+    return total;
   }
 
-  void filterCategories(String value) async {
-    final cleanValue = removeDiacritics(value.toLowerCase());
+  List<Quiz> getFilteredListByName(String name, [List<Quiz>? list]) {
+    final listToFilter = list ?? _state.quizzes;
+
     List<Quiz> quizzes = <Quiz>[];
 
-    if (value != "Tous") {
-      for (Quiz quiz in _state.quizzes) {
-        if (removeDiacritics(quiz.category.toLowerCase()) == cleanValue) {
-          quizzes.add(quiz);
-        }
-      }
-    } else {
-      quizzes = _state.quizzes;
+    quizzes.addAll(listToFilter
+        .where((q) => removeDiacritics(q.title.toLowerCase()).contains(name)));
+
+    return quizzes;
+  }
+
+  List<Quiz> getFilteredListByCategory(String category, [List<Quiz>? list]) {
+    final listToFilter = list ?? _state.quizzes;
+
+    if (category == "Tous") {
+      return listToFilter;
+    }
+
+    List<Quiz> quizzes = <Quiz>[];
+
+    quizzes.addAll(listToFilter.where((q) => q.category == category));
+
+    return quizzes;
+  }
+
+  void filterQuizzes(String? name, String? categorie, List<String>? tags) {
+    List<Quiz> quizzes = <Quiz>[];
+
+    if (categorie != null) {
+      quizzes = getFilteredListByCategory(categorie);
+    }
+
+    if (name != null) {
+      final cleanValue = removeDiacritics(name.toLowerCase());
+      quizzes = getFilteredListByName(cleanValue, quizzes);
+    }
+
+    if (tags != null) {
+      quizzes = orderFilteredListByTag(tags, quizzes);
     }
 
     _state = _state.copyWith(filtered: quizzes);
-    _state = _state.copyWith(filteredCategory: quizzes);
     notifyListeners();
   }
 

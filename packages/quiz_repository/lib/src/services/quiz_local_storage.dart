@@ -112,6 +112,30 @@ class QuizLocalStorage implements QuizStorage {
   }
 
   @override
+  Future<void> addLike(User user, String like, int index) {
+    // TODO: implement addLike
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteLike(User user, int index) {
+    // TODO: implement deleteLike
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> addInterest(User user, String interest, int index) {
+    // TODO: implement addInterest
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> deleteInterest(User user, List<String> interests) {
+    // TODO: implement deleteInterest
+    throw UnimplementedError();
+  }
+
+  @override
   Future<void> addProgress(GameProgress progress, String userId, int index) {
     // TODO: implement addProgress
     throw UnimplementedError();

@@ -10,20 +10,17 @@ class QuizListState extends Equatable {
   const QuizListState({
     required this.quizzes,
     required this.filtered,
-    required this.filteredCategory,
     required this.status,
   });
 
   final QuizListStatus status;
   final List<Quiz> filtered;
-  final List<Quiz> filteredCategory;
   final List<Quiz> quizzes;
 
   factory QuizListState.initial() {
     return QuizListState(
       quizzes: List<Quiz>.empty(),
       filtered: List<Quiz>.empty(),
-      filteredCategory: List<Quiz>.empty(),
       status: QuizListStatus.initial,
     );
   }
@@ -40,7 +37,6 @@ class QuizListState extends Equatable {
     return QuizListState(
       quizzes: quizzes ?? this.quizzes,
       filtered: filtered ?? this.filtered,
-      filteredCategory: filteredCategory ?? this.filteredCategory,
       status: status ?? this.status,
     );
   }

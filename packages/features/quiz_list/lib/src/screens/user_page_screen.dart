@@ -29,10 +29,10 @@ class _UserPageScreenState extends State<UserPageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<UserListProvider>().userState.user;
+    final user = context.watch<UserListProvider>().userState.user;
     final quizzes =
         context.watch<QuizListProvider>().findQuizzesByAuthor(user.username);
-
+    final TextEditingController controller = TextEditingController();
     int pointsTot = 0;
     for (var v in user.achievement) {
       pointsTot += v.star;
@@ -81,9 +81,95 @@ class _UserPageScreenState extends State<UserPageScreen> {
                 )
               ],
             ),
+            Divider(),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15.0),
-              child: Divider(),
+              padding: const EdgeInsets.symmetric(vertical: 17.0),
+              child: ExpansionTile(
+                title: Text(
+                  'Intérets',
+                  style: TextStyle(color: Colors.white),
+                ),
+                collapsedIconColor: Colors.white,
+                iconColor: Colors.white,
+                childrenPadding: EdgeInsets.all(8.0),
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 6,
+                        child: Container(
+                          height: 50,
+                          padding: EdgeInsets.symmetric(
+                              vertical: 4.0, horizontal: 12.0),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: Colors.white),
+                          child: TextField(
+                            controller: controller,
+                            style: TextStyle(fontSize: 15.0),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: SizedBox(),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          context
+                              .read<UserListProvider>()
+                              .addInterest(interest: controller.text);
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll(Colors.white),
+                          foregroundColor: WidgetStatePropertyAll(Colors.green),
+                          shape: WidgetStatePropertyAll<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                          ),
+                        ),
+                        child: Text('+'),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 15.0),
+                  Wrap(
+                    spacing: 4.0,
+                    runSpacing: 4.0,
+                    children: [
+                      for (String interet in user.interests)
+                        TextButton(
+                          onPressed: () {
+                            context
+                                .read<UserListProvider>()
+                                .deleteInterest(interest: interet);
+                          },
+                          style: ButtonStyle(
+                            backgroundColor:
+                                WidgetStatePropertyAll(Colors.white),
+                            foregroundColor:
+                                WidgetStatePropertyAll(Colors.black),
+                            shape:
+                                WidgetStatePropertyAll<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(interet),
+                              SizedBox(width: 2.0),
+                              Icon(Icons.close, color: Colors.red, size: 15.0),
+                            ],
+                          ),
+                        )
+                    ],
+                  )
+                ],
+              ),
             ),
             Expanded(
               child: ListView.separated(
@@ -92,6 +178,10 @@ class _UserPageScreenState extends State<UserPageScreen> {
                     Expanded(
                         child: QuizItem(
                             quiz: quizzes[index],
+                            note: _getNote(
+                                index: index,
+                                achievements: user.achievement,
+                                quizzes: quizzes),
                             showDetail: (id) {
                               Navigator.of(context).pushNamed(
                                   DetailPageScreen.routeName,

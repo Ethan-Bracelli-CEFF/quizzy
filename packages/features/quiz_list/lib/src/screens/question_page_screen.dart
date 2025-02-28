@@ -176,6 +176,35 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
       context
           .read<UserListProvider>()
           .deleteProgress(user.id as String, progress as GameProgress);
+      final user = context.read<UserListProvider>().userState.user;
+      final points = context.read<QuizPoints>().points;
+      double percentage = points / questions.length;
+      void updateAchievement() {
+        for (var a in user.achievement) {
+          if (a.id == id && a.hightscore < points) {
+            context.read<UserListProvider>().updateAchievement(
+                  achievement: Achievement(
+                      id: id,
+                      star: (percentage * 5).floor(),
+                      hightscore: points),
+                  user: user,
+                  quizId: a.id,
+                );
+            return;
+          } else if (a.id == id && a.hightscore >= points) {
+            return;
+          }
+        }
+
+        context.read<UserListProvider>().addAchievement(
+              achievement: Achievement(
+                  id: id, star: (percentage * 5).floor(), hightscore: points),
+              user: user,
+            );
+      }
+
+      updateAchievement();
+
       Navigator.of(context).pushReplacementNamed(ResultatPageScreen.routeName,
           arguments: [questions, id, questionTotCount]);
     }

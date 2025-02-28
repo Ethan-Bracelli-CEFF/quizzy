@@ -1929,14 +1929,7 @@
     },
     "utilisateurs": {
         "-OJwEXOeDQT39s7x-SIb": {
-            "achievements": [
-                {
-                    "highscore": 29,
-                    "id": "-asdkjfhb",
-                    "star": 4
-                }
-            ],
-            "id": "-OJwEXOeDQT39s7x-SId",
+            "id": "-OJwEXOeDQT39s7x-SIb",
             "in_progress": [
                 {
                     "id": "-asdkjfhb",
@@ -1945,24 +1938,12 @@
                     "seed": 2
                 }
             ],
-            "interests": [
-                "foot",
-                "informatique"
-            ],
-            "likes": [
-                "-asdkjhus"
-            ],
+            "interests": [],
+            "likes": [],
             "username": "Fabrioche"
         },
         "-OJwEXOeDQT39s7x-SIc": {
-            "achievements": [
-                {
-                    "highscore": 29,
-                    "id": "-asdkjfhb",
-                    "star": 4
-                }
-            ],
-            "id": "-OJwEXOeDQT39s7x-SId",
+            "id": "-OJwEXOeDQT39s7x-SIc",
             "in_progress": [
                 {
                     "id": "-asdkjfhb",
@@ -1971,23 +1952,11 @@
                     "seed": 2
                 }
             ],
-            "interests": [
-                "foot",
-                "informatique"
-            ],
-            "likes": [
-                "-asdkjhus"
-            ],
+            "interests": [],
+            "likes": [],
             "username": "Burri"
         },
         "-OJwEXOeDQT39s7x-SId": {
-            "achievements": [
-                {
-                    "highscore": 29,
-                    "id": "-asdkjfhb",
-                    "star": 4
-                }
-            ],
             "id": "-OJwEXOeDQT39s7x-SId",
             "in_progress": [
                 {
@@ -1997,13 +1966,8 @@
                     "seed": 2
                 }
             ],
-            "interests": [
-                "foot",
-                "informatique"
-            ],
-            "likes": [
-                "-asdkjhus"
-            ],
+            "interests": [],
+            "likes": [],
             "username": "Aitaneuh"
         }
     }

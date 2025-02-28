@@ -71,10 +71,12 @@ class QuizRemoteStorage implements QuizStorage {
             gameProgress.add(GameProgressRemoteModel.fromJson(gameProgressData)
                 .toDomainEntity());
           });
-          userData['achievements'].forEach((achievementData) {
-            achievement.add(AchievementRemoteModel.fromJson(achievementData)
-                .toDomainEntity());
-          });
+          if (userData['achievements'] != null) {
+            userData['achievements'].forEach((achievementData) {
+              achievement.add(AchievementRemoteModel.fromJson(achievementData)
+                  .toDomainEntity());
+            });
+          }
           users.add(UserRemoteModel.fromJson(userData)
               .toDomainEntity(userId.toString(), gameProgress, achievement));
         });
@@ -286,6 +288,63 @@ class QuizRemoteStorage implements QuizStorage {
       final parsedUrl = Uri.parse(
           '${url}utilisateurs/${user.id}/in_progress/${progress.id}.json$dbName');
       final response = await _client.delete(parsedUrl);
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> addLike(User user, String like, int index) async {
+    try {
+      final parsedUrl =
+          Uri.parse('${url}utilisateurs/${user.id}/likes/$index.json$dbName');
+      final response = await _client.put(parsedUrl, body: jsonEncode(like));
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> deleteLike(User user, int index) async {
+    try {
+      final parsedUrl =
+          Uri.parse('${url}utilisateurs/${user.id}/likes/$index.json$dbName');
+      final response = await _client.delete(parsedUrl);
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> addInterest(User user, String interest, int index) async {
+    try {
+      final parsedUrl = Uri.parse(
+          '${url}utilisateurs/${user.id}/interests/$index.json$dbName');
+      final response = await _client.put(parsedUrl, body: jsonEncode(interest));
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> deleteInterest(User user, List<String> interests) async {
+    try {
+      final parsedUrl =
+          Uri.parse('${url}utilisateurs/${user.id}/interests.json$dbName');
+      final response =
+          await _client.put(parsedUrl, body: jsonEncode(interests));
       if (response.statusCode / 100 != 2) {
         throw HttpException('${response.statusCode}');
       }
