@@ -77,4 +77,12 @@ class QuizRepository {
       rethrow;
     }
   }
+
+  Future<void> addLike(User user, String like, int index) async {
+    try {
+      await storage.addLike(user, like, index);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

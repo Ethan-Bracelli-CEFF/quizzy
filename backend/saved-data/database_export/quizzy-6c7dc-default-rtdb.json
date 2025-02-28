@@ -1929,7 +1929,6 @@
     },
     "utilisateurs": {
         "-OJwEXOeDQT39s7x-SIb": {
-            "achievements": [],
             "id": "-OJwEXOeDQT39s7x-SIb",
             "in_progress": [
                 {
@@ -1948,7 +1947,6 @@
             "username": "Fabrioche"
         },
         "-OJwEXOeDQT39s7x-SIc": {
-            "achievements": [],
             "id": "-OJwEXOeDQT39s7x-SIc",
             "in_progress": [
                 {
@@ -1958,14 +1956,12 @@
                     "seed": 2
                 }
             ],
-            "interests": [],
             "likes": [
                 "-asdkjhus"
             ],
             "username": "Burri"
         },
         "-OJwEXOeDQT39s7x-SId": {
-            "achievements": [],
             "id": "-OJwEXOeDQT39s7x-SId",
             "in_progress": [
                 {
@@ -1975,7 +1971,6 @@
                     "seed": 2
                 }
             ],
-            "interests": [],
             "likes": [
                 "-asdkjhus"
             ],
