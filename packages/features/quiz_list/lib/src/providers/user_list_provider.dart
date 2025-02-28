@@ -102,9 +102,8 @@ class UserListProvider with ChangeNotifier {
 
   void addLike(User? user, String like) async {
     final User finalUser = user ?? userState.user;
-    final int index = finalUser.likes.length;
     try {
-      await repository.addLike(finalUser, like, index);
+      await repository.addLike(finalUser, like, finalUser.likes.length);
       _state.users.firstWhere((u) => u.id == finalUser.id).likes.add(like);
       //TODO : refilter & delete this notify
       notifyListeners();
@@ -113,13 +112,44 @@ class UserListProvider with ChangeNotifier {
     }
   }
 
-  void updateLike(User? user, String oldLike, String newLike) async {
+  void deleteLike(User? user, String like) async {
     final User finalUser = user ?? userState.user;
-    final int index = finalUser.interests.indexWhere((i) => i == oldLike);
+    final int index = finalUser.interests.indexWhere((l) => l == like);
     try {
-      await repository.addLike(finalUser, newLike, index);
-      _state.users.firstWhere((u) => u.id == finalUser.id).likes[index] =
-          newLike;
+      await repository.deleteLike(finalUser, index);
+      _state.users.firstWhere((u) => u.id == finalUser.id).likes.remove(index);
+      //TODO : refilter & delete this notify
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void addInterest(User? user, String interest) async {
+    final User finalUser = user ?? userState.user;
+    try {
+      await repository.addInterest(
+          finalUser, interest, finalUser.interests.length);
+      _state.users
+          .firstWhere((u) => u.id == finalUser.id)
+          .interests
+          .add(interest);
+      //TODO : refilter & delete this notify
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void deleteInterest(User? user, String interest) async {
+    final User finalUser = user ?? userState.user;
+    final int index = finalUser.interests.indexWhere((i) => i == interest);
+    try {
+      await repository.deleteInterest(finalUser, index);
+      _state.users
+          .firstWhere((u) => u.id == finalUser.id)
+          .interests
+          .remove(index);
       //TODO : refilter & delete this notify
       notifyListeners();
     } catch (e) {
