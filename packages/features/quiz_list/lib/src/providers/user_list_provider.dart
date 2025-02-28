@@ -130,15 +130,17 @@ class UserListProvider with ChangeNotifier {
     }
   }
 
-  void addInterest({User? user, required String interest}) async {
+  void addInterest(
+      {User? user, required String interest, int index = 0}) async {
     final User finalUser = user ?? _userState.user;
+    final finalIndex = finalUser.interests.length + index;
 
     if (finalUser.interests.contains(interest.toLowerCase())) {
       return;
     }
     try {
       await repository.addInterest(
-          finalUser, interest.toLowerCase(), finalUser.interests.length);
+          finalUser, interest.toLowerCase(), finalIndex);
       _state.users
           .firstWhere((u) => u.id == finalUser.id)
           .interests
@@ -150,21 +152,18 @@ class UserListProvider with ChangeNotifier {
     }
   }
 
-  void deleteInterest({User? user, required String interest}) async {
+  void deleteInterest({User? user, required List<String> interests}) async {
     final User finalUser = user ?? _userState.user;
-    final int index = finalUser.interests.indexWhere((i) => i == interest);
-    if (index == -1) {
-      return;
-    }
-    final interests =
-        _state.users.firstWhere((u) => u.id == finalUser.id).interests;
-    try {
-      interests.remove(interest);
-      await repository.deleteInterest(finalUser, interests);
+
+    for (String interest in interests) {
       _state.users
           .firstWhere((u) => u.id == finalUser.id)
           .interests
           .remove(interest);
+    }
+
+    try {
+      await repository.deleteInterest(finalUser, finalUser.interests);
       notifyListeners();
     } catch (e) {
       rethrow;

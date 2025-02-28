@@ -107,6 +107,9 @@ class _UserPageScreenState extends State<UserPageScreen> {
                           child: TextField(
                             controller: controller,
                             style: TextStyle(fontSize: 15.0),
+                            onSubmitted: (value) => context
+                                .read<UserListProvider>()
+                                .addInterest(interest: value),
                           ),
                         ),
                       ),
@@ -143,7 +146,7 @@ class _UserPageScreenState extends State<UserPageScreen> {
                           onPressed: () {
                             context
                                 .read<UserListProvider>()
-                                .deleteInterest(interest: interet);
+                                .deleteInterest(interests: [interet]);
                           },
                           style: ButtonStyle(
                             backgroundColor:

@@ -20,8 +20,10 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
     context.read<UserListProvider>().addLike(like: id);
     final quiz = context.read<QuizListProvider>().findQuizById(id);
 
-    for (String tag in quiz.tags) {
-      context.read<UserListProvider>().addInterest(interest: tag);
+    for (int i = 0; i < quiz.tags.length; i++) {
+      context
+          .read<UserListProvider>()
+          .addInterest(interest: quiz.tags[i], index: i);
     }
   }
 
@@ -30,9 +32,7 @@ class _DetailPageScreenState extends State<DetailPageScreen> {
 
     final quiz = context.read<QuizListProvider>().findQuizById(id);
 
-    for (String tag in quiz.tags) {
-      context.read<UserListProvider>().deleteInterest(interest: tag);
-    }
+    context.read<UserListProvider>().deleteInterest(interests: quiz.tags);
   }
 
   Widget body(Quiz quiz, int note, bool liked) {

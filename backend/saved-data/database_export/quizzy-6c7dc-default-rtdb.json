@@ -976,11 +976,11 @@
                 }
             ],
             "tags": [
-                "ICH-322",
-                "ICH-294",
-                "ICH-295",
-                "Culture",
-                "Flutter",
+                "ich-322",
+                "ich-294",
+                "ich-295",
+                "culture",
+                "flutter",
                 "ceff"
             ],
             "title": "Culture Flutter"
@@ -1354,7 +1354,7 @@
             ],
             "tags": [
                 "culture",
-                "Informatique",
+                "informatique",
                 "ceff"
             ],
             "title": "Culture Informatique"
@@ -1728,7 +1728,7 @@
             ],
             "tags": [
                 "pays",
-                "Géographie",
+                "géographie",
                 "ville"
             ],
             "title": "Géographie"
@@ -1930,42 +1930,21 @@
     "utilisateurs": {
         "-OJwEXOeDQT39s7x-SIb": {
             "id": "-OJwEXOeDQT39s7x-SIb",
-            "in_progress": [
-                {
-                    "id": "-asdkjfhb",
-                    "index": 3,
-                    "point": 5,
-                    "seed": 2
-                }
-            ],
+            "in_progress": [],
             "interests": [],
             "likes": [],
             "username": "Fabrioche"
         },
         "-OJwEXOeDQT39s7x-SIc": {
             "id": "-OJwEXOeDQT39s7x-SIc",
-            "in_progress": [
-                {
-                    "id": "-asdkjfhb",
-                    "index": 3,
-                    "point": 5,
-                    "seed": 2
-                }
-            ],
+            "in_progress": [],
             "interests": [],
             "likes": [],
             "username": "Burri"
         },
         "-OJwEXOeDQT39s7x-SId": {
             "id": "-OJwEXOeDQT39s7x-SId",
-            "in_progress": [
-                {
-                    "id": "-asdkjfhb",
-                    "index": 3,
-                    "point": 5,
-                    "seed": 2
-                }
-            ],
+            "in_progress": [],
             "interests": [],
             "likes": [],
             "username": "Aitaneuh"
