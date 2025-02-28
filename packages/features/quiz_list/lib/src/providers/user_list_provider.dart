@@ -14,25 +14,21 @@ class UserListProvider with ChangeNotifier {
   UserState get userState => _userState;
 
   Future<void> fetchAndSetUsers() async {
-    _state = _state.copyWith(status: UserListStatus.loading);
-    notifyListeners();
+    try {
+      _state = _state.copyWith(status: UserListStatus.loading);
+      notifyListeners();
 
-    final repositoryUsers = await repository.getAllUsers();
-    _state = _state.copyWith(
-      status: UserListStatus.loaded,
-      users: repositoryUsers,
-    );
-    _userState =
-        _userState.copyWith(user: _state.users[0], status: UserStatus.loaded);
-    notifyListeners();
-  }
-
-  User findUserById(String id) {
-    return _state.users.firstWhere((user) => user.id == id);
-  }
-
-  int findUserIndexById(String id) {
-    return _state.users.indexWhere((user) => user.id == id);
+      final repositoryUsers = await repository.getAllUsers();
+      _state = _state.copyWith(
+        status: UserListStatus.loaded,
+        users: repositoryUsers,
+      );
+      _userState =
+          _userState.copyWith(user: _state.users[0], status: UserStatus.loaded);
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   void addUser(User user) async {
@@ -46,12 +42,13 @@ class UserListProvider with ChangeNotifier {
     }
   }
 
-  void updateUser(User user) async {
+  void updateUser(User? user) async {
+    final User finalUser = user ?? userState.user;
     try {
-      final index = findUserIndexById(user.id ?? '');
+      final index = _state.users.indexWhere((user) => user.id == finalUser.id);
       if (index != -1) {
-        await repository.updateUser(user);
-        _state.users[index] = user;
+        await repository.updateUser(finalUser);
+        _state.users[index] = finalUser;
       }
       //TODO : refilter & delete this notify
       notifyListeners();
@@ -60,9 +57,10 @@ class UserListProvider with ChangeNotifier {
     }
   }
 
-  void deleteUser(User user) async {
+  void deleteUser(User? user) async {
+    final User finalUser = user ?? userState.user;
     try {
-      await repository.deleteUser(user);
+      await repository.deleteUser(finalUser);
       _state.users.remove(user);
       //TODO : refilter & delete this notify
       notifyListeners();
@@ -71,29 +69,61 @@ class UserListProvider with ChangeNotifier {
     }
   }
 
-  int findAchievementIndexById(User user, String id) {
-    return user.achievement.indexWhere((a) => a.id == id);
-  }
-
-  void addAchievement(Achievement achievement, User user) async {
-    await repository.addAchievement(
-        achievement, user.id!, user.achievement.length);
-    _state.users
-        .firstWhere((u) => u.id == user.id)
-        .achievement
-        .add(achievement);
-    notifyListeners();
+  void addAchievement(Achievement achievement, User? user) async {
+    final User finalUser = user ?? userState.user;
+    try {
+      await repository.addAchievement(
+          achievement, finalUser.id!, finalUser.achievement.length);
+      _state.users
+          .firstWhere((u) => u.id == finalUser.id)
+          .achievement
+          .add(achievement);
+      //TODO : refilter & delete this notify
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
   }
 
   void updateAchievement(
-      Achievement achievement, User user, String quizId) async {
-    final index = findAchievementIndexById(user, quizId);
+      Achievement achievement, User? user, String quizId) async {
+    final User finalUser = user ?? userState.user;
+    final int index = finalUser.achievement.indexWhere((a) => a.id == quizId);
+    try {
+      await repository.addAchievement(achievement, finalUser.id!, index);
+      _state.users.firstWhere((u) => u.id == finalUser.id).achievement[index] =
+          achievement;
+      //TODO : refilter & delete this notify
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
 
-    await repository.addAchievement(achievement, user.id!, index);
-    _state.users
-        .firstWhere((u) => u.id == user.id)
-        .achievement
-        .add(achievement);
-    notifyListeners();
+  void addLike(User? user, String like) async {
+    final User finalUser = user ?? userState.user;
+    final int index = finalUser.likes.length;
+    try {
+      await repository.addLike(finalUser, like, index);
+      _state.users.firstWhere((u) => u.id == finalUser.id).likes.add(like);
+      //TODO : refilter & delete this notify
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void updateLike(User? user, String oldLike, String newLike) async {
+    final User finalUser = user ?? userState.user;
+    final int index = finalUser.interests.indexWhere((i) => i == oldLike);
+    try {
+      await repository.addLike(finalUser, newLike, index);
+      _state.users.firstWhere((u) => u.id == finalUser.id).likes[index] =
+          newLike;
+      //TODO : refilter & delete this notify
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    }
   }
 }

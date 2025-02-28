@@ -110,4 +110,10 @@ class QuizLocalStorage implements QuizStorage {
     // TODO: implement addAchievement
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> addLike(User user, String like, int index) {
+    // TODO: implement addLike
+    throw UnimplementedError();
+  }
 }

@@ -235,4 +235,18 @@ class QuizRemoteStorage implements QuizStorage {
       rethrow;
     }
   }
+
+  @override
+  Future<void> addLike(User user, String like, int index) async {
+    try {
+      final parsedUrl =
+          Uri.parse('${url}utilisateurs/${user.id}}/likes/$index.json$dbName');
+      final response = await _client.put(parsedUrl, body: jsonEncode(like));
+      if (response.statusCode / 100 != 2) {
+        throw HttpException('${response.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
