@@ -279,11 +279,12 @@ class QuizRemoteStorage implements QuizStorage {
   }
 
   @override
-  Future<void> deleteInterest(User user, int index) async {
+  Future<void> deleteInterest(User user, List<String> interests) async {
     try {
-      final parsedUrl = Uri.parse(
-          '${url}utilisateurs/${user.id}/interests/$index.json$dbName');
-      final response = await _client.delete(parsedUrl);
+      final parsedUrl =
+          Uri.parse('${url}utilisateurs/${user.id}/interests.json$dbName');
+      final response =
+          await _client.put(parsedUrl, body: jsonEncode(interests));
       if (response.statusCode / 100 != 2) {
         throw HttpException('${response.statusCode}');
       }

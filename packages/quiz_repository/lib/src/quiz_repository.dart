@@ -102,9 +102,9 @@ class QuizRepository {
     }
   }
 
-  Future<void> deleteInterest(User user, int index) async {
+  Future<void> deleteInterest(User user, List<String> interests) async {
     try {
-      await storage.deleteInterest(user, index);
+      await storage.deleteInterest(user, interests);
     } catch (e) {
       rethrow;
     }

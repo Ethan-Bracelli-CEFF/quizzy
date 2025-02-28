@@ -18,5 +18,5 @@ abstract class QuizStorage {
   Future<void> deleteLike(User user, int index);
 
   Future<void> addInterest(User user, String interest, int index);
-  Future<void> deleteInterest(User user, int index);
+  Future<void> deleteInterest(User user, List<String> interests);
 }

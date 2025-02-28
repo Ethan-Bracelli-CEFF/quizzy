@@ -160,12 +160,12 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
         for (var a in user.achievement) {
           if (a.id == id && a.hightscore < points) {
             context.read<UserListProvider>().updateAchievement(
-                  Achievement(
+                  achievement: Achievement(
                       id: id,
                       star: (percentage * 5).floor(),
                       hightscore: points),
-                  user,
-                  a.id,
+                  user: user,
+                  quizId: a.id,
                 );
             return;
           } else if (a.id == id && a.hightscore >= points) {
@@ -174,9 +174,9 @@ class _QuestionPageScreenState extends State<QuestionPageScreen> {
         }
 
         context.read<UserListProvider>().addAchievement(
-              Achievement(
+              achievement: Achievement(
                   id: id, star: (percentage * 5).floor(), hightscore: points),
-              user,
+              user: user,
             );
       }
 

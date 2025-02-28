@@ -17,21 +17,21 @@ class DetailPageScreen extends StatefulWidget {
 
 class _DetailPageScreenState extends State<DetailPageScreen> {
   void _like(id) {
-    context.read<UserListProvider>().addLike(null, id);
+    context.read<UserListProvider>().addLike(like: id);
     final quiz = context.read<QuizListProvider>().findQuizById(id);
 
     for (String tag in quiz.tags) {
-      context.read<UserListProvider>().addInterest(null, tag);
+      context.read<UserListProvider>().addInterest(interest: tag);
     }
   }
 
   void _dislike(id) {
-    context.read<UserListProvider>().deleteLike(null, id);
+    context.read<UserListProvider>().deleteLike(like: id);
 
     final quiz = context.read<QuizListProvider>().findQuizById(id);
 
     for (String tag in quiz.tags) {
-      context.read<UserListProvider>().deleteInterest(null, tag);
+      context.read<UserListProvider>().deleteInterest(interest: tag);
     }
   }
 
