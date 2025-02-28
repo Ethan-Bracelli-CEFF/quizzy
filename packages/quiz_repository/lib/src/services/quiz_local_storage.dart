@@ -130,7 +130,7 @@ class QuizLocalStorage implements QuizStorage {
   }
 
   @override
-  Future<void> deleteInterest(User user, int index) {
+  Future<void> deleteInterest(User user, List<String> interests) {
     // TODO: implement deleteInterest
     throw UnimplementedError();
   }

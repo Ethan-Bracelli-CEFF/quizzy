@@ -29,10 +29,10 @@ class _UserPageScreenState extends State<UserPageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<UserListProvider>().userState.user;
+    final user = context.watch<UserListProvider>().userState.user;
     final quizzes =
         context.watch<QuizListProvider>().findQuizzesByAuthor(user.username);
-
+    final TextEditingController controller = TextEditingController();
     int pointsTot = 0;
     for (var v in user.achievement) {
       pointsTot += v.star;
@@ -105,6 +105,7 @@ class _UserPageScreenState extends State<UserPageScreen> {
                               borderRadius: BorderRadius.circular(20.0),
                               color: Colors.white),
                           child: TextField(
+                            controller: controller,
                             style: TextStyle(fontSize: 15.0),
                           ),
                         ),
@@ -114,7 +115,11 @@ class _UserPageScreenState extends State<UserPageScreen> {
                         child: SizedBox(),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context
+                              .read<UserListProvider>()
+                              .addInterest(interest: controller.text);
+                        },
                         style: ButtonStyle(
                           backgroundColor: WidgetStatePropertyAll(Colors.white),
                           foregroundColor: WidgetStatePropertyAll(Colors.green),
@@ -135,7 +140,11 @@ class _UserPageScreenState extends State<UserPageScreen> {
                     children: [
                       for (String interet in user.interests)
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context
+                                .read<UserListProvider>()
+                                .deleteInterest(interest: interet);
+                          },
                           style: ButtonStyle(
                             backgroundColor:
                                 WidgetStatePropertyAll(Colors.white),
