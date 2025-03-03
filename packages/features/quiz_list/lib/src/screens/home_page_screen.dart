@@ -4,9 +4,10 @@ import 'package:component_library/component_library.dart';
 import 'package:provider/provider.dart';
 import 'package:quiz_list/quiz_list.dart';
 
+List<Quiz> filterQuizzes = <Quiz>[];
+
 class HomePageScreen extends StatefulWidget {
   static const routeName = '/';
-
   const HomePageScreen({super.key});
 
   @override
@@ -72,12 +73,15 @@ class _HomePageScreenState extends State<HomePageScreen> {
       return;
     }
 
-    selectedCategorie = category;
+    setState(() {
+      selectedCategorie = category;
 
-    context.read<QuizListProvider>().filterQuizzes(
-        searchedValue == "" ? null : searchedValue,
-        selectedCategorie,
-        user.interests);
+      filterQuizzes = context.read<QuizListProvider>().filterQuizzes(
+            name: searchedValue == "" ? null : searchedValue,
+            categorie: selectedCategorie,
+            tags: user.interests,
+          );
+    });
   }
 
   Widget _categoryButton(
@@ -111,12 +115,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
 
   Widget _showQuiz() {
     final user = context.watch<UserListProvider>().userState.user;
-
-    context
-        .read<QuizListProvider>()
-        .filterQuizzes(searchedValue, selectedCategorie, user.interests);
-
     final state = context.watch<QuizListProvider>().state;
+    filterQuizzes = context.read<QuizListProvider>().filterQuizzes(
+          name: searchedValue,
+          categorie: selectedCategorie,
+          tags: user.interests,
+        );
 
     if (state.status == QuizListStatus.initial) {
       return const Center(
@@ -166,9 +170,15 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 30.0, vertical: 17.0),
                     child: SearchsBar(click: (String value) {
-                      searchedValue = value;
-                      context.read<QuizListProvider>().filterQuizzes(
-                          searchedValue, selectedCategorie, user.interests);
+                      setState(() {
+                        searchedValue = value;
+                        filterQuizzes =
+                            context.read<QuizListProvider>().filterQuizzes(
+                                  name: searchedValue,
+                                  categorie: selectedCategorie,
+                                  tags: user.interests,
+                                );
+                      });
                     }),
                   ),
                   SizedBox(height: 5.0),
@@ -192,23 +202,23 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         note: _getNote(
                           index: index,
                           achievements: user.achievement,
-                          quizzes: state.filtered,
+                          quizzes: filterQuizzes,
                         ),
-                        liked: user.likes.contains(state.filtered[index].id),
-                        quiz: state.filtered[index],
+                        liked: user.likes.contains(filterQuizzes[index].id),
+                        quiz: filterQuizzes[index],
                         showDetail: (id) => _showDetailQuizScreen(
                             id,
                             _getNote(
                               index: index,
                               achievements: user.achievement,
-                              quizzes: state.filtered,
+                              quizzes: filterQuizzes,
                             ),
                             user.likes.contains(id)),
                       ),
                       separatorBuilder: (context, index) => SizedBox(
                         height: 20,
                       ),
-                      itemCount: state.filtered.length,
+                      itemCount: filterQuizzes.length,
                     ),
                   ),
                 ],

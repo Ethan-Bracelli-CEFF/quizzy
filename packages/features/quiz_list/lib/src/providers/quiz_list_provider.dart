@@ -20,8 +20,6 @@ class QuizListProvider with ChangeNotifier {
     _state = _state.copyWith(status: QuizListStatus.loading);
     notifyListeners();
 
-    // await Future.delayed(Duration(seconds: 1));
-
     final repositoryQuizzes = await repository.getAllQuizzes();
 
     constQuizzes = repositoryQuizzes;
@@ -29,7 +27,6 @@ class QuizListProvider with ChangeNotifier {
     _state = _state.copyWith(
       status: QuizListStatus.loaded,
       quizzes: repositoryQuizzes,
-      filtered: [],
     );
     notifyListeners();
   }
@@ -92,9 +89,9 @@ class QuizListProvider with ChangeNotifier {
     return quizzes;
   }
 
-  void filterQuizzes(String? name, String? categorie, List<String>? tags) {
+  List<Quiz> filterQuizzes(
+      {String? name, String? categorie, List<String>? tags}) {
     List<Quiz> quizzes = <Quiz>[];
-
     if (categorie != null) {
       quizzes = getFilteredListByCategory(categorie);
     }
@@ -108,8 +105,7 @@ class QuizListProvider with ChangeNotifier {
       quizzes = orderFilteredListByTag(tags, quizzes);
     }
 
-    _state = _state.copyWith(filtered: quizzes);
-    notifyListeners();
+    return quizzes;
   }
 
   void addQuiz(Quiz quiz) async {

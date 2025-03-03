@@ -70,7 +70,7 @@ class QuizRemoteStorage implements QuizStorage {
           List<GameProgress> gameProgress = [];
           List<Achievement> achievement = [];
           if (userData['in_progress'] != null) {
-            userData['in_progress'].forEach((gameProgressData) {
+            userData['in_progress'].forEach((gameProgressId, gameProgressData) {
               gameProgress.add(
                   GameProgressRemoteModel.fromJson(gameProgressData)
                       .toDomainEntity());
