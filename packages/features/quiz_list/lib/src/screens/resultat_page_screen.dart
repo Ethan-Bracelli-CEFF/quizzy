@@ -21,36 +21,12 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)?.settings.arguments as List<dynamic>;
 
-    // final questions = data[0];
     final id = data[1];
     int questionTotCount = data[2];
-    final user = context.read<UserListProvider>().userState.user;
 
     int score = context.read<QuizPoints>().points;
 
     double percentage = score / questionTotCount;
-
-    void updateAchievement() {
-      for (var a in user.achievement) {
-        if (a.id == id) {
-          context.read<UserListProvider>().updateAchievement(
-                achievement: Achievement(
-                    id: id, star: (percentage * 5).floor(), hightscore: 0),
-                user: user,
-                quizId: a.id,
-              );
-          return;
-        }
-      }
-
-      context.read<UserListProvider>().addAchievement(
-            achievement: Achievement(
-                id: id, star: (percentage * 5).floor(), hightscore: 0),
-            user: user,
-          );
-    }
-
-    updateAchievement();
 
     return Scaffold(
       appBar: AppBar(
@@ -97,7 +73,10 @@ class _ResultatPageScreenState extends State<ResultatPageScreen> {
               ),
             ),
             SizedBox(height: 15),
-            AchievementItem.fromPercentage(percentage, size: 100)
+            AchievementItem(
+              note: (percentage * 5).floor(),
+              size: 100,
+            )
           ],
         ),
       ),
