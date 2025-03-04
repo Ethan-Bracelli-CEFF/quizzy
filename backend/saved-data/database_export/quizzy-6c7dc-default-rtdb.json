@@ -1,29 +1,5 @@
 {
     "questionnaires": {
-        "-OJwBV5ROYsuWVMratrR": {
-            "category": "Autres",
-            "creator": "Aitaneuh",
-            "description": "Juste un Quiz de test",
-            "id": "-OJwBV5ROYsuWVMratrR",
-            "questions": [
-                {
-                    "responses": [
-                        {
-                            "correct": true,
-                            "text": "vrai"
-                        },
-                        {
-                            "text": "faux"
-                        }
-                    ],
-                    "title": "Est-ce que Ethan est le meilleur dev que la terre ait jamais connu?"
-                }
-            ],
-            "tags": [
-                "dev"
-            ],
-            "title": "Quiz Dev"
-        },
         "-OJwBV5ROYsuWVMratrS": {
             "category": "Sport",
             "creator": "Aitaneuh",

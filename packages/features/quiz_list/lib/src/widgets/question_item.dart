@@ -182,6 +182,7 @@ class _QuestionItemState extends State<QuestionItem> {
   }
 }
 
+// ignore: must_be_immutable
 class ResponseField extends StatefulWidget {
   ResponseField(
       {required this.name,

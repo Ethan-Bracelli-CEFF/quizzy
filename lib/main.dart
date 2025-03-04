@@ -7,10 +7,6 @@ void main() {
   runApp(const Quizzy());
 }
 
-//TODO : General Error
-//Update Achievement didn't work every time. The first time it works
-//ajout d'une question dans quiz
-//Le gameprogress ne se met pas a jour
 class Quizzy extends StatelessWidget {
   const Quizzy({super.key});
 
