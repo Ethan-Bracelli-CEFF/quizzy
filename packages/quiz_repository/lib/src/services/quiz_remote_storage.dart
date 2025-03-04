@@ -8,10 +8,10 @@ import 'package:quiz_repository/quiz_repository.dart';
 import 'package:http/http.dart' as http;
 
 class QuizRemoteStorage implements QuizStorage {
-  // static const url = 'https://quizzy-6c7dc-default-rtdb.europe-west1.firebasedatabase.app/';
-  static const url = 'http://localhost:9000/';
-  // static const dbName = '';
-  static const dbName = '?ns=quizzy-6c7dc-default-rtdb';
+  static const url = 'https://quizzy-6c7dc-default-rtdb.europe-west1.firebasedatabase.app/';
+  // static const url = 'http://localhost:9000/';
+  static const dbName = '';
+  // static const dbName = '?ns=quizzy-6c7dc-default-rtdb';
 
   QuizRemoteStorage({@visibleForTesting http.Client? client})
       : _client = client ?? http.Client();
